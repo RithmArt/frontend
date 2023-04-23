@@ -3,6 +3,8 @@
 /* eslint-disable */
 export type { CuratorshipMembersABI } from "./CuratorshipMembersABI";
 export type { Erc20 } from "./Erc20";
+export type { WorkshopOfTheAbominableSasquatch } from "./WorkshopOfTheAbominableSasquatch";
 
 export { CuratorshipMembersABI__factory } from "./factories/CuratorshipMembersABI__factory";
 export { Erc20__factory } from "./factories/Erc20__factory";
+export { WorkshopOfTheAbominableSasquatch__factory } from "./factories/WorkshopOfTheAbominableSasquatch__factory";
