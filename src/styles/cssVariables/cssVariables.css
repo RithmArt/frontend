@@ -1,0 +1,78 @@
+html {
+  font-family: "Poppins", Montserrat, Rubik, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  background: #0a0124;
+}
+.selectPaper {
+  background: var(--primary) !important;
+  color: var(--commonTextColor) !important;
+  border-radius: var(--buttonBorderRadius) !important;
+  border: 2px solid var(--primary);
+}
+.selectPaper li {
+  font-size: 16px !important;
+  font-family: "Poppins" !important;
+}
+
+:root {
+  --white: white;
+  --black: black;
+  --primary: #151515;
+  --frameColor:#4F4545;
+  --secondary: #eaab50;
+  --actionColor: #d15e2c;
+  --warning: #ebd033;
+  --mainBackgroundColor: #272626;
+  --navigationTabBackground: #f5f5f5;
+  --lightTint: #f7f7f7;
+  --activeNAvigationTabBackground: #c8e6fe;
+  --lightBlue: #c8e6fe;
+  --mildBlue: #e9f5fe;
+  --placeholderColor: #c7c7c7;
+  --dark: #363636;
+  --commonTextColor: #f7f7f7;
+  --grey: #8e8e8e;
+  --green: #60a88b;
+  --mildGreen: rgba(40, 199, 111, 0.12);
+  --opaqueGreen: rgba(96, 168, 139, 0.5);
+  --red: #d12e38;
+  --mildRed: rgba(223, 95, 103, 0.12);
+  --mildYellow: rgba(251, 139, 36, 0.2);
+  --lightGrey: #e5e5e5;
+  --navigationTabTextColor: #333;
+  --error: #d62839;
+  --tint: #f9f9f9;
+  --paperBorderRadius: 8px;
+  --gridInputBorder: #dbdbdb;
+  --ctaBlue: #28a2ff;
+  --paperBackground: #201f55;
+  --bodyTextColor: #e5e6e7;
+  --buttonBorderRadius: 0px;
+  --primaryDisabled: rgba(209, 94, 44, 0.25);
+  --chipBackgroundColor: #3a2e6b;
+  --poolCardBackground: rgba(0, 16, 59, 0.6);
+  --cardBorder: #4d2f43;
+  --swapInputbackground: #06041d;
+  --paperBorderRadius: 12px;
+  --navigationDrawerBackground: rgba(6, 4, 29, 0.9);
+  --modalBackground:#665D5D;
+  --modalContentBackground:#3F3F3F;
+  --modalOverlayBackground: rgba(6, 4, 29, 0.7);
+
+  /* Radio */
+  --radioWidth: 18px;
+  --radioHeight: 18px;
+
+  /* Table */
+  --tableHeadColor: "#0F0E3B";
+
+  /* ag grid related styles */
+  --ag-border-color: transparent;
+  --ag-row-border-color: transparent;
+  --ag-header-background-color: var(--tint);
+  --ag-header-column-separator-color: transparent;
+  --ag-data-color: var(--darkText);
+  --ag-range-selection-border-color: transparent;
+  --ag-odd-row-background-color: var(--lightTint);
+}
