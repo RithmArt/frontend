@@ -1,0 +1,14 @@
+{
+  "ExamplePage": {
+
+  },
+  "Errors":{
+    "ErrorConnectingWallet": "Error Connecting to Wallet",
+    "NoProvider": "No browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.",
+    "NotConnectedToSupportedNetwork":"You're connected to an unsupported network, please Switch to Avalanche."
+  },
+  "HomePage": {
+    "home": "Home",
+    "description": "Home Page"
+  }
+}
