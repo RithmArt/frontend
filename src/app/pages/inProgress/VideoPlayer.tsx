@@ -12,7 +12,7 @@ import {
 } from "video-react";
 import "video-react/dist/video-react.css";
 
-export const VideoPlayer=(): ReactElement =>{
+export const VideoPlayer = (): ReactElement => {
   return (
     <Container maxWidth="xl">
       <Grid container justifyContent="center">
@@ -34,7 +34,7 @@ export const VideoPlayer=(): ReactElement =>{
       </Grid>
     </Container>
   );
-}
+};
 const CustomGridItem = styled(Grid)`
   .video-react-controls-enabled {
     border-radius: 8px;

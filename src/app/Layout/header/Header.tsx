@@ -139,9 +139,9 @@ export default function Header(): ReactElement {
 }
 
 const StyledLogo = styled("img")`
-width: 55px;
-height: 76px;
-`
+  width: 55px;
+  height: 76px;
+`;
 
 const StyledAppBar = styled(AppBar)`
   background-color: ${CssVariables.mainBackgroundColor};
