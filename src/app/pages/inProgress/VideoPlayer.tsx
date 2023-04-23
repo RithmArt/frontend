@@ -12,7 +12,7 @@ import {
 } from "video-react";
 import "video-react/dist/video-react.css";
 
-export default function VideoPlayer(): ReactElement {
+export const VideoPlayer=(): ReactElement =>{
   return (
     <Container maxWidth="xl">
       <Grid container justifyContent="center">

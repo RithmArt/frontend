@@ -1,4 +1,4 @@
-import VideoPlayer from "./VideoPlayer";
+import { VideoPlayer } from "./VideoPlayer";
 
 export const InProgressPage = () => {
   return (

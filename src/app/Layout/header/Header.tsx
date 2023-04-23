@@ -82,7 +82,7 @@ export default function Header(): ReactElement {
       <Container maxWidth="xl">
         <Toolbar>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <img src={logoIcon} alt="" />
+            <StyledLogo src={logoIcon} alt="" />
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton onClick={openDrawerHandler}>
@@ -91,7 +91,7 @@ export default function Header(): ReactElement {
             <Drawer anchor="left" open={openDrawer} onClose={closeDraweHandler}>
               <CustomList>
                 <StyledListItem onClick={closeDraweHandler}>
-                  <img src={logoIcon} alt="logoIcon.svg" />
+                  <StyledLogo src={logoIcon} alt="logoIcon.svg" />
                 </StyledListItem>
                 <Divider />
                 {navItems.map((item) => (
@@ -138,11 +138,17 @@ export default function Header(): ReactElement {
   );
 }
 
+const StyledLogo = styled("img")`
+width: 55px;
+height: 76px;
+`
+
 const StyledAppBar = styled(AppBar)`
   background-color: ${CssVariables.mainBackgroundColor};
   ${containerClasses.root} {
     background-color: ${CssVariables.mainBackgroundColor};
   }
+  padding: 12px 0;
 `;
 
 const StyledLink = styled(Link)`

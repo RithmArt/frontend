@@ -13,6 +13,7 @@ import frametest1 from "./assets/frametest1.png";
 import frametest2 from "./assets/frametest2.png";
 import { CollectionInformationSection } from "app/components/common/collectionInformation";
 import { MintSection } from "app/components/common/mintSection";
+import { VideoPlayer } from "../inProgress/VideoPlayer";
 
 export const LastDropsPage = () => {
   return (
@@ -104,6 +105,8 @@ export const LastDropsPage = () => {
         scriptType="webGL"
         previewImageSrc={frametest2}
       />
+      <VSpacer size={170} />
+      <VideoPlayer />
     </Wrapper>
   );
 };
