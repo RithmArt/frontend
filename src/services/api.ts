@@ -32,7 +32,7 @@ export class ApiService {
     switch (params.requestType) {
       case RequestTypes.GET:
         let query = "";
-        if (params.data !== {}) {
+        if (params.data && Object.keys(params.data).length > 0) {
           query = queryStringer(params.data);
         }
         const rawRes = await fetch(url + query, {
@@ -102,11 +102,7 @@ export class ApiService {
     return rawResponse.json();
   }
 
-  private getHeaders():
-    | Headers
-    | string[][]
-    | Record<string, string>
-    | undefined {
+  private getHeaders(): any {
     if (this.token === "") {
       return {
         "Content-Type": "application/json",

@@ -70,7 +70,7 @@
     "format": "prettier --write ./src/**/*.{js,ts,tsx}",
     "checkAll": "yarn checkTs && yarn checkEslint && yarn checkFormat",
     "prepare": "husky install",
-    "postinstall": "typechain  --target ethers-v5 --out-dir src/abi/ethers-contracts 'src/abi/*.json'",
+    "postinstall": "typechain  --target ethers-v5 --out-dir src/abi/abi-types 'src/abi/*.json'",
     "generate": "cross-env TS_NODE_PROJECT='./internals/ts-node.tsconfig.json' plop --plopfile internals/generators/plopfile.ts"
   },
   "browserslist": {

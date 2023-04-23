@@ -1,10 +1,10 @@
 import { BigNumber } from "@ethersproject/bignumber";
 import { ContractReceipt } from "ethers";
 import { ContractTransaction } from "@ethersproject/contracts";
-import { Erc20 } from "abi/ethers-contracts/Erc20";
 import { MaxUint256 } from "@ethersproject/constants";
 import { Zero } from "@ethersproject/constants";
 import { toast } from "react-toastify";
+import { Erc20 } from "abi/abi-types/Erc20";
 
 /**
  * Checks if a spender is allowed to spend some amount of a token.

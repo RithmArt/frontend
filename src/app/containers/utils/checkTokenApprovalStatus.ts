@@ -1,5 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import { Erc20 } from "abi/ethers-contracts/Erc20";
+import { Erc20 } from "abi/abi-types/Erc20";
 
 export default async function checkTokenApprovalStatus(
   srcTokenContract: Erc20,
