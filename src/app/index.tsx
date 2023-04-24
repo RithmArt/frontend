@@ -14,7 +14,7 @@ import { translations } from "locales/i18n";
 import { BlockChain } from "./containers/BlockChain/Loadable";
 import { AppPages } from "./types";
 import Layout from "./Layout";
-import { useGlobalSlice } from "store/slice";
+import { useGlobalSlice } from "app/containers/global/slice";
 import { GlobalModals } from "./components/modals";
 import { HomePage } from "./pages/Home/Loadable";
 import { PlaygroundPage } from "./pages/playground";

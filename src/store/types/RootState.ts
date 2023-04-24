@@ -4,7 +4,7 @@ import { BlockChainState } from "app/containers/BlockChain/types";
 import { Web3State } from "app/containers/BlockChain/Web3/types";
 import { EthersState } from "app/containers/BlockChain/Ethers/types";
 
-import { GlobalState } from "store/slice";
+import { GlobalState } from "app/containers/global/slice";
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 

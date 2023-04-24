@@ -18,8 +18,8 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface CuratorshipMembersABIInterface extends utils.Interface {
-  contractName: "CuratorshipMembersABI";
+export interface AbominableSasquatchWorkshopInterface extends utils.Interface {
+  contractName: "AbominableSasquatchWorkshop";
   functions: {
     "_tokenIdToHashMap(uint256)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -37,9 +37,11 @@ export interface CuratorshipMembersABIInterface extends utils.Interface {
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
+    "royaltyInfo(uint256,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setBaseURI(string)": FunctionFragment;
+    "setMintCollectionID(uint256)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenByIndex(uint256)": FunctionFragment;
@@ -115,6 +117,10 @@ export interface CuratorshipMembersABIInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "royaltyInfo",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "safeTransferFrom",
     values: [string, string, BigNumberish]
   ): string;
@@ -123,6 +129,10 @@ export interface CuratorshipMembersABIInterface extends utils.Interface {
     values: [string, boolean]
   ): string;
   encodeFunctionData(functionFragment: "setBaseURI", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "setMintCollectionID",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
@@ -214,6 +224,10 @@ export interface CuratorshipMembersABIInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "royaltyInfo",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "safeTransferFrom",
     data: BytesLike
   ): Result;
@@ -222,6 +236,10 @@ export interface CuratorshipMembersABIInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setBaseURI", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setMintCollectionID",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
@@ -317,13 +335,13 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface CuratorshipMembersABI extends BaseContract {
-  contractName: "CuratorshipMembersABI";
+export interface AbominableSasquatchWorkshop extends BaseContract {
+  contractName: "AbominableSasquatchWorkshop";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: CuratorshipMembersABIInterface;
+  interface: AbominableSasquatchWorkshopInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -415,9 +433,14 @@ export interface CuratorshipMembersABI extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    mint(
+    "mint(address,uint256)"(
       _to: string,
       _collectionId: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    "mint(address)"(
+      _to: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -436,6 +459,12 @@ export interface CuratorshipMembersABI extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    royaltyInfo(
+      _tokenId: BigNumberish,
+      _salePrice: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber]>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -460,6 +489,11 @@ export interface CuratorshipMembersABI extends BaseContract {
 
     setBaseURI(
       baseURI_: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setMintCollectionID(
+      mintCollectionId_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -600,9 +634,14 @@ export interface CuratorshipMembersABI extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  mint(
+  "mint(address,uint256)"(
     _to: string,
     _collectionId: BigNumberish,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  "mint(address)"(
+    _to: string,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -618,6 +657,12 @@ export interface CuratorshipMembersABI extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  royaltyInfo(
+    _tokenId: BigNumberish,
+    _salePrice: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<[string, BigNumber]>;
 
   "safeTransferFrom(address,address,uint256)"(
     from: string,
@@ -642,6 +687,11 @@ export interface CuratorshipMembersABI extends BaseContract {
 
   setBaseURI(
     baseURI_: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setMintCollectionID(
+    mintCollectionId_: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -776,11 +826,13 @@ export interface CuratorshipMembersABI extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    mint(
+    "mint(address,uint256)"(
       _to: string,
       _collectionId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    "mint(address)"(_to: string, overrides?: CallOverrides): Promise<void>;
 
     mintMany(
       _to: string,
@@ -794,6 +846,12 @@ export interface CuratorshipMembersABI extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    royaltyInfo(
+      _tokenId: BigNumberish,
+      _salePrice: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, BigNumber]>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -817,6 +875,11 @@ export interface CuratorshipMembersABI extends BaseContract {
     ): Promise<void>;
 
     setBaseURI(baseURI_: string, overrides?: CallOverrides): Promise<void>;
+
+    setMintCollectionID(
+      mintCollectionId_: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     supportsInterface(
       interfaceId: BytesLike,
@@ -998,9 +1061,14 @@ export interface CuratorshipMembersABI extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    mint(
+    "mint(address,uint256)"(
       _to: string,
       _collectionId: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    "mint(address)"(
+      _to: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1017,6 +1085,12 @@ export interface CuratorshipMembersABI extends BaseContract {
 
     ownerOf(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    royaltyInfo(
+      _tokenId: BigNumberish,
+      _salePrice: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1043,6 +1117,11 @@ export interface CuratorshipMembersABI extends BaseContract {
 
     setBaseURI(
       baseURI_: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setMintCollectionID(
+      mintCollectionId_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1178,9 +1257,14 @@ export interface CuratorshipMembersABI extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    mint(
+    "mint(address,uint256)"(
       _to: string,
       _collectionId: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "mint(address)"(
+      _to: string,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1197,6 +1281,12 @@ export interface CuratorshipMembersABI extends BaseContract {
 
     ownerOf(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    royaltyInfo(
+      _tokenId: BigNumberish,
+      _salePrice: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1223,6 +1313,11 @@ export interface CuratorshipMembersABI extends BaseContract {
 
     setBaseURI(
       baseURI_: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setMintCollectionID(
+      mintCollectionId_: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

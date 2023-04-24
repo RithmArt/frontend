@@ -5,9 +5,9 @@
 import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
 import type {
-  WorkshopOfTheAbominableSasquatch,
-  WorkshopOfTheAbominableSasquatchInterface,
-} from "../WorkshopOfTheAbominableSasquatch";
+  AbominableSasquatchWorkshop,
+  AbominableSasquatchWorkshopInterface,
+} from "../AbominableSasquatchWorkshop";
 
 const _abi = [
   {
@@ -879,21 +879,19 @@ const _abi = [
   },
 ];
 
-export class WorkshopOfTheAbominableSasquatch__factory {
+export class AbominableSasquatchWorkshop__factory {
   static readonly abi = _abi;
-  static createInterface(): WorkshopOfTheAbominableSasquatchInterface {
-    return new utils.Interface(
-      _abi
-    ) as WorkshopOfTheAbominableSasquatchInterface;
+  static createInterface(): AbominableSasquatchWorkshopInterface {
+    return new utils.Interface(_abi) as AbominableSasquatchWorkshopInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): WorkshopOfTheAbominableSasquatch {
+  ): AbominableSasquatchWorkshop {
     return new Contract(
       address,
       _abi,
       signerOrProvider
-    ) as WorkshopOfTheAbominableSasquatch;
+    ) as AbominableSasquatchWorkshop;
   }
 }

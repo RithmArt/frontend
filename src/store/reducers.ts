@@ -6,7 +6,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { connectRouter } from "connected-react-router";
 import { InjectedReducersType } from "store/types/injector-typings";
 import { history } from "router/history";
-import { globalReducer } from "./slice";
+import { globalReducer } from "../app/containers/global/slice";
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers

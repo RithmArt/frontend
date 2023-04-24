@@ -1,5 +1,8 @@
 import { createSlice } from "store/toolkit";
-import { useInjectReducer, useInjectSaga } from "./redux-injectors";
+import {
+  useInjectReducer,
+  useInjectSaga,
+} from "../../../store/redux-injectors";
 import { globalSaga } from "./saga";
 
 export interface GlobalState {}

@@ -4,10 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
-import type {
-  CuratorshipMembersABI,
-  CuratorshipMembersABIInterface,
-} from "../CuratorshipMembersABI";
+import type { MembershipABI, MembershipABIInterface } from "../MembershipABI";
 
 const _abi = [
   {
@@ -824,19 +821,15 @@ const _abi = [
   },
 ];
 
-export class CuratorshipMembersABI__factory {
+export class MembershipABI__factory {
   static readonly abi = _abi;
-  static createInterface(): CuratorshipMembersABIInterface {
-    return new utils.Interface(_abi) as CuratorshipMembersABIInterface;
+  static createInterface(): MembershipABIInterface {
+    return new utils.Interface(_abi) as MembershipABIInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): CuratorshipMembersABI {
-    return new Contract(
-      address,
-      _abi,
-      signerOrProvider
-    ) as CuratorshipMembersABI;
+  ): MembershipABI {
+    return new Contract(address, _abi, signerOrProvider) as MembershipABI;
   }
 }
