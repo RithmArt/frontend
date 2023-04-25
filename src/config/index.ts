@@ -1,5 +1,5 @@
 import { env } from "environment";
-import membershipABI from "abi/membershipABI.json";
+import membershipABI from "abi/membership.json";
 import abominableSasquatchABI from "abi/abominable_sasquatch_workshop.json";
 
 const IS_MAINNET = env.NETWORK === "mainnet";
@@ -16,5 +16,5 @@ const WORKSHOPS = {
     abi: abominableSasquatchABI,
   },
 };
-
+export type Workshops = keyof typeof WORKSHOPS;
 export { IS_MAINNET, WORKSHOPS, MAX_RETRIES };

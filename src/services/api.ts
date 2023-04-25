@@ -18,7 +18,7 @@ export class ApiService {
   public async fetchData(params: RequestParameters) {
     const url = params.isRawUrl ? params.url : this.baseUrl + params.url;
 
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== "production" && !params.turnOffLogger) {
       const uri = `${params.isRawUrl ? "" : this.baseUrl}${params.url}`;
       console.log(
         `🚀 %c${params.requestType} %crequest to: %c${uri}\n✉%c:`,
@@ -66,7 +66,7 @@ export class ApiService {
         toast.error("connection failed");
       }
     }
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== "production" && !params.turnOffLogger) {
       const uri = `${params.isRawUrl ? "" : this.baseUrl}${params.url}`;
       if (rawResponse.ok) {
         rawResponse

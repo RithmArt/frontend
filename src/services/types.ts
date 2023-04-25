@@ -10,6 +10,7 @@ export interface RequestParameters {
   data: any;
   isRawUrl?: boolean;
   requestName?: string;
+  turnOffLogger?: boolean;
 }
 
 export interface StandardResponse {

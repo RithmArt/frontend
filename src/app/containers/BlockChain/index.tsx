@@ -13,6 +13,7 @@ import { useWeb3Slice } from "./Web3/slice";
 export const BlockChain: FC = () => {
   useBlockChainSlice();
   useWeb3Slice();
+
   return (
     <>
       <Web3 />

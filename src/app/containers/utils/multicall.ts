@@ -58,9 +58,9 @@ async function getMultiContractData(
   keys?: string[]
 ): Promise<ReturnValues> {
   const multicall = new Multicall({ ethersProvider: provider });
-
+  console.log({ contractArray });
   const call = await multicall.call(contractArray);
-
+  console.log({ call });
   const resultSet = {} as ReturnValues;
 
   const contractNames = Object.keys(call.results);

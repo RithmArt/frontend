@@ -23,8 +23,8 @@ import { LastDropsPage } from "./pages/LastDrops";
 
 export function App() {
   const { t } = useTranslation();
-
   useGlobalSlice();
+
   return (
     <>
       <Helmet

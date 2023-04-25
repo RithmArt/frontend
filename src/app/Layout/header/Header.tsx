@@ -94,8 +94,8 @@ export default function Header(): ReactElement {
                   <StyledLogo src={logoIcon} alt="logoIcon.svg" />
                 </StyledListItem>
                 <Divider />
-                {navItems.map((item) => (
-                  <StyledListItem onClick={closeDraweHandler}>
+                {navItems.map((item, index) => (
+                  <StyledListItem key={index} onClick={closeDraweHandler}>
                     <StyledLink to={item.link}>{item.navItem}</StyledLink>
                   </StyledListItem>
                 ))}
@@ -111,8 +111,9 @@ export default function Header(): ReactElement {
             >
               <MenuItem onClick={closeBtnHandler}>Last drops</MenuItem>
               <Divider />
-              {dropDownItems.map((item) => (
+              {dropDownItems.map((item, index) => (
                 <MenuItem
+                  key={index}
                   onClick={() => {
                     handleLastDropClick(item.to);
                   }}
@@ -126,8 +127,10 @@ export default function Header(): ReactElement {
               ))}
             </CustomMenuBtn>
             <nav>
-              {navItems.map((item) => (
-                <NavLink to={item.link}>{item.navItem}</NavLink>
+              {navItems.map((item, index) => (
+                <NavLink key={index} to={item.link}>
+                  {item.navItem}
+                </NavLink>
               ))}
             </nav>
           </NavItemsWrapper>
