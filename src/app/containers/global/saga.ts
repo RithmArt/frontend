@@ -6,6 +6,7 @@ import { all, call, put, select, takeEvery } from "redux-saga/effects";
 import { Web3Domains } from "../BlockChain/Web3/selectors";
 import { fetchNFTMetadata } from "./providers/getNftMetadata";
 import { GlobalActions } from "./slice";
+import { NFT } from "./types";
 
 function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
   try {
@@ -45,8 +46,17 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
       const apiCall = call(fetchNFTMetadata, uri);
       fetchArray.push(apiCall);
     }
-    const nftMetadata: any[] = yield all(fetchArray);
-    console.log({ nftMetadata });
+    const nftMetadata: NFT[] = yield all(fetchArray);
+    for (let i = 0; i < nftMetadata.length; i++) {
+      const nft = nftMetadata[i];
+      nft.id = parseInt(nftIds[i].toString());
+    }
+    yield put(
+      GlobalActions.setWorkshopNFTs({
+        workshop: action.payload.workshop,
+        nfts: nftMetadata,
+      })
+    );
   } catch (error) {
     console.log({ error });
   } finally {
