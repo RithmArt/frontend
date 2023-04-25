@@ -39,12 +39,16 @@ export const Hero = () => {
 
 const Wrapper = styled("div")`
   display: flex;
+  gap: 40px;
 `;
 
-const TitleDescActionsWrapper = styled("div")``;
+const TitleDescActionsWrapper = styled("div")`
+  width: 70%;
+`;
 const ActionsWrapper = styled("div")`
   display: flex;
   gap: 10px;
+  margin-top: 30px;
 `;
 const Title = styled("h3")`
   margin: 0;

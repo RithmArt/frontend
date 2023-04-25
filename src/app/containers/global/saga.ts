@@ -1,15 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { AbominableSasquatchWorkshop, Membership } from "abi/abi-types";
 import { WorkshopContract, WORKSHOPS, Workshops } from "config";
 import { BigNumber, Contract } from "ethers";
-import {
-  all,
-  call,
-  put,
-  select,
-  takeEvery,
-  takeLatest,
-} from "redux-saga/effects";
+import { all, call, put, select, takeEvery } from "redux-saga/effects";
 import { Web3Domains } from "../BlockChain/Web3/selectors";
 import { fetchNFTMetadata } from "./providers/getNftMetadata";
 import { GlobalActions } from "./slice";
@@ -84,27 +76,43 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
   }
 }
 function* getWorkshopInfo(action: PayloadAction<{ workshop: Workshops }>) {
-  const workshopContract: WorkshopContract = yield call(
-    getWorkshopContract,
-    action.payload.workshop
-  );
-  const workshop = WORKSHOPS[action.payload.workshop];
-  const strokes = workshop.strokes;
-  const contractsToCall: any[] = [];
-  for (let i = 1; i <= strokes; i++) {
-    const contractCall = call(workshopContract.getCollectionInfo, i);
-    contractsToCall.push(contractCall);
+  try {
+    const workshopContract: WorkshopContract = yield call(
+      getWorkshopContract,
+      action.payload.workshop
+    );
+    const workshop = WORKSHOPS[action.payload.workshop];
+    const strokes = workshop.strokes;
+    const contractsToCall: any[] = [];
+    for (let i = 1; i <= strokes; i++) {
+      const contractCall = call(workshopContract.getCollectionInfo, i);
+      contractsToCall.push(contractCall);
+    }
+    const infos: WorkshopInfo[] = [];
+    const res = yield all(contractsToCall);
+    for (let i = 0; i < res.length; i++) {
+      const info = res[i];
+      infos.push({
+        invocations: info[0],
+        maxInvocations: info[1],
+        script: info[2],
+        price: info[3],
+        artist: info[4],
+        artistPercentage: info[5],
+      });
+    }
+    yield put(
+      GlobalActions.setWorkshopInfos({
+        workshop: action.payload.workshop,
+        infos: infos,
+      })
+    );
+  } catch (error) {
+    console.log(error);
   }
-  const infos: WorkshopInfo[] = yield all(contractsToCall);
-  yield put(
-    GlobalActions.setWorkshopInfos({
-      workshop: action.payload.workshop,
-      infos: infos,
-    })
-  );
 }
 
 export function* globalSaga() {
   yield takeEvery(GlobalActions.fetchNFTIds.type, fetchNFTIds);
-  yield takeLatest(GlobalActions.getWorkshopInfo.type, getWorkshopInfo);
+  yield takeEvery(GlobalActions.getWorkshopInfo.type, getWorkshopInfo);
 }
