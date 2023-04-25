@@ -7,7 +7,7 @@ import {
 } from "../../../store/redux-injectors";
 import { useFetchInitialData } from "./hooks/useFetchInitialData";
 import { globalSaga } from "./saga";
-import { NFT } from "./types";
+import { WorkshopInfo, NFT } from "./types";
 
 export interface GlobalState {
   workshops: {
@@ -15,8 +15,10 @@ export interface GlobalState {
       nftIds?: string[];
       abi: any;
       address: string;
+      strokes: number;
       isLoadingMetadatas?: boolean;
       nfts?: NFT[];
+      infos?: WorkshopInfo[];
     };
   };
 }
@@ -30,6 +32,16 @@ const globalSlice = createSlice({
   initialState,
   reducers: {
     fetchNFTIds: (state, action: PayloadAction<{ workshop: Workshops }>) => {},
+    getWorkshopInfo: (
+      state,
+      action: PayloadAction<{ workshop: Workshops }>
+    ) => {},
+    setWorkshopInfos: (
+      state,
+      action: PayloadAction<{ workshop: Workshops; infos: WorkshopInfo[] }>
+    ) => {
+      state.workshops[action.payload.workshop].infos = action.payload.infos;
+    },
     setIsLoadingWorkshop: (
       state,
       action: PayloadAction<{ workshop: Workshops; isLoading: boolean }>

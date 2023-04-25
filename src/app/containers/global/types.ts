@@ -1,3 +1,5 @@
+import { BigNumber } from "ethers";
+
 export interface NFT {
   artist: string;
   id?: number;
@@ -10,4 +12,13 @@ export interface NFT {
   image: string;
   name: string;
   platform: string;
+}
+
+export interface WorkshopInfo {
+  invocations: BigNumber;
+  maxInvocations: BigNumber;
+  price: BigNumber;
+  script: string;
+  artist: string;
+  artistPercentage: BigNumber;
 }
