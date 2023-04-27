@@ -17,6 +17,7 @@ export const ThreeImages = (props: ThreeImagesProps) => {
         defaultSpacing={2}
         style={{
           placeContent: "center",
+          alignItems: "center",
         }}
       >
         <Hero1 src={image1} />
@@ -29,18 +30,21 @@ export const ThreeImages = (props: ThreeImagesProps) => {
 
 const Hero1 = styled("img")`
   width: 323px;
-  object-fit: contain;
+  object-fit: cover;
   border: 2px solid black;
+  height: 460px;
 `;
 const Hero2 = styled("img")`
   width: 572px;
-  object-fit: contain;
+  object-fit: cover;
   border: 2px solid black;
+  height: 410px;
 `;
 const Hero3 = styled("img")`
-  object-fit: contain;
+  object-fit: cover;
   border: 2px solid black;
-  width: 271px;
+  width: 270px;
+  height: 270px;
 `;
 
 const ImegesWrapper = styled("div")`

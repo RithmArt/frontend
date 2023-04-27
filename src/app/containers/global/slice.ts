@@ -21,10 +21,17 @@ export interface GlobalState {
       infos?: WorkshopInfo[];
     };
   };
+  randomNFTs: {
+    [key in Workshops]?: NFT[];
+  };
 }
 // The initial state of the LoginPage container
 export const initialState: GlobalState = {
   workshops: WORKSHOPS,
+  randomNFTs: {
+    membership: [],
+    abominablesasquatch: [],
+  },
 };
 
 const globalSlice = createSlice({
@@ -54,6 +61,12 @@ const globalSlice = createSlice({
       action: PayloadAction<{ workshop: Workshops; nfts: NFT[] }>
     ) => {
       state.workshops[action.payload.workshop].nfts = action.payload.nfts;
+    },
+    setRandomNFTs: (
+      state,
+      action: PayloadAction<{ workshop: Workshops; nfts: NFT[] }>
+    ) => {
+      state.randomNFTs[action.payload.workshop] = action.payload.nfts;
     },
   },
 });

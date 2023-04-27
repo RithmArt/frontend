@@ -3,6 +3,7 @@ import { WorkshopContract, WORKSHOPS, Workshops } from "config";
 import { BigNumber, Contract } from "ethers";
 import { all, call, put, select, takeEvery } from "redux-saga/effects";
 import { Web3Domains } from "../BlockChain/Web3/selectors";
+import { resolveAny } from "../utils/resolveAny";
 import { fetchNFTMetadata } from "./providers/getNftMetadata";
 import { GlobalActions } from "./slice";
 import { NFT, WorkshopInfo } from "./types";
@@ -37,23 +38,27 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
       const contractCall = call(workshopContract.tokenByIndex, i);
       contractsToCall.push(contractCall);
     }
-    const nftIds: BigNumber[] = yield all(contractsToCall);
 
-    const notractsTocall2: any[] = [];
+    const nftIds: BigNumber[] = yield call(resolveAny, contractsToCall);
+
+    const contractsTocall2: any[] = [];
     for (let i = 0; i < nftIds.length; i++) {
       const bigNumberId = nftIds[i];
       const intId = parseInt(bigNumberId.toString());
       const contractCall = call(workshopContract.tokenURI, intId);
-      notractsTocall2.push(contractCall);
+      contractsTocall2.push(contractCall);
     }
-    const nftUris: string[] = yield all(notractsTocall2);
+
+    const nftUris = yield call(resolveAny, contractsTocall2);
     const fetchArray: any = [];
     for (let i = 0; i < nftUris.length; i++) {
       const uri = nftUris[i];
       const apiCall = call(fetchNFTMetadata, uri);
       fetchArray.push(apiCall);
     }
-    const nftMetadata: NFT[] = yield all(fetchArray);
+
+    const nftMetadata: NFT[] = yield call(resolveAny, fetchArray);
+    console.log({ nftMetadata });
     for (let i = 0; i < nftMetadata.length; i++) {
       const nft = nftMetadata[i];
       nft.id = parseInt(nftIds[i].toString());
@@ -62,6 +67,13 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
       GlobalActions.setWorkshopNFTs({
         workshop: action.payload.workshop,
         nfts: nftMetadata,
+      })
+    );
+    const randomized = [...nftMetadata].sort(() => Math.random() - 0.5);
+    yield put(
+      GlobalActions.setRandomNFTs({
+        workshop: action.payload.workshop,
+        nfts: randomized,
       })
     );
   } catch (error) {

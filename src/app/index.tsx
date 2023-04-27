@@ -20,6 +20,7 @@ import { HomePage } from "./pages/Home/Loadable";
 import { PlaygroundPage } from "./pages/playground";
 import { InProgressPage } from "./pages/inProgress";
 import { LastDropsPage } from "./pages/LastDrops";
+import { WorkshopPage } from "./pages/workshop";
 
 export function App() {
   const { t } = useTranslation();
@@ -42,6 +43,12 @@ export function App() {
           <Route path={AppPages.PlaygroundPage} component={PlaygroundPage} />
           <Route path={AppPages.InProgressPage} component={InProgressPage} />
           <Route path={AppPages.LastDrops} component={LastDropsPage} />
+          <Route exact path={AppPages.Workshops} component={WorkshopPage} />
+          <Route
+            exact
+            path={`${AppPages.Workshops}/:workshop`}
+            component={WorkshopPage}
+          />
           <Route component={NotFoundPage} />
         </Switch>
       </Layout>

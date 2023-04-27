@@ -18,8 +18,8 @@ import { VSpacer } from "app/components/common/vSpace";
 import { CollectionInformationSection } from "app/components/common/collectionInformation";
 import frameTest2 from "assets/images/frametest2.png";
 import { MintSection } from "app/components/common/mintSection";
-import { SwiperSlider } from "../inProgress/SwiperSlider";
 import { LayoutMaxWidth } from "app/Layout";
+import { SwiperSlider } from "app/components/common/swiper";
 
 export const PlaygroundPage = () => {
   return (
@@ -212,7 +212,31 @@ export const PlaygroundPage = () => {
       <VSpacer size={50} />
       <SliderWrapper>
         <AbsoluteWrapper>
-          <SwiperSlider />
+          <SwiperSlider
+            items={[
+              <Frame
+                src={frameTest1}
+                bottomInfo={{
+                  title: "test title",
+                  description: "test description",
+                }}
+              />,
+              <Frame
+                src={frameTest1}
+                bottomInfo={{
+                  title: "test title",
+                  description: "test description",
+                }}
+              />,
+              <Frame
+                src={frameTest1}
+                bottomInfo={{
+                  title: "test title",
+                  description: "test description",
+                }}
+              />,
+            ]}
+          />
         </AbsoluteWrapper>
       </SliderWrapper>
     </>

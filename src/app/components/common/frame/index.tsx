@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { css, styled } from "@mui/material";
 import { CssVariables } from "styles/cssVariables/cssVariables";
 
 interface FrameProps {
@@ -8,7 +8,7 @@ interface FrameProps {
     startImageIconSrc?: string;
     endImageIconSrc?: string;
     title: string;
-    description: string;
+    description?: string;
   };
   width?: number;
   height?: number;
@@ -30,7 +30,7 @@ export const Frame = (props: FrameProps) => {
       info={bottomInfo}
     >
       <ImageWrapper>
-        <StyledImg src={src} />
+        <StyledImg height={height} src={src} />
       </ImageWrapper>
       {bottomInfo && (
         <InfoWrapper>
@@ -40,7 +40,9 @@ export const Frame = (props: FrameProps) => {
             )}
             <InfoTextsWrapper>
               <Title>{bottomInfo.title}</Title>
-              <Description>{bottomInfo.description}</Description>
+              {bottomInfo.description && (
+                <Description>{bottomInfo.description}</Description>
+              )}
             </InfoTextsWrapper>
           </StartImageAndTextsWrapper>
           {bottomInfo.endImageIconSrc && (
@@ -94,10 +96,17 @@ const Description = styled("p")`
   color: ${CssVariables.white};
 `;
 
-const StyledImg = styled("img")`
+const StyledImg = styled("img")<{ height?: number }>`
   flex: 1;
   border: 2px solid black;
   max-width: 100%;
+  ${({ height }) =>
+    height
+      ? css`
+          height: ${height - 155}px;
+          object-fit: cover;
+        `
+      : "height:fit-content;"}
 `;
 
 const Wrapper = styled("div")<{

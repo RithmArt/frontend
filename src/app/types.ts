@@ -6,6 +6,7 @@ export enum AppPages {
   PlaygroundPage = "/playground",
   InProgressPage = "/in-progress",
   LastDrops = "/last-drops",
+  Workshops = "/workshops",
 }
 
 export enum NavigationRouteName {}
