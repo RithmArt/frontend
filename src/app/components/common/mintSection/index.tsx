@@ -7,61 +7,110 @@ import { Title } from "../title";
 import { TitleValue } from "../TitleValue";
 import { VSpacer } from "../vSpace";
 import { mediaQuery1024, mediaQuery282, mediaQuery377 } from "styles/media";
+import { NeedsWalletConnection } from "../needsWalletConnection";
+import { WalletToggle } from "../walletToggle";
+import { WORKSHOPS } from "config";
+import { useDispatch, useSelector } from "react-redux";
+import { globalSelectors } from "app/containers/global/selectors";
+import { PageLoading } from "../pageLoading";
+import { subtract } from "precise-math";
+import { utils } from "ethers";
+import { shopSelectors } from "app/containers/shop/selector";
+import { shopActions } from "app/containers/shop/slice";
 
 interface MintSectionProps {
-  title: string;
   licence: string;
-  collectionId: string;
   scriptType: string;
-  remaining: string;
-  total: string;
-  floorPrice: string;
-  previewImageSrc: string;
+  workshop: keyof typeof WORKSHOPS;
 }
 
-export const MintSection = (props: MintSectionProps) => {
-  const {
-    title,
-    licence,
-    collectionId,
-    scriptType,
-    remaining,
-    total,
-    floorPrice,
-    previewImageSrc,
-  } = props;
+export const MintSection = ({
+  licence,
+  scriptType,
+  workshop,
+}: MintSectionProps) => {
+  const dispatch = useDispatch();
+  const handleMintClick = (floorPriceInAVAX: string) => {
+    dispatch(
+      shopActions.startMintingNft({
+        collectionId: 1,
+        workshop,
+        amountToPay: Number(floorPriceInAVAX),
+      })
+    );
+  };
+  const randomNftsFromWorkshop =
+    useSelector(globalSelectors.randomNfts(workshop)) || [];
+  const workshopInfo = useSelector(globalSelectors.workshopInfos(workshop));
+  const isMinting = useSelector(shopSelectors.isMintingNft);
+  const nftInfo = randomNftsFromWorkshop[0] || undefined;
 
+  if (!workshopInfo) {
+    return <PageLoading />;
+  }
+
+  const collectionInfo = workshopInfo[0];
+  const total = Number(collectionInfo.maxInvocations);
+  const remaining = subtract(total, Number(collectionInfo.invocations));
+  const floorPrice = Number(collectionInfo.price).toString();
+  const floorPrice_in_AVAX = utils.formatEther(floorPrice);
+  // const formatedFloorPrice=formatCurrencyCell()
   return (
     <Wrapper>
       <Container maxWidth="xl">
         <Grid container justifyContent="space-between">
           <Grid item xs={12} sm={12} md={12} lg={4} xl={3}>
             <ImagePreviewWrapper>
-              <Frame bgVariant="monocolor" src={previewImageSrc} />
+              {nftInfo && (
+                <Frame
+                  height={420}
+                  width={340}
+                  bgVariant="monocolor"
+                  src={nftInfo.image}
+                />
+              )}
+              <span style={{ color: "red" }}>
+                *rendom art from this collection
+              </span>
             </ImagePreviewWrapper>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={4} xl={3}>
             <InfoWrapper>
-              <StyledTitle>{title}</StyledTitle>
+              <StyledTitle>{nftInfo?.name}</StyledTitle>
               <VSpacer size={50} />
               <TitleValue title="Licence" value={licence} />
-              <TitleValue title="Collection ID" value={collectionId} />
+              <TitleValue title="Collection ID" value={"0"} />
 
               <TitleValue title="Script Type" value={scriptType} />
               <TitleValue title="Remaining" value={remaining + " / " + total} />
-              <TitleValue title="Floor Price" value={floorPrice} />
-              <ActionsWrapper>
-                <SnowSelect
-                  onChange={() => {}}
-                  options={[
-                    { label: "Public Mint", value: "PublicMint" },
-                    { label: "Private Mint", value: "PrivateMint" },
-                  ]}
-                  value="PublicMint"
-                  selectedValue={"PublicMint"}
-                />
-                <ContainedButton>Mint</ContainedButton>
-              </ActionsWrapper>
+              <TitleValue
+                title="Floor Price"
+                value={`${floorPrice_in_AVAX} AVAX`}
+              />
+              <NeedsWalletConnection
+                disConnected={<WalletToggle />}
+                connected={
+                  <>
+                    <ActionsWrapper>
+                      <SnowSelect
+                        onChange={() => {}}
+                        options={[
+                          { label: "Public Mint", value: "PublicMint" },
+                          // { label: "Private Mint", value: "PrivateMint" },
+                        ]}
+                        value="PublicMint"
+                        selectedValue={"PublicMint"}
+                      />
+                      <ContainedButton
+                        loading={isMinting}
+                        onClick={() => handleMintClick(floorPrice_in_AVAX)}
+                      >
+                        Mint
+                      </ContainedButton>
+                    </ActionsWrapper>
+                  </>
+                }
+              ></NeedsWalletConnection>
             </InfoWrapper>
           </Grid>
         </Grid>
@@ -79,6 +128,7 @@ const ActionsWrapper = styled("div")`
 `;
 
 const ImagePreviewWrapper = styled("div")`
+  margin-top: 25px;
   @media (max-width: ${mediaQuery1024}) {
     display: flex;
     justify-content: center;

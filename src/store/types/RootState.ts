@@ -5,6 +5,7 @@ import { Web3State } from "app/containers/BlockChain/Web3/types";
 import { EthersState } from "app/containers/BlockChain/Ethers/types";
 
 import { GlobalState } from "app/containers/global/slice";
+import { ShopState } from "app/containers/shop/types";
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -14,11 +15,12 @@ import { GlobalState } from "app/containers/global/slice";
   So, not available always
 */
 export interface RootState {
-  global?: GlobalState;
+  global: GlobalState;
   homePage?: HomePageState;
   router?: RouterState;
   web3?: Web3State;
   ethers?: EthersState;
   blockChain?: BlockChainState;
+  shop: ShopState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

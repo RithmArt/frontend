@@ -102,15 +102,9 @@ export const WorkshopPage = () => {
       />
       <VSpacer size={170} />
       <MintSection
-        title="arq
-      Mountains"
+        workshop={workshop}
         licence="CC BY-NC-ND 4.0"
-        collectionId="3000"
-        floorPrice="2.5 AVAX"
-        remaining="2"
-        total="100"
         scriptType="webGL"
-        previewImageSrc={frametest2}
       />
       <VSpacer size={75} />
       <CollectionInformationSection

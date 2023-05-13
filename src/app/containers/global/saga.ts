@@ -1,30 +1,17 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { WorkshopContract, WORKSHOPS, Workshops } from "config";
-import { BigNumber, Contract } from "ethers";
-import { all, call, put, select, takeEvery } from "redux-saga/effects";
-import { rpcProvider } from "../BlockChain/Web3";
-import { Web3Domains } from "../BlockChain/Web3/selectors";
+import {
+  MAX_NFTS_TO_FETCH_ON_START,
+  WorkshopContract,
+  WORKSHOPS,
+  Workshops,
+} from "config";
+import { BigNumber } from "ethers";
+import { all, call, put, takeEvery } from "redux-saga/effects";
 import { resolveAny } from "../utils/resolveAny";
 import { fetchNFTMetadata } from "./providers/getNftMetadata";
 import { GlobalActions } from "./slice";
 import { NFT, WorkshopInfo } from "./types";
-
-function* getWorkshopContract({
-  ws,
-  useToGetData,
-}: {
-  ws: Workshops;
-  useToGetData?: boolean;
-}) {
-  const workshop = WORKSHOPS[ws];
-  const library = yield select(Web3Domains.selectNetworkLibraryDomain);
-  const workshopContract = new Contract(
-    workshop.address,
-    workshop.abi,
-    useToGetData ? rpcProvider : library.getSigner()
-  ) as WorkshopContract;
-  return workshopContract;
-}
+import { getWorkshopContract } from "./utils/getWorkshopContract";
 
 function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
   try {
@@ -40,23 +27,27 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
     });
     const totalSupply: BigNumber = yield call(workshopContract.totalSupply);
     const intTotalSupply = parseInt(totalSupply.toString());
+    const numberToGet =
+      MAX_NFTS_TO_FETCH_ON_START <= intTotalSupply
+        ? MAX_NFTS_TO_FETCH_ON_START
+        : intTotalSupply;
     const contractsToCall: any[] = [];
-    for (let i = 0; i < intTotalSupply; i++) {
+    for (let i = 0; i < numberToGet; i++) {
       const contractCall = call(workshopContract.tokenByIndex, i);
       contractsToCall.push(contractCall);
     }
 
     const nftIds: BigNumber[] = yield call(resolveAny, contractsToCall);
 
-    const contractsTocall2: any[] = [];
+    const contractsToCallToFetchNFT_Uris: any[] = [];
     for (let i = 0; i < nftIds.length; i++) {
       const bigNumberId = nftIds[i];
       const intId = parseInt(bigNumberId.toString());
       const contractCall = call(workshopContract.tokenURI, intId);
-      contractsTocall2.push(contractCall);
+      contractsToCallToFetchNFT_Uris.push(contractCall);
     }
 
-    const nftUris = yield call(resolveAny, contractsTocall2);
+    const nftUris = yield call(resolveAny, contractsToCallToFetchNFT_Uris);
     const fetchArray: any = [];
     for (let i = 0; i < nftUris.length; i++) {
       const uri = nftUris[i];
@@ -65,7 +56,6 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
     }
 
     const nftMetadata: NFT[] = yield call(resolveAny, fetchArray);
-    console.log({ nftMetadata });
     for (let i = 0; i < nftMetadata.length; i++) {
       const nft = nftMetadata[i];
       nft.id = parseInt(nftIds[i].toString());
@@ -84,7 +74,7 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
       })
     );
   } catch (error) {
-    console.log({ error });
+    console.error({ error });
   } finally {
     yield put(
       GlobalActions.setIsLoadingWorkshop({

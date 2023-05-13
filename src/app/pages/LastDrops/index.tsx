@@ -14,8 +14,11 @@ import frametest2 from "./assets/frametest2.png";
 import { CollectionInformationSection } from "app/components/common/collectionInformation";
 import { MintSection } from "app/components/common/mintSection";
 import { VideoPlayer } from "../inProgress/VideoPlayer";
+import { useParams } from "react-router-dom";
 
 export const LastDropsPage = () => {
+  const params = useParams();
+  console.log(params);
   return (
     <Wrapper>
       <TitleDescriptionAction
@@ -95,15 +98,9 @@ export const LastDropsPage = () => {
       />
       <VSpacer size={75} />
       <MintSection
-        title="arq
-      Mountains"
+        workshop="abominablesasquatch"
+        scriptType="webgl"
         licence="CC BY-NC-ND 4.0"
-        collectionId="3000"
-        floorPrice="2.5 AVAX"
-        remaining="2"
-        total="100"
-        scriptType="webGL"
-        previewImageSrc={frametest2}
       />
       <VSpacer size={170} />
       <VideoPlayer />

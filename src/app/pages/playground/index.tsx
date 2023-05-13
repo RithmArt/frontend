@@ -16,7 +16,6 @@ import bookmarkIcon from "assets/icons/bookmark.svg";
 import { GroupedTitleAndDescriptionWithIconOnTop } from "app/components/common/titleDescriptionAction/TitleAndDescriptionWithIconOnTop/grouped";
 import { VSpacer } from "app/components/common/vSpace";
 import { CollectionInformationSection } from "app/components/common/collectionInformation";
-import frameTest2 from "assets/images/frametest2.png";
 import { MintSection } from "app/components/common/mintSection";
 import { LayoutMaxWidth } from "app/Layout";
 import { SwiperSlider } from "app/components/common/swiper";
@@ -43,15 +42,9 @@ export const PlaygroundPage = () => {
       />
       <VSpacer size={75} />
       <MintSection
-        title="arq
-      Mountains"
+        workshop="membership"
         licence="CC BY-NC-ND 4.0"
-        collectionId="3000"
-        floorPrice="2.5 AVAX"
-        remaining="2"
-        total="100"
         scriptType="webGL"
-        previewImageSrc={frameTest2}
       />
       <VSpacer size={75} />
 

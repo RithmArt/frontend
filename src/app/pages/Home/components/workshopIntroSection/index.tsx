@@ -5,8 +5,7 @@ import avatarplaceholder from "assets/images/avatarplaceholder.png";
 import circularplaceholder from "assets/images/circularplaceholder.png";
 import { useSelector } from "react-redux";
 import { globalSelectors } from "app/containers/global/selectors";
-import { Workshops } from "config";
-import { NFT } from "app/containers/global/types";
+import { WORKSHOPS, Workshops } from "config";
 import { ContainedButton } from "app/components/common/buttons/containedButton";
 import { history } from "router/history";
 
@@ -22,9 +21,9 @@ export const WorkshopIntroSection = (props: Props) => {
   // ignore eslint error because we are sure that the first two elements are not undefined
   // eslint-disable-next-line
   const nfts = randomNfts.filter((nft, index) => index < numberOfNfts);
-  const nft: NFT = nfts[0] || undefined;
-  const title = nft?.name || "";
-  const description = nft?.description || "";
+  const workshops = WORKSHOPS;
+  const workshopDescriptions = workshops[workshop].descriptions;
+  const workshopName = workshops[workshop].name;
 
   const handleRedirectToWorkshopClick = () => {
     history.push(`/workshops/${workshop}`);
@@ -49,10 +48,10 @@ export const WorkshopIntroSection = (props: Props) => {
   return (
     <>
       <TitleDescriptionAction
-        title={title}
+        title={workshopName}
         reverse={isReverse}
         textAlign={isReverse ? "right" : "left"}
-        description={description}
+        description={workshopDescriptions}
         actions={
           <ContainedButton onClick={handleRedirectToWorkshopClick}>
             view workshop

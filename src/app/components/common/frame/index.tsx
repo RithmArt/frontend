@@ -100,13 +100,15 @@ const StyledImg = styled("img")<{ height?: number }>`
   flex: 1;
   border: 2px solid black;
   max-width: 100%;
-  ${({ height }) =>
+  height: 100%;
+  object-fit: cover;
+  /* ${({ height }) =>
     height
       ? css`
           height: ${height - 155}px;
           object-fit: cover;
         `
-      : "height:fit-content;"}
+      : "height:fit-content;"} */
 `;
 
 const Wrapper = styled("div")<{

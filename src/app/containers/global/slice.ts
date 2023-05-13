@@ -5,6 +5,7 @@ import {
   useInjectReducer,
   useInjectSaga,
 } from "../../../store/redux-injectors";
+import { useShopSlice } from "../shop/slice";
 import { useFetchInitialData } from "./hooks/useFetchInitialData";
 import { globalSaga } from "./saga";
 import { WorkshopInfo, NFT } from "./types";
@@ -80,4 +81,5 @@ export const useGlobalSlice = () => {
   useInjectReducer({ key: sliceKey, reducer: globalReducer });
   useInjectSaga({ key: sliceKey, saga: globalSaga });
   useFetchInitialData();
+  useShopSlice();
 };
