@@ -20,6 +20,16 @@ export interface GlobalState {
       isLoadingMetadatas?: boolean;
       nfts?: NFT[];
       infos?: WorkshopInfo[];
+      info: {
+        name: string;
+        descriptions: string;
+        inspiration: string;
+      };
+      creatorInfo: {
+        name: string;
+        descriptions: string;
+        image: string;
+      };
     };
   };
   randomNFTs: {

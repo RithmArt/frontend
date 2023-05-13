@@ -2,12 +2,9 @@ import { styled } from "@mui/material";
 import { ContainedButton } from "app/components/common/buttons/containedButton";
 import { Frame } from "app/components/common/frame";
 import { TitleDescriptionAction } from "app/components/common/titleDescriptionAction";
-import louis from "./assets/louis.png";
 import { ThreeImages } from "app/components/common/threeImages";
 import { VSpacer } from "app/components/common/vSpace";
 import { Stacked } from "app/components/common/stacked";
-import frametest1 from "./assets/frametest1.png";
-import frametest2 from "./assets/frametest2.png";
 import { CollectionInformationSection } from "app/components/common/collectionInformation";
 import { MintSection } from "app/components/common/mintSection";
 import { VideoPlayer } from "../inProgress/VideoPlayer";
@@ -16,26 +13,47 @@ import { useSelector } from "react-redux";
 import { globalSelectors } from "app/containers/global/selectors";
 import { Workshops } from "config";
 import { getMultipleRandom } from "app/containers/utils/getMultipleRandom";
+import { PageLoading } from "app/components/common/pageLoading";
+import { utils } from "ethers";
 
 export const WorkshopPage = () => {
   const params = useParams<{ workshop: Workshops }>();
   const { workshop } = params;
   const workshops = useSelector(globalSelectors.workshops);
-  if (!workshops) {
-    return <>not found</>;
-  }
+
   const workshopData = workshops[workshop];
   const nfts = workshopData.nfts || [];
   const threeRandomNfts = getMultipleRandom(nfts, 3);
+  const workshopInfo = useSelector(globalSelectors.workshopInfos(workshop));
+  if (!workshops) {
+    return <>not found</>;
+  }
+  if (!workshopInfo) {
+    return <PageLoading />;
+  }
+
+  const collectionInfo = workshopInfo[0];
+  const total = Number(collectionInfo.maxInvocations);
+  const floorPrice = Number(collectionInfo.price).toString();
+  const floorPrice_in_AVAX = utils.formatEther(floorPrice);
+
+  const scrollToMintContainer = () => {
+    const mintButton = document.getElementById("mintButton");
+    if (mintButton) {
+      mintButton.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <Wrapper>
       <TitleDescriptionAction
-        top={<>0xluis_</>}
-        title="arq Mountains"
-        description="Short descripcion about the drop"
+        top={<>{workshopData.creatorInfo.name}</>}
+        title={workshopData.info.name}
+        description={workshopData.info.descriptions}
         actions={
           <>
-            <ContainedButton>Mint</ContainedButton>
+            <ContainedButton onClick={scrollToMintContainer}>
+              Mint
+            </ContainedButton>
           </>
         }
         otherSection={
@@ -48,23 +66,22 @@ export const WorkshopPage = () => {
       />
       <VSpacer size={170} />
       <TitleDescriptionAction
-        title="0xluis_"
-        description={[
-          "0xluis_ is a generative artist oscillating between Paris and Madrid. He graduated with a software engineering and machine learning degree and was always drawn to generative art in the past few years. It was only after graduating that he started to get out of his comfort zone and started creating art.",
-          "His work is for now shaped by simple primitives, contrasted colours and various distortions applied with shaders. His favourite quote is: It's always day one",
-        ]}
+        title={workshopData.creatorInfo.name}
+        description={workshopData.creatorInfo.descriptions}
         actions={
           <>
-            <ContainedButton>Mint</ContainedButton>
+            <ContainedButton onClick={scrollToMintContainer}>
+              Mint
+            </ContainedButton>
           </>
         }
         otherSection={
           <Frame
-            src={louis}
+            src={workshopData.creatorInfo.image}
             bgVariant="monocolor"
             bottomInfo={{
-              title: "0xluis_",
-              description: "@collector_name",
+              title: workshopData.creatorInfo.name,
+              description: workshopData.info.name,
             }}
           />
         }
@@ -73,7 +90,7 @@ export const WorkshopPage = () => {
 
       <TitleDescriptionAction
         title="Inspiration behind the collection"
-        description="The collection captures an iterative sequence of apocalyptic scenarios which drift through the void of obliviousness. A future for which we won't be here, conformed by a present engulfed by sediments of time. A time that will shift what was once below with what was once above ( earth-civilization ), asserting fate's victory."
+        description={workshopData.info.inspiration}
         reverse
         textAlign="right"
         otherSection={
@@ -82,18 +99,20 @@ export const WorkshopPage = () => {
             elements={[
               <Frame
                 bgVariant="monocolor"
-                src={frametest1}
+                height={420}
+                src={nfts[0]?.image}
                 bottomInfo={{
-                  title: "#51",
-                  description: "@collection_name",
+                  title: "#" + (nfts[0]?.id || ""),
+                  description: workshopData.info.name || "",
                 }}
               />,
               <Frame
                 bgVariant="monocolor"
-                src={frametest2}
+                height={420}
+                src={nfts[1]?.image}
                 bottomInfo={{
-                  title: "#52",
-                  description: "@collection_name",
+                  title: "#" + (nfts[1]?.id || ""),
+                  description: workshopData.info.name || "",
                 }}
               />,
             ]}
@@ -108,11 +127,11 @@ export const WorkshopPage = () => {
       />
       <VSpacer size={75} />
       <CollectionInformationSection
-        title="Evolved from ancestors"
-        description="An artwork series exploring emergent natural phenomena uncovered by harnessing deeply nested fractal noise. A chaotic system where the hash of each token acts as a creative engine, generating a window into a foreign world."
+        title={workshopData.info.name}
+        description={workshopData.info.descriptions}
         numberOfProperties="100+"
-        price="2.5"
-        size="100"
+        price={floorPrice_in_AVAX}
+        size={total.toString()}
       />
       <VSpacer size={170} />
       <VideoPlayer />

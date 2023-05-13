@@ -22,8 +22,8 @@ export const WorkshopIntroSection = (props: Props) => {
   // eslint-disable-next-line
   const nfts = randomNfts.filter((nft, index) => index < numberOfNfts);
   const workshops = WORKSHOPS;
-  const workshopDescriptions = workshops[workshop].descriptions;
-  const workshopName = workshops[workshop].name;
+  const workshopDescriptions = workshops[workshop]?.info.descriptions;
+  const workshopName = workshops[workshop]?.info.name;
 
   const handleRedirectToWorkshopClick = () => {
     history.push(`/workshops/${workshop}`);

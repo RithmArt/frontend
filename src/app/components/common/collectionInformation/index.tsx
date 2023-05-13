@@ -41,7 +41,7 @@ export const CollectionInformationSection = (
   return (
     <Wrapper>
       <Container maxWidth="xl">
-        <Grid container justifyContent="space-between">
+        <Grid container justifyContent="space-between" alignItems="center">
           <GridTextSection item xs={12} sm={12} md={12} lg={5} xl={5}>
             <TextSectionWrapper>
               <StyledDescription>Collection Information</StyledDescription>

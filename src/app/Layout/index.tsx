@@ -44,6 +44,7 @@ const MainWrapper = styled("div")(({ theme }) => ({
   maxWidth: LayoutMaxWidth,
   width: "100%",
   margin: "100px auto 50px auto",
+  minHeight: "90vh",
   [mobile]: {
     marginLeft: 0,
     padding: "0 5px",

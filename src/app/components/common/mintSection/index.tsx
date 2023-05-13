@@ -41,9 +41,9 @@ export const MintSection = ({
   };
   const randomNftsFromWorkshop =
     useSelector(globalSelectors.randomNfts(workshop)) || [];
-  const workshopInfo = useSelector(globalSelectors.workshopInfos(workshop));
   const isMinting = useSelector(shopSelectors.isMintingNft);
   const nftInfo = randomNftsFromWorkshop[0] || undefined;
+  const workshopInfo = useSelector(globalSelectors.workshopInfos(workshop));
 
   if (!workshopInfo) {
     return <PageLoading />;
@@ -58,7 +58,7 @@ export const MintSection = ({
   return (
     <Wrapper>
       <Container maxWidth="xl">
-        <Grid container justifyContent="space-between">
+        <Grid container justifyContent="space-between" alignItems="center">
           <Grid item xs={12} sm={12} md={12} lg={4} xl={3}>
             <ImagePreviewWrapper>
               {nftInfo && (
@@ -70,12 +70,12 @@ export const MintSection = ({
                 />
               )}
               <span style={{ color: "red" }}>
-                *rendom art from this collection
+                *rendom art from this workshop
               </span>
             </ImagePreviewWrapper>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={4} xl={3}>
-            <InfoWrapper>
+            <InfoWrapper id="mintButton">
               <StyledTitle>{nftInfo?.name}</StyledTitle>
               <VSpacer size={50} />
               <TitleValue title="Licence" value={licence} />
@@ -93,6 +93,7 @@ export const MintSection = ({
                   <>
                     <ActionsWrapper>
                       <SnowSelect
+                        style={{ width: "50%" }}
                         onChange={() => {}}
                         options={[
                           { label: "Public Mint", value: "PublicMint" },
@@ -102,6 +103,7 @@ export const MintSection = ({
                         selectedValue={"PublicMint"}
                       />
                       <ContainedButton
+                        style={{ width: "50%" }}
                         loading={isMinting}
                         onClick={() => handleMintClick(floorPrice_in_AVAX)}
                       >
@@ -133,6 +135,8 @@ const ImagePreviewWrapper = styled("div")`
     display: flex;
     justify-content: center;
     margin-bottom: 130px;
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
