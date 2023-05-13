@@ -5,10 +5,10 @@ import { Web3Actions } from "app/containers/BlockChain/Web3/slice";
 import { ConnectorPayload } from "app/containers/BlockChain/Web3/types";
 // import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { mobile } from "styles/media";
 import { LocalStorageKeys, storage } from "../../../../store/storage";
 import { ContainedButton } from "../buttons/containedButton";
 import { OutlinedButton } from "../buttons/outlinedButton";
+import { mobile } from "styles/media";
 
 interface WalletToggleProps {
   fullWidth?: boolean;
@@ -32,7 +32,7 @@ export const WalletToggle: FC<WalletToggleProps> = ({ fullWidth }) => {
   };
 
   return account ? (
-    <OutlinedButton
+    <StyledOutlinedButton
       height={40.5}
       loading={isConnecting}
       onClick={handleButtonClick}
@@ -41,7 +41,7 @@ export const WalletToggle: FC<WalletToggleProps> = ({ fullWidth }) => {
       {account.substring(0, 5) +
         "..." +
         account.substring(account.length, account.length - 4)}
-    </OutlinedButton>
+    </StyledOutlinedButton>
   ) : (
     <StyledContainedButton
       color="primary"
@@ -57,6 +57,12 @@ export const WalletToggle: FC<WalletToggleProps> = ({ fullWidth }) => {
 
 const StyledContainedButton = styled(ContainedButton)({
   [mobile]: {
-    fontSize: "12px",
+    marginLeft: "auto",
+  },
+});
+
+const StyledOutlinedButton = styled(OutlinedButton)({
+  [mobile]: {
+    marginLeft: "auto",
   },
 });

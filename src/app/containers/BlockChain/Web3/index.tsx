@@ -28,6 +28,8 @@ export function useActiveWeb3React(): Web3ReactContextInterface<Web3Provider> & 
   return context.active ? context : contextNetwork;
 }
 
+export const rpcProvider = new ethers.providers.StaticJsonRpcProvider(rpcUrl);
+
 const Core = () => {
   useWeb3Slice();
   const dispatch = useDispatch();

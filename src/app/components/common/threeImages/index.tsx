@@ -1,5 +1,4 @@
 import { styled } from "@mui/material";
-import Masonry from "@mui/lab/Masonry";
 
 interface ThreeImagesProps {
   image1: string;
@@ -10,20 +9,11 @@ export const ThreeImages = (props: ThreeImagesProps) => {
   const { image1, image2, image3 } = props;
   return (
     <ImegesWrapper>
-      <Masonry
-        columns={2}
-        spacing={2}
-        defaultColumns={2}
-        defaultSpacing={2}
-        style={{
-          placeContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Hero1 src={image1} />
+      <Hero1 src={image1} />
+      <Hero2AndHero3Wrappe>
         <Hero2 src={image2} />
         <Hero3 src={image3} />
-      </Masonry>
+      </Hero2AndHero3Wrappe>
     </ImegesWrapper>
   );
 };
@@ -49,5 +39,19 @@ const Hero3 = styled("img")`
 
 const ImegesWrapper = styled("div")`
   display: flex;
+  justify-content: center;
   align-items: center;
+  padding: 0px;
+  gap: 15px;
+`;
+
+const Hero2AndHero3Wrappe = styled("div")`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 572px;
+  height: 693px;
 `;

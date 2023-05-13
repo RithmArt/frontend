@@ -1,54 +1,70 @@
-import { styled } from "@mui/material";
+import { styled, Grid, Container } from "@mui/material";
+
 import { ContainedButton } from "app/components/common/buttons/containedButton";
 import { OutlinedButton } from "app/components/common/buttons/outlinedButton";
 import { ThreeImages } from "app/components/common/threeImages";
 import { CssVariables } from "styles/cssVariables/cssVariables";
+import {
+  mediaQuery545,
+  mediaQuery417,
+  mediaQuery395,
+  mediaQuery377,
+  mediaQuery282,
+  mediaQuery825,
+} from "styles/media";
 import hero1 from "./assets/hero1.png";
 import hero2 from "./assets/hero2.png";
 import hero3 from "./assets/hero3.png";
 
 export const Hero = () => {
   return (
-    <Wrapper>
-      <TitleDescActionsWrapper>
-        <TitleAndDescWrapper>
-          <Title>
-            Algorithm Art platform for
-            <b>Artists</b>.
-          </Title>
-          <Description>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum eaque
-            obcaecati amet, laudantium nulla sapiente corrupti rerum! Et nostrum
-            harum expedita sequi laudantium iste! Atque et repellendus, eveniet
-            voluptas earum quidem, natus error sequi consequuntur, sit ex?
-            Dolores, rerum laudantium repellat nulla nesciunt voluptatibus sint
-            voluptate ex blanditiis. Accusantium et sunt facere eos similique
-            odit itaque natus, repellat aut. Ut minima amet, nemo nam in aut
-            pariatur voluptas odit at!
-          </Description>
-        </TitleAndDescWrapper>
-        <ActionsWrapper>
-          <ContainedButton>Galery Art</ContainedButton>
-          <OutlinedButton>Become an artist </OutlinedButton>
-        </ActionsWrapper>
-      </TitleDescActionsWrapper>
-      <ThreeImages image1={hero1} image2={hero2} image3={hero3} />
-    </Wrapper>
+    <Container maxWidth="xl">
+      <Grid container spacing={{ lg: 8, xl: 8 }}>
+        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+          <TitleDescActionsWrapper>
+            <TitleAndDescWrapper>
+              <Title>
+                Algorithm Art platform for
+                <b>Artists</b>.
+              </Title>
+              <Description>
+                The First algorithm Art dAO on Avalanche built to support the
+                exposure and adoption of Generative, Computational and AI art
+              </Description>
+            </TitleAndDescWrapper>
+            <ActionsWrapper>
+              <ExtendedContainedButton>Galery Art</ExtendedContainedButton>
+              <ExtendedOutlinedButton>Become an artist</ExtendedOutlinedButton>
+            </ActionsWrapper>
+          </TitleDescActionsWrapper>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={8}
+          xl={8}
+          display={{ xs: "none", lg: "flex" }}
+        >
+          <ThreeImages image1={hero1} image2={hero2} image3={hero3} />
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
-const Wrapper = styled("div")`
-  display: flex;
-  gap: 40px;
-`;
-
 const TitleDescActionsWrapper = styled("div")`
-  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 `;
 const ActionsWrapper = styled("div")`
   display: flex;
   gap: 10px;
-  margin-top: 30px;
+  @media (max-width: ${mediaQuery282}) {
+    flex-direction: column;
+  }
 `;
 const Title = styled("h3")`
   margin: 0;
@@ -56,6 +72,24 @@ const Title = styled("h3")`
   font-weight: 400;
   font-size: 65px;
   color: ${CssVariables.white};
+  @media (max-width: ${mediaQuery825}) {
+    font-size: 63px;
+  }
+  @media (max-width: ${mediaQuery545}) {
+    font-size: 50px;
+  }
+  @media (max-width: ${mediaQuery417}) {
+    font-size: 58px;
+  }
+  @media (max-width: ${mediaQuery395}) {
+    font-size: 54px;
+  }
+  @media (max-width: ${mediaQuery377}) {
+    font-size: 33px;
+  }
+  @media (max-width: ${mediaQuery282}) {
+    font-size: 37px;
+  }
 `;
 
 const Description = styled("p")`
@@ -64,5 +98,42 @@ const Description = styled("p")`
   font-weight: 400;
   font-size: 18px;
   color: ${CssVariables.white};
+  @media (max-width: ${mediaQuery825}) {
+    font-size: 17px;
+  }
+  @media (max-width: ${mediaQuery545}) {
+    margin-top: 7px;
+    font-size: 16px;
+  }
+
+  @media (max-width: ${mediaQuery377}) {
+    margin-top: 7px;
+    font-size: 15px;
+  }
+  @media (max-width: ${mediaQuery282}) {
+    margin-top: 7px;
+    font-size: 12px;
+  }
 `;
-const TitleAndDescWrapper = styled("div")``;
+
+const ExtendedOutlinedButton = styled(OutlinedButton)`
+  @media (max-width: ${mediaQuery825}) {
+    font-size: 14px;
+  }
+
+  @media (max-width: ${mediaQuery395}) {
+    font-size: 11px;
+  }
+`;
+
+const ExtendedContainedButton = styled(ContainedButton)`
+  @media (max-width: ${mediaQuery377}) {
+    font-size: 14px;
+  } ;
+`;
+
+const TitleAndDescWrapper = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;

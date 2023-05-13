@@ -35,7 +35,7 @@ const StyledLayout = styled("div")({
 const HeaderWrapper = styled("div")({
   position: "fixed",
   width: "100%",
-  zIndex: 1,
+  zIndex: 99,
 });
 
 const MainWrapper = styled("div")(({ theme }) => ({

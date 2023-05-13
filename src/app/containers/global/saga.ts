@@ -2,19 +2,26 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { WorkshopContract, WORKSHOPS, Workshops } from "config";
 import { BigNumber, Contract } from "ethers";
 import { all, call, put, select, takeEvery } from "redux-saga/effects";
+import { rpcProvider } from "../BlockChain/Web3";
 import { Web3Domains } from "../BlockChain/Web3/selectors";
 import { resolveAny } from "../utils/resolveAny";
 import { fetchNFTMetadata } from "./providers/getNftMetadata";
 import { GlobalActions } from "./slice";
 import { NFT, WorkshopInfo } from "./types";
 
-function* getWorkshopContract(ws: Workshops) {
+function* getWorkshopContract({
+  ws,
+  useToGetData,
+}: {
+  ws: Workshops;
+  useToGetData?: boolean;
+}) {
   const workshop = WORKSHOPS[ws];
   const library = yield select(Web3Domains.selectNetworkLibraryDomain);
   const workshopContract = new Contract(
     workshop.address,
     workshop.abi,
-    library.getSigner()
+    useToGetData ? rpcProvider : library.getSigner()
   ) as WorkshopContract;
   return workshopContract;
 }
@@ -27,10 +34,10 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
         isLoading: true,
       })
     );
-    const workshopContract = yield call(
-      getWorkshopContract,
-      action.payload.workshop
-    );
+    const workshopContract = yield call(getWorkshopContract, {
+      ws: action.payload.workshop,
+      useToGetData: true,
+    });
     const totalSupply: BigNumber = yield call(workshopContract.totalSupply);
     const intTotalSupply = parseInt(totalSupply.toString());
     const contractsToCall: any[] = [];
@@ -89,10 +96,10 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
 }
 function* getWorkshopInfo(action: PayloadAction<{ workshop: Workshops }>) {
   try {
-    const workshopContract: WorkshopContract = yield call(
-      getWorkshopContract,
-      action.payload.workshop
-    );
+    const workshopContract: WorkshopContract = yield call(getWorkshopContract, {
+      ws: action.payload.workshop,
+      useToGetData: true,
+    });
     const workshop = WORKSHOPS[action.payload.workshop];
     const strokes = workshop.strokes;
     const contractsToCall: any[] = [];

@@ -82,16 +82,20 @@ export default function Header(): ReactElement {
       <Container maxWidth="xl">
         <Toolbar>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <StyledLogo src={logoIcon} alt="" />
+            <Link to="/">
+              <StyledLogo src={logoIcon} alt="" />
+            </Link>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton onClick={openDrawerHandler}>
+            <CustomIconBtn onClick={openDrawerHandler}>
               <MenuIcon />
-            </IconButton>
+            </CustomIconBtn>
             <Drawer anchor="left" open={openDrawer} onClose={closeDraweHandler}>
               <CustomList>
                 <StyledListItem onClick={closeDraweHandler}>
-                  <StyledLogo src={logoIcon} alt="logoIcon.svg" />
+                  <Link to="/">
+                    <StyledLogo src={logoIcon} alt="" />
+                  </Link>
                 </StyledListItem>
                 <Divider />
                 {navItems.map((item, index) => (
@@ -205,4 +209,8 @@ const CustomMenuBtn = styled(Menu)({
     marginBottom: "-11px",
   },
   "li > p:nth-of-type(2)": { fontSize: "12px", fontWeight: "400" },
+});
+
+const CustomIconBtn = styled(IconButton)({
+  color: "white",
 });

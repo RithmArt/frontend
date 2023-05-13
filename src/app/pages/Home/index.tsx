@@ -17,7 +17,7 @@ import { GroupedTitleAndDescriptionWithIconOnTop } from "app/components/common/t
 import walletIcon from "assets/icons/walletIcon.svg";
 import paperUploadIcon from "assets/icons/paperUpload.svg";
 import bookmarkIcon from "assets/icons/bookmark.svg";
-import { styled } from "@mui/material";
+import { Container, Grid, styled } from "@mui/material";
 import { LayoutMaxWidth } from "app/Layout";
 import { VSpacer } from "app/components/common/vSpace";
 import { NFTsSlider } from "./components/nftsSlider";
@@ -28,7 +28,6 @@ export const HomePage = () => {
   useInjectHomePageSlice();
   const workshops = useSelector(globalSelectors.workshops);
   // const dispatch = useDispatch();
-
   return (
     <>
       <Hero />
@@ -47,31 +46,49 @@ export const HomePage = () => {
         }
         return <WorkshopIntroSection key={workshop} workshop={ws} />;
       })}
-      <CenteredTitleAndDescription
-        title="How does it work?"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
-      />
-      <GroupedTitleAndDescriptionWithIconOnTop>
-        <TitleAndDescriptionWithIconOnTop
-          title="Wallet"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
-          iconSrc={walletIcon}
-        />
-        <TitleAndDescriptionWithIconOnTop
-          title="Create Collection"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
-          iconSrc={paperUploadIcon}
-        />
-        <TitleAndDescriptionWithIconOnTop
-          title="List them for sale"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
-          iconSrc={bookmarkIcon}
-        />
-      </GroupedTitleAndDescriptionWithIconOnTop>
+      <Container maxWidth="xl">
+        <Grid container justifyContent="center" marginTop="200px">
+          <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
+            <CenteredTitleAndDescription
+              title="How does it work?"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
+            />
+          </Grid>
+        </Grid>
+        <GroupedTitleAndDescriptionWithIconOnTop>
+          <Grid container spacing={5} my="35px">
+            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+              <TitleAndDescriptionWithIconOnTop
+                title="Wallet"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
+                iconSrc={walletIcon}
+              />
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+              <TitleAndDescriptionWithIconOnTop
+                title="Create Collection"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
+                iconSrc={paperUploadIcon}
+              />
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+              <TitleAndDescriptionWithIconOnTop
+                title="List them for sale"
+                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
+                iconSrc={bookmarkIcon}
+              />
+            </Grid>
+          </Grid>
+        </GroupedTitleAndDescriptionWithIconOnTop>
+      </Container>
       <VSpacer size={50} />
       <SliderWrapper>
         <AbsoluteWrapper>
-          <NFTsSlider numberOfNfts={20} />
+          <Grid container justifyContent="center" my="35px">
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+              <NFTsSlider numberOfNfts={20} />
+            </Grid>
+          </Grid>
         </AbsoluteWrapper>
       </SliderWrapper>
     </>

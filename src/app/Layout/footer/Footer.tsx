@@ -8,6 +8,12 @@ import twiterIcon from "./footerIcons/twiterIcon.svg";
 import discordIcon from "./footerIcons/discordIcon.svg";
 import logoBlack from "./footerIcons/logoBlack.svg";
 
+import {
+  mobile,
+  mediaQuery282,
+  mediaQuery377,
+  mediaQuery825,
+} from "styles/media";
 import ListItems from "./components/footer/listItem";
 import { Description } from "app/components/common/description";
 import { CssVariables } from "styles/cssVariables/cssVariables";
@@ -30,10 +36,10 @@ export default function Footer(): ReactElement {
   return (
     <>
       <StyledContainer maxWidth="xl">
-        <Grid container alignItems="center">
-          <Grid item xs={12} sm={12} md={4} lg={4} xl={5}>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <GridImgWrapper item xs={12} sm={12} md={4} lg={4} xl={5}>
             <WrapperImg>
-              <img src={logoBlack} alt="" />
+              <IconImgBlack src={logoBlack} alt="logoBlack" />
             </WrapperImg>
             <Box>
               <StyledDescription>
@@ -41,7 +47,7 @@ export default function Footer(): ReactElement {
                 volutpat sapien quam, tristique dignissim odio.
               </StyledDescription>
             </Box>
-          </Grid>
+          </GridImgWrapper>
           <Grid item xs={12} sm={12} md={2} lg={2} xl={2}>
             <ListItems heading={listTiltleFooter1} items={listItemsFooter1} />
           </Grid>
@@ -59,7 +65,7 @@ export default function Footer(): ReactElement {
             alignItems="center"
             justifyContent="center"
           >
-            <CustomBox>
+            <CustomBox mt="22px">
               <img src={twiterIcon} alt="twiterIcon" />
               <img src={discordIcon} alt="medusIcon" />
               <img src={telegramIcon} alt="telegramIcon" />
@@ -78,30 +84,94 @@ export default function Footer(): ReactElement {
   );
 }
 
-const StyledContainer = styled(Container)``;
 const StyledDescription = styled(Description)`
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  ${mobile} {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  @media (max-width: ${mediaQuery825}) {
+    font-size: 13px;
+  }
+  @media (max-width: ${mediaQuery377}) {
+    font-size: 12px;
+  }
 `;
 
-const CustomBox = styled(Box)({
-  img: { marginRight: "10px" },
-});
+const CustomBox = styled(Box)`
+  img {
+    margin-right: 10px;
+  }
+  @media (max-width: ${mediaQuery825}) {
+    img {
+      max-width: 26px;
+    }
+  }
+  @media (max-width: ${mediaQuery282}) {
+    img {
+      max-width: 25px;
+    }
+  }
+`;
 
 const WrapperImg = styled("div")({
-  img: {
-    width: "124px",
-    height: "124px",
-    display: "block",
+  [mobile]: {
+    display: "flex",
+    justifyContent: "center",
   },
+
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  padding: "0px",
+  gap: "16px",
+  width: "255px",
+  height: "124px",
 });
 
 const CopyRightWrapper = styled("div")({
+  fontStyle: "normal",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   marginTop: "26px",
   color: CssVariables.white,
   p: {
+    fontWeight: "400",
     fontSize: "14px",
+    lineHeight: "21px",
+    textAlign: "center",
+    textTransform: "capitalize",
   },
 });
+
+const GridImgWrapper = styled(Grid)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  padding: "0px",
+  gap: "24px",
+  [mobile]: {
+    alignItems: "center",
+  },
+});
+
+const StyledContainer = styled(Container)({
+  marginTop: "100px",
+});
+
+const IconImgBlack = styled("img")`
+  @media (max-width: ${mediaQuery825}) {
+    max-width: 245px;
+  }
+  @media (max-width: ${mediaQuery282}) {
+    max-width: 185px;
+  }
+`;

@@ -101,14 +101,6 @@ export const WorkshopPage = () => {
         }
       />
       <VSpacer size={170} />
-      <CollectionInformationSection
-        title="Evolved from ancestors"
-        description="An artwork series exploring emergent natural phenomena uncovered by harnessing deeply nested fractal noise. A chaotic system where the hash of each token acts as a creative engine, generating a window into a foreign world."
-        numberOfProperties="100+"
-        price="2.5"
-        size="100"
-      />
-      <VSpacer size={75} />
       <MintSection
         title="arq
       Mountains"
@@ -119,6 +111,14 @@ export const WorkshopPage = () => {
         total="100"
         scriptType="webGL"
         previewImageSrc={frametest2}
+      />
+      <VSpacer size={75} />
+      <CollectionInformationSection
+        title="Evolved from ancestors"
+        description="An artwork series exploring emergent natural phenomena uncovered by harnessing deeply nested fractal noise. A chaotic system where the hash of each token acts as a creative engine, generating a window into a foreign world."
+        numberOfProperties="100+"
+        price="2.5"
+        size="100"
       />
       <VSpacer size={170} />
       <VideoPlayer />

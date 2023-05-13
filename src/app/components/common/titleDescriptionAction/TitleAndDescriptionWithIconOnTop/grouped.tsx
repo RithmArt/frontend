@@ -10,4 +10,5 @@ const Wrapper = styled("div")`
   flex-direction: row;
   flex-wrap: wrap;
   align-content: space-between;
+  padding: 24px 0px;
 `;
