@@ -8,6 +8,7 @@ import { Paper, styled } from "@mui/material";
 import { GlobalActions } from "app/containers/global/slice";
 import { CenteredTitleAndDescription } from "app/components/common/titleDescriptionAction/centered";
 import { VSpacer } from "app/components/common/vSpace";
+import { useDeviceSize } from "hooks/mediaQuery";
 
 const heights = [300, 500, 200, 100, 250, 600, 350, 450, 400, 650, 550];
 // this function selects a random height from heights array
@@ -19,6 +20,7 @@ export const GalleryPage = () => {
   const { workshop = "membership" } = params;
   const nfts = useSelector(globalSelectors.allNfts(workshop));
   const workshopInfo = WORKSHOPS[workshop];
+  const { isMobile } = useDeviceSize();
 
   if (!nfts.length) {
     return <PageLoading />;
@@ -26,6 +28,10 @@ export const GalleryPage = () => {
 
   const handleNftClick = (index: number) => {
     const nft = nfts[index];
+    if (isMobile) {
+      window.open(nft?.external_url || "", "_blank");
+      return;
+    }
     dispatch(
       GlobalActions.setSelectedNftToShow({
         nft,
@@ -41,8 +47,7 @@ export const GalleryPage = () => {
         description={workshopInfo.info.descriptions}
       />
       <VSpacer size={50} />
-
-      <Masonry columns={4} spacing={2}>
+      <Masonry columns={{ xs: 1, sm: 2, lg: 3 }} spacing={1}>
         {nfts.map((nft, index) => (
           <Item
             onClick={() => handleNftClick(index)}
