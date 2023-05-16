@@ -12,6 +12,7 @@ interface FrameProps {
   };
   width?: number;
   height?: number;
+  onClick?: () => void;
 }
 
 export const Frame = (props: FrameProps) => {
@@ -21,6 +22,7 @@ export const Frame = (props: FrameProps) => {
     bottomInfo,
     height,
     width = 350,
+    onClick,
   } = props;
   return (
     <Wrapper
@@ -28,6 +30,10 @@ export const Frame = (props: FrameProps) => {
       height={height}
       bgVariant={bgVariant}
       info={bottomInfo}
+      onClick={onClick ? onClick : () => {}}
+      style={{
+        cursor: onClick ? "pointer" : "auto",
+      }}
     >
       <ImageWrapper>
         <StyledImg height={height} src={src} />

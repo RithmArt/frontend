@@ -7,6 +7,7 @@ export const GlobalDomains = {
   root: (state: RootState) => state,
   workshops: (state: RootState) => state.global?.workshops,
   randomNfts: (state: RootState) => state.global?.randomNFTs,
+  selectedNftToShow: (state: RootState) => state.global?.selectedNftToShow,
 };
 
 export const globalSelectors = {
@@ -55,4 +56,8 @@ export const globalSelectors = {
       return [];
     });
   },
+  selectedNftToShow: createSelector(
+    [GlobalDomains.selectedNftToShow],
+    (nft) => nft
+  ),
 };

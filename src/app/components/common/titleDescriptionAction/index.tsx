@@ -165,5 +165,5 @@ const Wrapper = styled("div")<{ reverse: "true" | "false" }>`
 `;
 
 const ContainerWrapper = styled(Container)`
-  margin: 104px 0;
+  margin: 0px 0;
 `;

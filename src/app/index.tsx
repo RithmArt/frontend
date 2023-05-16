@@ -21,6 +21,7 @@ import { PlaygroundPage } from "./pages/playground";
 import { InProgressPage } from "./pages/inProgress";
 import { LastDropsPage } from "./pages/LastDrops";
 import { WorkshopPage } from "./pages/workshop";
+import { GalleryPage } from "./pages/gallery";
 
 export function App() {
   const { t } = useTranslation();
@@ -48,6 +49,11 @@ export function App() {
             exact
             path={`${AppPages.Workshops}/:workshop`}
             component={WorkshopPage}
+          />
+          <Route
+            exact
+            path={`${AppPages.Gallery}/:workshop`}
+            component={GalleryPage}
           />
           <Route component={NotFoundPage} />
         </Switch>

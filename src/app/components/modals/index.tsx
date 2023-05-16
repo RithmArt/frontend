@@ -1,5 +1,5 @@
 import { NoProviderAlert } from "./noProvider";
-import { TestModal } from "./test";
+import { ViewNftModal } from "./nftToShow";
 import { WrongNetworkModalAlert } from "./wrongNetwork";
 
 export const GlobalModals = () => {
@@ -7,7 +7,7 @@ export const GlobalModals = () => {
     <>
       <WrongNetworkModalAlert />
       <NoProviderAlert />
-      <TestModal />
+      <ViewNftModal />
     </>
   );
 };

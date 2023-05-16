@@ -14,11 +14,8 @@ import frametest2 from "./assets/frametest2.png";
 import { CollectionInformationSection } from "app/components/common/collectionInformation";
 import { MintSection } from "app/components/common/mintSection";
 import { VideoPlayer } from "../inProgress/VideoPlayer";
-import { useParams } from "react-router-dom";
 
 export const LastDropsPage = () => {
-  const params = useParams();
-  console.log(params);
   return (
     <Wrapper>
       <TitleDescriptionAction

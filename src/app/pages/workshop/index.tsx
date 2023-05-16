@@ -15,10 +15,12 @@ import { Workshops } from "config";
 import { getMultipleRandom } from "app/containers/utils/getMultipleRandom";
 import { PageLoading } from "app/components/common/pageLoading";
 import { utils } from "ethers";
+import { history } from "router/history";
+import { AppPages } from "app/types";
 
 export const WorkshopPage = () => {
   const params = useParams<{ workshop: Workshops }>();
-  const { workshop } = params;
+  const { workshop = "membership" } = params;
   const workshops = useSelector(globalSelectors.workshops);
 
   const workshopData = workshops[workshop];
@@ -43,6 +45,11 @@ export const WorkshopPage = () => {
       mintButton.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const handleViewGalleryClick = () => {
+    history.push(`${AppPages.Gallery}/${workshop}`);
+  };
+
   return (
     <Wrapper>
       <TitleDescriptionAction
@@ -51,8 +58,8 @@ export const WorkshopPage = () => {
         description={workshopData.info.descriptions}
         actions={
           <>
-            <ContainedButton onClick={scrollToMintContainer}>
-              Mint
+            <ContainedButton onClick={handleViewGalleryClick}>
+              view gallery
             </ContainedButton>
           </>
         }

@@ -10,30 +10,36 @@ import { useFetchInitialData } from "./hooks/useFetchInitialData";
 import { globalSaga } from "./saga";
 import { WorkshopInfo, NFT } from "./types";
 
+export interface AdditionalWorkshopInfo {
+  name: string;
+  descriptions: string;
+  inspiration: string;
+}
+export interface WorkshopInterface {
+  nftIds?: string[];
+  abi: any;
+  address: string;
+  strokes: number;
+  isLoadingMetadatas?: boolean;
+  nfts?: NFT[];
+  infos?: WorkshopInfo[];
+  info: AdditionalWorkshopInfo;
+  creatorInfo: {
+    name: string;
+    descriptions: string;
+    image: string;
+  };
+}
 export interface GlobalState {
   workshops: {
-    [key in Workshops]: {
-      nftIds?: string[];
-      abi: any;
-      address: string;
-      strokes: number;
-      isLoadingMetadatas?: boolean;
-      nfts?: NFT[];
-      infos?: WorkshopInfo[];
-      info: {
-        name: string;
-        descriptions: string;
-        inspiration: string;
-      };
-      creatorInfo: {
-        name: string;
-        descriptions: string;
-        image: string;
-      };
-    };
+    [key in Workshops]: WorkshopInterface;
   };
   randomNFTs: {
     [key in Workshops]?: NFT[];
+  };
+  selectedNftToShow?: {
+    nft: NFT;
+    workshopInfo: WorkshopInterface;
   };
 }
 // The initial state of the LoginPage container
@@ -49,6 +55,21 @@ const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
+    setSelectedNftToShow: (
+      state,
+      action: PayloadAction<{ nft: NFT; workshop: Workshops } | undefined>
+    ) => {
+      if (action.payload) {
+        const workshops = state.workshops;
+        const workshopInfo = workshops[action.payload.workshop];
+        state.selectedNftToShow = {
+          nft: action.payload.nft,
+          workshopInfo,
+        };
+      } else {
+        state.selectedNftToShow = undefined;
+      }
+    },
     fetchNFTIds: (state, action: PayloadAction<{ workshop: Workshops }>) => {},
     getWorkshopInfo: (
       state,
