@@ -38,7 +38,7 @@ const WORKSHOPS = {
       inspiration:
         "The collection captures an iterative sequence of apocalyptic scenarios which drift through the void of obliviousness. A future for which we won't be here, conformed by a present engulfed by sediments of time. A time that will shift what was once below with what was once above ( earth-civilization ), asserting fate's victory.",
       descriptions:
-        "The Workshop is a collection of iterative algorithmic pieces based on historically significant generative art pieces. The workshop is an on-chain generative art collection. The foundational skils represented provide insight into what is possible with algorithmic art. The workshop is supported by the RITHM for off chain rendering. Through the use of Workshop Batch 1 as a training set for the textual inversion, Abominable Sasquatch has created a bridge between verifiable on-chain training sources and Artificial Intelligence (A.I.) using Stable Diffusion. This collection builds upon the imagery of an emergent city, within the generative art pieces in Batch 1, with a prompt to create watercolor city blueprints.",
+        "The Workshop is a collection of iterative algorithmic pieces based ",
     },
     creatorInfo: {
       image: louis,
@@ -52,3 +52,9 @@ const WORKSHOPS = {
 export type Workshops = keyof typeof WORKSHOPS;
 export type WorkshopContract = Membership | AbominableSasquatchWorkshop;
 export { IS_MAINNET, WORKSHOPS, MAX_RETRIES, MAX_NFTS_TO_FETCH_ON_START };
+export const campfireApiEndpoint = `https://campfire.exchange/api/accounts`;
+export const treasuryAddress = "0x60104a2cdbb0207f4337036bcab90716b2925c69";
+export const treasuryGalleryInfo = {
+  title: "Treasury Gallery",
+  descriptions: "treasury gallery descriptions",
+};

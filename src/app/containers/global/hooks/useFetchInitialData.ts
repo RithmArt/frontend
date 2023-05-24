@@ -7,7 +7,9 @@ import { GlobalActions } from "../slice";
 export const useFetchInitialData = () => {
   const dispatch = useDispatch();
   const library = useSelector(Web3Selectors.selectNetworkLibrary);
+
   useEffect(() => {
+    dispatch(GlobalActions.getTreasuryNFTs());
     if (library) {
       const workshops = Object.keys(WORKSHOPS);
       for (let i = 0; i < workshops.length; i++) {

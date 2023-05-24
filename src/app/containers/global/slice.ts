@@ -8,7 +8,7 @@ import {
 import { useShopSlice } from "../shop/slice";
 import { useFetchInitialData } from "./hooks/useFetchInitialData";
 import { globalSaga } from "./saga";
-import { WorkshopInfo, NFT } from "./types";
+import { WorkshopInfo, NFT, MoralisNftResult } from "./types";
 
 export interface AdditionalWorkshopInfo {
   name: string;
@@ -41,6 +41,8 @@ export interface GlobalState {
     nft: NFT;
     workshopInfo: WorkshopInterface;
   };
+  treasuryNFTs: MoralisNftResult[];
+  isLoadingTreasuryNfts: boolean;
 }
 // The initial state of the LoginPage container
 export const initialState: GlobalState = {
@@ -49,6 +51,8 @@ export const initialState: GlobalState = {
     membership: [],
     abominablesasquatch: [],
   },
+  isLoadingTreasuryNfts: false,
+  treasuryNFTs: [],
 };
 
 const globalSlice = createSlice({
@@ -71,6 +75,7 @@ const globalSlice = createSlice({
       }
     },
     fetchNFTIds: (state, action: PayloadAction<{ workshop: Workshops }>) => {},
+    getTreasuryNFTs() {},
     getWorkshopInfo: (
       state,
       action: PayloadAction<{ workshop: Workshops }>
@@ -99,6 +104,12 @@ const globalSlice = createSlice({
       action: PayloadAction<{ workshop: Workshops; nfts: NFT[] }>
     ) => {
       state.randomNFTs[action.payload.workshop] = action.payload.nfts;
+    },
+    setIsLoadingTreasuryNfts(state, action: PayloadAction<boolean>) {
+      state.isLoadingTreasuryNfts = action.payload;
+    },
+    setTreasuryNfts(state, action: PayloadAction<GlobalState["treasuryNFTs"]>) {
+      state.treasuryNFTs = action.payload;
     },
   },
 });

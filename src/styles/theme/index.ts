@@ -14,6 +14,9 @@ let theme = createTheme({
       disabledBackground: "#efefef",
       disabled: "#333333",
     },
+    background: {
+      paper: "#000000",
+    },
   },
 });
 
@@ -36,6 +39,7 @@ theme = createTheme(theme, {
       fontSize: "16px",
       fontFamily: FontFamilies.Poppins,
       fontWeight: "bold",
+      color: "white",
     },
     body2: {
       fontSize: "16px",

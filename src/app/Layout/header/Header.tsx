@@ -17,10 +17,11 @@ import Divider from "@mui/material/Divider";
 import { Link, NavLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import logoIcon from "./headerIcons/logoIcon.svg";
-import dropDownIcon from "./headerIcons/dropDownIcon.svg";
 import { CssVariables } from "styles/cssVariables/cssVariables";
 import { WalletToggle } from "app/components/common/walletToggle";
 import { history } from "router/history";
+import { WORKSHOPS } from "config";
+import { AppPages } from "app/types";
 
 const navItems = [
   { navItem: "Collection", link: "/Colletion" },
@@ -28,31 +29,20 @@ const navItems = [
   { navItem: "About", link: "/About" },
 ];
 
-const dropDownItems = [
-  {
-    picure: dropDownIcon,
-    collectionName: "Collection Name",
-    name: "Artist",
-    to: "/last-drops",
-  },
-  {
-    picure: dropDownIcon,
-    collectionName: "Collection Name",
-    name: "Lufy",
-    to: "/last-drops",
-  },
-  {
-    picure: dropDownIcon,
-    collectionName: "Collection Name",
-    name: "Logan",
-    to: "/last-drops",
-  },
-];
-
 export default function Header(): ReactElement {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openBtn, setOpenBtn] = useState(false);
+  const workshops = WORKSHOPS;
+  const lastDropsItems = Object.keys(workshops).map((key) => {
+    const item = workshops[key];
+    return {
+      picure: item.creatorInfo.image,
+      collectionName: item.info.name,
+      name: item.creatorInfo.name,
+      to: `${AppPages.Workshops}/${key}`,
+    };
+  });
 
   const openDrawerHandler = (e) => {
     setOpenDrawer(true);
@@ -97,7 +87,7 @@ export default function Header(): ReactElement {
                     <StyledLogo src={logoIcon} alt="" />
                   </Link>
                 </StyledListItem>
-                <Divider />
+                <StyledDivider />
                 {navItems.map((item, index) => (
                   <StyledListItem key={index} onClick={closeDraweHandler}>
                     <StyledLink to={item.link}>{item.navItem}</StyledLink>
@@ -114,15 +104,15 @@ export default function Header(): ReactElement {
               onClose={closeBtnHandler}
             >
               <MenuItem onClick={closeBtnHandler}>Last drops</MenuItem>
-              <Divider />
-              {dropDownItems.map((item, index) => (
+              <StyledDivider />
+              {lastDropsItems.map((item, index) => (
                 <MenuItem
                   key={index}
                   onClick={() => {
                     handleLastDropClick(item.to);
                   }}
                 >
-                  <img src={item.picure} alt={item.name} />
+                  <StyledMenuIcon src={item.picure} alt={item.name} />
                   <Box ml="20px">
                     <p>{item.collectionName}</p>
                     <p>{item.name}</p>
@@ -144,6 +134,13 @@ export default function Header(): ReactElement {
     </StyledAppBar>
   );
 }
+
+const StyledMenuIcon = styled("img")`
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  object-fit: cover;
+`;
 
 const StyledLogo = styled("img")`
   width: 55px;
@@ -187,7 +184,7 @@ const CustomList = styled(List)({
   li: { padding: "8px" },
   "li a": {
     textDecoration: "none",
-    color: "#1a1717",
+    color: CssVariables.white,
   },
 });
 
@@ -214,3 +211,8 @@ const CustomMenuBtn = styled(Menu)({
 const CustomIconBtn = styled(IconButton)({
   color: "white",
 });
+
+const StyledDivider = styled(Divider)`
+  background-color: ${CssVariables.white};
+  background: ${CssVariables.white};
+`;

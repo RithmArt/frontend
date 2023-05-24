@@ -7,6 +7,7 @@ export enum AppPages {
   InProgressPage = "/in-progress",
   LastDrops = "/last-drops",
   Workshops = "/workshops",
+  TreasuryGallery = "/treasury-gallery",
   Gallery = "/gallery",
 }
 

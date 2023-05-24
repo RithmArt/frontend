@@ -7,10 +7,11 @@ import {
 } from "config";
 import { BigNumber } from "ethers";
 import { all, call, put, takeEvery } from "redux-saga/effects";
+import { fetchTreasuryNFTsAPI } from "../BlockChain/providers/fetchNftsApi";
 import { resolveAny } from "../utils/resolveAny";
 import { fetchNFTMetadata } from "./providers/getNftMetadata";
 import { GlobalActions } from "./slice";
-import { NFT, WorkshopInfo } from "./types";
+import { MoralisNftResult, NFT, WorkshopInfo } from "./types";
 import { getWorkshopContract } from "./utils/getWorkshopContract";
 
 function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
@@ -121,7 +122,20 @@ function* getWorkshopInfo(action: PayloadAction<{ workshop: Workshops }>) {
   }
 }
 
+function* getTreasuryNFTs() {
+  try {
+    yield put(GlobalActions.setIsLoadingTreasuryNfts(true));
+    const res: MoralisNftResult[] = yield call(fetchTreasuryNFTsAPI);
+    yield put(GlobalActions.setTreasuryNfts(res));
+  } catch (error) {
+    console.error({ error });
+  } finally {
+    yield put(GlobalActions.setIsLoadingTreasuryNfts(false));
+  }
+}
+
 export function* globalSaga() {
   yield takeEvery(GlobalActions.fetchNFTIds.type, fetchNFTIds);
   yield takeEvery(GlobalActions.getWorkshopInfo.type, getWorkshopInfo);
+  yield takeEvery(GlobalActions.getTreasuryNFTs.type, getTreasuryNFTs);
 }

@@ -9,10 +9,7 @@ import { GlobalActions } from "app/containers/global/slice";
 import { CenteredTitleAndDescription } from "app/components/common/titleDescriptionAction/centered";
 import { VSpacer } from "app/components/common/vSpace";
 import { useDeviceSize } from "hooks/mediaQuery";
-
-const heights = [300, 500, 200, 100, 250, 600, 350, 450, 400, 650, 550];
-// this function selects a random height from heights array
-const randomHeight = () => heights[Math.floor(Math.random() * heights.length)];
+import { randomHeight } from "utils/randomHeight";
 
 export const GalleryPage = () => {
   const dispatch = useDispatch();

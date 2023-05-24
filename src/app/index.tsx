@@ -19,9 +19,10 @@ import { GlobalModals } from "./components/modals";
 import { HomePage } from "./pages/Home/Loadable";
 import { PlaygroundPage } from "./pages/playground";
 import { InProgressPage } from "./pages/inProgress";
-import { LastDropsPage } from "./pages/LastDrops";
-import { WorkshopPage } from "./pages/workshop";
-import { GalleryPage } from "./pages/gallery";
+import { LastDropsPage } from "./pages/LastDrops/Loadable";
+import { WorkshopPage } from "./pages/workshop/Loadable";
+import { GalleryPage } from "./pages/gallery/Loadable";
+import { TreasuryGalleryPage } from "./pages/treasuryGallery/Loadable";
 
 export function App() {
   const { t } = useTranslation();
@@ -44,6 +45,10 @@ export function App() {
           <Route path={AppPages.PlaygroundPage} component={PlaygroundPage} />
           <Route path={AppPages.InProgressPage} component={InProgressPage} />
           <Route path={AppPages.LastDrops} component={LastDropsPage} />
+          <Route
+            path={AppPages.TreasuryGallery}
+            component={TreasuryGalleryPage}
+          />
           <Route exact path={AppPages.Workshops} component={WorkshopPage} />
           <Route
             exact
