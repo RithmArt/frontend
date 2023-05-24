@@ -24,7 +24,7 @@ import { WORKSHOPS } from "config";
 import { AppPages } from "app/types";
 
 const navItems = [
-  { navItem: "Collection", link: "/Colletion" },
+  { navItem: "Gallery", link: "/treasury-gallery" },
   { navItem: "Governance", link: "/Governance" },
   { navItem: "About", link: "/About" },
 ];

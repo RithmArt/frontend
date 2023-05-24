@@ -17,11 +17,7 @@ export const TreasuryGalleryPage: FC = () => {
     return <PageLoading />;
   }
 
-  const nftsToShow = nfts
-    .filter((item) => item.media !== undefined)
-    .filter(
-      (item) => item.media.original_media_url && item.media.media_collection
-    );
+  const nftsToShow = nfts;
   const handleNftClick = (index: number) => {
     const nft = nftsToShow[index];
     window.open(nft?.media.media_collection?.high.url || "", "_blank");

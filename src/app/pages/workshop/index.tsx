@@ -49,7 +49,7 @@ export const WorkshopPage = () => {
   const handleViewGalleryClick = () => {
     history.push(`${AppPages.Gallery}/${workshop}`);
   };
-
+  console.log({ threeRandomNfts });
   return (
     <Wrapper>
       <TitleDescriptionAction
@@ -65,9 +65,9 @@ export const WorkshopPage = () => {
         }
         otherSection={
           <ThreeImages
-            image1={threeRandomNfts[0]?.image}
-            image2={threeRandomNfts[1]?.image}
-            image3={threeRandomNfts[2]?.image}
+            image1={threeRandomNfts[0]?.media?.original_media_url}
+            image2={threeRandomNfts[1]?.media?.original_media_url}
+            image3={threeRandomNfts[2]?.media?.original_media_url}
           />
         }
       />
@@ -107,18 +107,18 @@ export const WorkshopPage = () => {
               <Frame
                 bgVariant="monocolor"
                 height={420}
-                src={nfts[0]?.image}
+                src={nfts[0]?.media?.original_media_url}
                 bottomInfo={{
-                  title: "#" + (nfts[0]?.id || ""),
+                  title: "#" + (nfts[0]?.token_id || ""),
                   description: workshopData.info.name || "",
                 }}
               />,
               <Frame
                 bgVariant="monocolor"
                 height={420}
-                src={nfts[1]?.image}
+                src={nfts[1]?.media?.original_media_url}
                 bottomInfo={{
-                  title: "#" + (nfts[1]?.id || ""),
+                  title: "#" + (nfts[1]?.token_id || ""),
                   description: workshopData.info.name || "",
                 }}
               />,

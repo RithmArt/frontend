@@ -8,7 +8,7 @@ import {
 import { useShopSlice } from "../shop/slice";
 import { useFetchInitialData } from "./hooks/useFetchInitialData";
 import { globalSaga } from "./saga";
-import { WorkshopInfo, NFT, MoralisNftResult } from "./types";
+import { WorkshopInfo, MoralisNftResult } from "./types";
 
 export interface AdditionalWorkshopInfo {
   name: string;
@@ -21,7 +21,7 @@ export interface WorkshopInterface {
   address: string;
   strokes: number;
   isLoadingMetadatas?: boolean;
-  nfts?: NFT[];
+  nfts?: MoralisNftResult[];
   infos?: WorkshopInfo[];
   info: AdditionalWorkshopInfo;
   creatorInfo: {
@@ -35,10 +35,10 @@ export interface GlobalState {
     [key in Workshops]: WorkshopInterface;
   };
   randomNFTs: {
-    [key in Workshops]?: NFT[];
+    [key in Workshops]?: MoralisNftResult[];
   };
   selectedNftToShow?: {
-    nft: NFT;
+    nft: MoralisNftResult;
     workshopInfo: WorkshopInterface;
   };
   treasuryNFTs: MoralisNftResult[];
@@ -61,7 +61,9 @@ const globalSlice = createSlice({
   reducers: {
     setSelectedNftToShow: (
       state,
-      action: PayloadAction<{ nft: NFT; workshop: Workshops } | undefined>
+      action: PayloadAction<
+        { nft: MoralisNftResult; workshop: Workshops } | undefined
+      >
     ) => {
       if (action.payload) {
         const workshops = state.workshops;
@@ -95,13 +97,13 @@ const globalSlice = createSlice({
     },
     setWorkshopNFTs: (
       state,
-      action: PayloadAction<{ workshop: Workshops; nfts: NFT[] }>
+      action: PayloadAction<{ workshop: Workshops; nfts: MoralisNftResult[] }>
     ) => {
       state.workshops[action.payload.workshop].nfts = action.payload.nfts;
     },
     setRandomNFTs: (
       state,
-      action: PayloadAction<{ workshop: Workshops; nfts: NFT[] }>
+      action: PayloadAction<{ workshop: Workshops; nfts: MoralisNftResult[] }>
     ) => {
       state.randomNFTs[action.payload.workshop] = action.payload.nfts;
     },

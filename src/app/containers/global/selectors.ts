@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { Workshops } from "config";
 import { RootState } from "store/types";
-import { NFT } from "./types";
+import { MoralisNftResult } from "./types";
 
 export const GlobalDomains = {
   root: (state: RootState) => state,
@@ -19,7 +19,7 @@ export const globalSelectors = {
   ),
   allNfts: (workshop?: Workshops) => {
     return createSelector(GlobalDomains.workshops, (workshops) => {
-      const nfts: NFT[] = [];
+      const nfts: MoralisNftResult[] = [];
       if (workshops) {
         if (!workshop) {
           Object.keys(workshops).forEach((workshop) => {
@@ -33,7 +33,7 @@ export const globalSelectors = {
     });
   },
   allRandomNFTs: createSelector(GlobalDomains.randomNfts, (randomNfts) => {
-    const nfts: NFT[] = [];
+    const nfts: MoralisNftResult[] = [];
     if (randomNfts) {
       Object.keys(randomNfts).forEach((workshop) => {
         nfts.push(...(randomNfts[workshop] || []));

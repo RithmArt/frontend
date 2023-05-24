@@ -18,7 +18,6 @@ export const GalleryPage = () => {
   const nfts = useSelector(globalSelectors.allNfts(workshop));
   const workshopInfo = WORKSHOPS[workshop];
   const { isMobile } = useDeviceSize();
-
   if (!nfts.length) {
     return <PageLoading />;
   }
@@ -26,7 +25,10 @@ export const GalleryPage = () => {
   const handleNftClick = (index: number) => {
     const nft = nfts[index];
     if (isMobile) {
-      window.open(nft?.external_url || "", "_blank");
+      window.open(
+        nft?.metadata?.external_url || nft?.media?.original_media_url || "",
+        "_blank"
+      );
       return;
     }
     dispatch(
@@ -51,7 +53,7 @@ export const GalleryPage = () => {
             key={index}
             sx={{ height: randomHeight() }}
           >
-            <ImageItem alt={nft.name} src={nft.image} />
+            <ImageItem alt={nft.name} src={nft?.media?.original_media_url} />
           </Item>
         ))}
       </Masonry>

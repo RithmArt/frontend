@@ -66,7 +66,7 @@ export const MintSection = ({
                   height={420}
                   width={340}
                   bgVariant="monocolor"
-                  src={nftInfo.image}
+                  src={nftInfo.media.original_media_url}
                 />
               )}
               <span style={{ color: "red" }}>

@@ -1,19 +1,5 @@
 import { BigNumber } from "ethers";
 
-export interface NFT {
-  artist: string;
-  id?: number;
-  attributes: {
-    trait_type: string;
-    value: string;
-  }[];
-  description: string;
-  external_url: string;
-  image: string;
-  name: string;
-  platform: string;
-}
-
 export interface WorkshopInfo {
   invocations: BigNumber;
   maxInvocations: BigNumber;
@@ -47,7 +33,7 @@ export interface MoralisNftResult {
       medium: MoralisMedia;
     };
   };
-  metadata: string;
+  metadata: any;
   minter_address: string;
   name: string;
   owner_of: string;
@@ -57,4 +43,5 @@ export interface MoralisNftResult {
   token_hash: string;
   token_id: string;
   token_uri: string;
+  medResImageUrl?: string;
 }

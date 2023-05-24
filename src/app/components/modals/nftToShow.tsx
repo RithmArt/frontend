@@ -15,14 +15,17 @@ export const ViewNftModal = () => {
     dispatch(GlobalActions.setSelectedNftToShow(undefined));
   };
   const handleFrameClick = () => {
-    window.open(nft?.external_url || "", "_blank");
+    window.open(
+      nft?.metadata?.external_url || nft?.media?.original_media_url || "",
+      "_blank"
+    );
   };
   return (
     <SnowModal title={""} isOpen={isOpen} onClose={handleCloseClick}>
       <Wrapper>
         <TitleDescriptionAction
           title={nft?.name}
-          description={nft?.description || ""}
+          description={nft?.metadata?.description || ""}
           reverse
           textAlign="left"
           // actions={
@@ -39,7 +42,7 @@ export const ViewNftModal = () => {
               onClick={handleFrameClick}
               height={500}
               width={400}
-              src={nft?.image || ""}
+              src={nft?.media.original_media_url || ""}
               bgVariant="monocolor"
             />
           }

@@ -1,17 +1,17 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import {
-  MAX_NFTS_TO_FETCH_ON_START,
+  treasuryAddress,
   WorkshopContract,
   WORKSHOPS,
   Workshops,
 } from "config";
-import { BigNumber } from "ethers";
 import { all, call, put, takeEvery } from "redux-saga/effects";
-import { fetchTreasuryNFTsAPI } from "../BlockChain/providers/fetchNftsApi";
-import { resolveAny } from "../utils/resolveAny";
-import { fetchNFTMetadata } from "./providers/getNftMetadata";
+import {
+  getNFTsFromMoralis,
+  startMoralis,
+} from "../BlockChain/providers/fetchNftsApi";
 import { GlobalActions } from "./slice";
-import { MoralisNftResult, NFT, WorkshopInfo } from "./types";
+import { MoralisNftResult, WorkshopInfo } from "./types";
 import { getWorkshopContract } from "./utils/getWorkshopContract";
 
 function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
@@ -22,52 +22,19 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
         isLoading: true,
       })
     );
-    const workshopContract = yield call(getWorkshopContract, {
-      ws: action.payload.workshop,
-      useToGetData: true,
+
+    const nfts: MoralisNftResult[] = yield call(getNFTsFromMoralis, {
+      getBy: "contractAddress",
+      address: WORKSHOPS[action.payload.workshop].address,
     });
-    const totalSupply: BigNumber = yield call(workshopContract.totalSupply);
-    const intTotalSupply = parseInt(totalSupply.toString());
-    const numberToGet =
-      MAX_NFTS_TO_FETCH_ON_START <= intTotalSupply
-        ? MAX_NFTS_TO_FETCH_ON_START
-        : intTotalSupply;
-    const contractsToCall: any[] = [];
-    for (let i = 0; i < numberToGet; i++) {
-      const contractCall = call(workshopContract.tokenByIndex, i);
-      contractsToCall.push(contractCall);
-    }
 
-    const nftIds: BigNumber[] = yield call(resolveAny, contractsToCall);
-
-    const contractsToCallToFetchNFT_Uris: any[] = [];
-    for (let i = 0; i < nftIds.length; i++) {
-      const bigNumberId = nftIds[i];
-      const intId = parseInt(bigNumberId.toString());
-      const contractCall = call(workshopContract.tokenURI, intId);
-      contractsToCallToFetchNFT_Uris.push(contractCall);
-    }
-
-    const nftUris = yield call(resolveAny, contractsToCallToFetchNFT_Uris);
-    const fetchArray: any = [];
-    for (let i = 0; i < nftUris.length; i++) {
-      const uri = nftUris[i];
-      const apiCall = call(fetchNFTMetadata, uri);
-      fetchArray.push(apiCall);
-    }
-
-    const nftMetadata: NFT[] = yield call(resolveAny, fetchArray);
-    for (let i = 0; i < nftMetadata.length; i++) {
-      const nft = nftMetadata[i];
-      nft.id = parseInt(nftIds[i].toString());
-    }
     yield put(
       GlobalActions.setWorkshopNFTs({
         workshop: action.payload.workshop,
-        nfts: nftMetadata,
+        nfts,
       })
     );
-    const randomized = [...nftMetadata].sort(() => Math.random() - 0.5);
+    const randomized = [...nfts].sort(() => Math.random() - 0.5);
     yield put(
       GlobalActions.setRandomNFTs({
         workshop: action.payload.workshop,
@@ -86,6 +53,7 @@ function* fetchNFTIds(action: PayloadAction<{ workshop: Workshops }>) {
   }
 }
 function* getWorkshopInfo(action: PayloadAction<{ workshop: Workshops }>) {
+  yield call(startMoralis);
   try {
     const workshopContract: WorkshopContract = yield call(getWorkshopContract, {
       ws: action.payload.workshop,
@@ -125,7 +93,10 @@ function* getWorkshopInfo(action: PayloadAction<{ workshop: Workshops }>) {
 function* getTreasuryNFTs() {
   try {
     yield put(GlobalActions.setIsLoadingTreasuryNfts(true));
-    const res: MoralisNftResult[] = yield call(fetchTreasuryNFTsAPI);
+    const res: MoralisNftResult[] = yield call(getNFTsFromMoralis, {
+      getBy: "walletAddress",
+      address: treasuryAddress,
+    });
     yield put(GlobalActions.setTreasuryNfts(res));
   } catch (error) {
     console.error({ error });

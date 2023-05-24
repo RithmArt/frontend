@@ -20,7 +20,7 @@ export const NFTsSlider = (props: Props) => {
           return (
             <Frame
               height={500}
-              src={nft.image}
+              src={nft.media.original_media_url}
               bottomInfo={{
                 title: nft.name,
               }}

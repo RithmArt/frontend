@@ -35,7 +35,7 @@ export const WorkshopIntroSection = (props: Props) => {
         height={500}
         key={index}
         bgVariant="monocolor"
-        src={nft.image}
+        src={nft.media.original_media_url}
         bottomInfo={{
           title: nft.name,
           // description: nft.description,
