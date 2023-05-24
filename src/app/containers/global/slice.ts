@@ -24,6 +24,7 @@ export interface WorkshopInterface {
   nfts?: MoralisNftResult[];
   infos?: WorkshopInfo[];
   info: AdditionalWorkshopInfo;
+  introVideoLink?: string;
   creatorInfo: {
     name: string;
     descriptions: string;

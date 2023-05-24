@@ -141,7 +141,9 @@ export const WorkshopPage = () => {
         size={total.toString()}
       />
       <VSpacer size={170} />
-      <VideoPlayer />
+      {workshopData.introVideoLink && (
+        <VideoPlayer link={workshopData.introVideoLink} />
+      )}
     </Wrapper>
   );
 };

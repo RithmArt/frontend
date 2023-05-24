@@ -3,14 +3,18 @@ import { Container, Grid, styled } from "@mui/material";
 import { Player, ControlBar, VolumeMenuButton } from "video-react";
 import "video-react/dist/video-react.css";
 
-export const VideoPlayer = (): ReactElement => {
+export const VideoPlayer = (props: {
+  link: string;
+  link2?: string;
+}): ReactElement => {
+  const { link, link2 } = props;
   return (
     <Container maxWidth="xl">
       <Grid container justifyContent="center">
         <CustomGridItem item xs={12} sm={12} md={9} lg={10} xl={11}>
           <Player poster="/assets/poster.png">
-            <source src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4" />
-            <source src="http://mirrorblender.top-ix.org/movies/sintel-1024-surround.mp4" />
+            <source src={link} />
+            {link2 && <source src={link2} />}
             <ControlBar>
               <VolumeMenuButton />
             </ControlBar>

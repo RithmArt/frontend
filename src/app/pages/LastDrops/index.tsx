@@ -100,7 +100,7 @@ export const LastDropsPage = () => {
         licence="CC BY-NC-ND 4.0"
       />
       <VSpacer size={170} />
-      <VideoPlayer />
+      <VideoPlayer link="" />
     </Wrapper>
   );
 };
