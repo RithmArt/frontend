@@ -4,6 +4,7 @@ import React, {
   useContext,
   FC,
   createContext,
+  ReactNode,
 } from "react";
 
 const PING_RESOURCE = `${process.env.REACT_APP_BASE_URL}/check`;
@@ -49,7 +50,9 @@ const checkOnlineStatus: () => Promise<boolean> = async () => {
 
 const OnlineStatusContext = createContext(true);
 
-export const OnlineStatusProvider: FC = ({ children }) => {
+export const OnlineStatusProvider: FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [onlineStatus, setOnlineStatus] = useState<boolean>(true);
   if (process.env.NODE_ENV !== "production") {
     console.log(

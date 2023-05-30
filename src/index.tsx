@@ -53,7 +53,9 @@ toast.configure({
 const ConnectedApp = ({ Component }: Props) => (
   <ReduxProvider store={store}>
     <MaterialThemeProvider theme={theme}>
+      {/* @ts-ignore */}
       <HelmetProvider>
+        {/* @ts-ignore */}
         <ConnectedRouter history={history}>
           <Component />
         </ConnectedRouter>

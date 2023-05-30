@@ -63,6 +63,7 @@ export const getNFTsFromMoralis = async ({
   address: string;
 }) => {
   await startMoralis();
+  let nftArray: any = [];
   if (getBy === "contractAddress") {
     const response = await nftAPI.getContractNFTs({
       chain: "0xa86a",
@@ -70,8 +71,7 @@ export const getNFTsFromMoralis = async ({
       mediaItems: true,
       address,
     });
-    const nftArray = parseNftArray(response);
-    return nftArray;
+    nftArray = parseNftArray(response);
   } else if (getBy === "walletAddress") {
     const response = await nftAPI.getWalletNFTs({
       chain: "0xa86a",
@@ -79,7 +79,7 @@ export const getNFTsFromMoralis = async ({
       mediaItems: true,
       address: treasuryAddress,
     });
-    const nftArray = parseNftArray(response);
-    return nftArray;
+    nftArray = parseNftArray(response);
   }
+  return nftArray;
 };

@@ -30,6 +30,7 @@ export function App() {
 
   return (
     <>
+      {/* @ts-ignore */}
       <Helmet
         titleTemplate="%s - Rithm"
         defaultTitle={t(translations.HomePage.home())}

@@ -28,6 +28,7 @@ const WORKSHOPS = {
       descriptions:
         "a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs ",
     },
+
     strokes: 1,
   },
   abominablesasquatch: {

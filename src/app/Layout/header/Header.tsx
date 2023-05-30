@@ -25,8 +25,8 @@ import { AppPages } from "app/types";
 
 const navItems = [
   { navItem: "Gallery", link: "/treasury-gallery" },
-  { navItem: "Governance", link: "/Governance" },
-  { navItem: "About", link: "/About" },
+  // { navItem: "Governance", link: "/Governance" },
+  // { navItem: "About", link: "/About" },
 ];
 
 export default function Header(): ReactElement {

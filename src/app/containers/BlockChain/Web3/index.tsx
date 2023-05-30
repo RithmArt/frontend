@@ -80,7 +80,9 @@ let networkLibrary: BaseProvider | undefined;
 export const Web3 = () => {
   const getNetworkLibrary = useCallback((): BaseProvider => {
     const provider = new ethers.providers.StaticJsonRpcProvider(rpcUrl);
+    // @ts-ignore
     const library = (networkLibrary = networkLibrary ?? provider);
+    // @ts-ignore
     return library;
   }, []);
   const getLibrary = useCallback((prvdr) => {

@@ -1,7 +1,9 @@
 import { styled } from "@mui/material";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
-export const GroupedTitleAndDescriptionWithIconOnTop: FC = (props) => {
+export const GroupedTitleAndDescriptionWithIconOnTop: FC<{
+  children: ReactNode;
+}> = (props) => {
   return <Wrapper>{props.children}</Wrapper>;
 };
 

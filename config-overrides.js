@@ -1,3 +1,4 @@
+
 module.exports = {
   // The function to use to create a webpack dev server configuration when running the development
   // server with 'npm run start' or 'yarn start'.
@@ -10,15 +11,39 @@ module.exports = {
     return function (proxy, allowedHost) {
       // Create the default config by calling configFunction with the proxy/allowedHost parameters
       const config = configFunction(proxy, allowedHost);
-
       config.headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET',
         'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
       };
-
       // Return your customised Webpack Development Server config.
       return config;
     };
+  },
+  webpack: function(config, env) {
+    let loaders = config.resolve
+    loaders.fallback = {
+        "fs": false,
+        "tls": false,
+        "net": false,
+        "http": require.resolve("stream-http"),
+        "https": false,
+        "zlib": require.resolve("browserify-zlib") ,
+        "path": require.resolve("path-browserify"),
+        "stream": require.resolve("stream-browserify"),
+        "util": require.resolve("util/"),
+        "crypto": require.resolve("crypto-browserify")
+    }
+    config.ignoreWarnings= [
+      function ignoreSourcemapsloaderWarnings(warning) {
+        return (
+          warning.module &&
+          warning.module.resource.includes("node_modules") &&
+          warning.details &&
+          warning.details.includes("source-map-loader")
+        );
+      },
+    ]
+    return config
   },
 };

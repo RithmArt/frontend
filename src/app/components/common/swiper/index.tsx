@@ -2,9 +2,9 @@ import React, { ReactElement } from "react";
 
 // Import Swiper React components
 import { Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
-import "swiper/modules/pagination/pagination.min.css";
 import { styled } from "@mui/material";
 interface SwiperProps {
   items: ReactElement[];
