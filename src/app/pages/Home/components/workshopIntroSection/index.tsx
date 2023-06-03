@@ -54,7 +54,7 @@ export const WorkshopIntroSection = (props: Props) => {
         description={workshopDescriptions}
         actions={
           <ContainedButton onClick={handleRedirectToWorkshopClick}>
-            view workshop
+            View Collection
           </ContainedButton>
         }
         otherSection={

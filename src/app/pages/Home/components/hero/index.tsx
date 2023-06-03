@@ -24,16 +24,14 @@ export const Hero = () => {
           <TitleDescActionsWrapper>
             <TitleAndDescWrapper>
               <Title>
-                Algorithm Art platform for
-                <b>Artists</b>.
+                RITHM Art Collective
               </Title>
               <Description>
-                The First algorithm Art dAO on Avalanche built to support the
-                exposure and adoption of Generative, Computational and AI art
+                The 1st Algorithmic Art Collective built on the Avalanche network to support the development, curation and adoption of Generative, Computational and AI art
               </Description>
             </TitleAndDescWrapper>
             <ActionsWrapper>
-              <ExtendedContainedButton>Galery Art</ExtendedContainedButton>
+              <ExtendedContainedButton>Gallery Art</ExtendedContainedButton>
               <ExtendedOutlinedButton>Become an artist</ExtendedOutlinedButton>
             </ActionsWrapper>
           </TitleDescActionsWrapper>

@@ -1,10 +1,9 @@
 import React, { ReactElement } from "react";
 import { Box, Container, Grid, styled } from "@mui/material";
 
-import medusIcon from "./footerIcons/medusIcon.svg";
+import mediumIcon from "./footerIcons/medusIcon.svg";
 import bookIcon from "./footerIcons/bookIcon.svg";
-import telegramIcon from "./footerIcons/telegramIcon.svg";
-import twiterIcon from "./footerIcons/twiterIcon.svg";
+import twitterIcon from "./footerIcons/twiterIcon.svg";
 import discordIcon from "./footerIcons/discordIcon.svg";
 import logoBlack from "./footerIcons/logoBlack.svg";
 
@@ -43,8 +42,7 @@ export default function Footer(): ReactElement {
             </WrapperImg>
             <Box>
               <StyledDescription>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                volutpat sapien quam, tristique dignissim odio.
+                Providing the context for Algorithmic Art
               </StyledDescription>
             </Box>
           </GridImgWrapper>
@@ -65,12 +63,19 @@ export default function Footer(): ReactElement {
             alignItems="center"
             justifyContent="center"
           >
-            <CustomBox mt="22px">
-              <img src={twiterIcon} alt="twiterIcon" />
-              <img src={discordIcon} alt="medusIcon" />
-              <img src={telegramIcon} alt="telegramIcon" />
-              <img src={medusIcon} alt="medusIcon" />
-              <img src={bookIcon} alt="bookIcon" />
+            <CustomBox mt="22px"> 
+              <a href="https://twitter.com/rithmart" target="_blank" rel="noopener noreferrer">
+                <img src={twitterIcon} alt="twitterIcon" /> 
+              </a>
+              <a href="https://discord.gg/EHb2Y2wjss" target="_blank" rel="noopener noreferrer">
+                <img src={discordIcon} alt="discordIcon" />
+              </a>
+              <a href="https://medium.com/rithmart" target="_blank" rel="noopener noreferrer">
+                <img src={mediumIcon} alt="mediumIcon" />
+              </a>
+              <a href="https://rithmart.substack.com/" target="_blank" rel="noopener noreferrer">
+                <img src={bookIcon} alt="bookIcon" />
+              </a>
             </CustomBox>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

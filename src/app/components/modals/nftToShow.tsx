@@ -32,7 +32,7 @@ export const ViewNftModal = () => {
           //   <BottomWrapper>
           //     <TitleValue title="License:" value="CC BY-NC-ND 4.0" />
           //     <TitleValue title="CollectionId:" value="3000" />
-          //     <TitleValue title="Script type:" value="webGL" />
+          //     <TitleValue title="Script type:" value="P5.js" />
           //     <TitleValue title="Contract" value="0xa7d8...d270" />
           //     <TitleValue title="Owner" value="@0xred8...d970" />
           //   </BottomWrapper>

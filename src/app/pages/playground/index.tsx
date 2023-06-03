@@ -43,8 +43,8 @@ export const PlaygroundPage = () => {
       <VSpacer size={75} />
       <MintSection
         workshop="membership"
-        licence="CC BY-NC-ND 4.0"
-        scriptType="webGL"
+        licence="MIT"
+        scriptType="P5.js"
       />
       <VSpacer size={75} />
 

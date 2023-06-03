@@ -129,8 +129,8 @@ export const WorkshopPage = () => {
       <VSpacer size={170} />
       <MintSection
         workshop={workshop}
-        licence="CC BY-NC-ND 4.0"
-        scriptType="webGL"
+        licence="MIT"
+        scriptType="P5.js"
       />
       <VSpacer size={75} />
       <CollectionInformationSection

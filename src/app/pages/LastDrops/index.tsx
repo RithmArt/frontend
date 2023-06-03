@@ -96,8 +96,8 @@ export const LastDropsPage = () => {
       <VSpacer size={75} />
       <MintSection
         workshop="abominablesasquatch"
-        scriptType="webgl"
-        licence="CC BY-NC-ND 4.0"
+        scriptType="P5.js"
+        licence="MIT License"
       />
       <VSpacer size={170} />
       <VideoPlayer link="" />

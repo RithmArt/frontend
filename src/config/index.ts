@@ -4,6 +4,8 @@ import abominableSasquatchABI from "abi/abominable_sasquatch_workshop.json";
 import { AbominableSasquatchWorkshop } from "abi/abi-types/AbominableSasquatchWorkshop";
 import { Membership } from "abi/abi-types/Membership";
 import louis from "../assets/louis.png";
+import abominable from  "../assets/abominable.png";
+import { AnchorOutlined } from "@mui/icons-material";
 
 const IS_MAINNET = env.NETWORK === "mainnet";
 
@@ -18,15 +20,15 @@ const WORKSHOPS = {
     info: {
       name: "RITHM.ART Curatorship",
       descriptions:
-        "RITHM is a collective focused on the the support, development and expansion Algorithmic Art culture. The 1st collection of memberships is The Abominable Sasquatch's debut collection, 1st Strokes. 1st Strokes is an on-chain generative art collection. 1st Strokes is a representation of the beginning of an artistic journey and culture. It is designed to provide a minimalist expression that bridges the natural depth and technical beauty of calligraphy and programming.",
+        "The 1st collection of Rithm Art Curatorship NFTs are The Abominable Sasquatch's debut on-chain generative art collection, 1st Strokes. 1st Strokes is a representation of the beginning of a journey. It is designed to provide a minimalist expression that bridges the natural depth and technical beauty of calligraphy and programming.",
       inspiration:
-        "The collection captures an iterative sequence of apocalyptic scenarios which drift through the void of obliviousness. A future for which we won't be here, conformed by a present engulfed by sediments of time. A time that will shift what was once below with what was once above ( earth-civilization ), asserting fate's victory.",
+        "1st Strokes takes a lot of its inspiration from ink painting and calligraphy brushes.    What often stands out in calligraphy is bold lines that vary in their depth. Depending on the ink there could be bleeding on the canvas. The path is a substantial part of a paint stroke.",
     },
     creatorInfo: {
-      image: louis,
-      name: "creaTOR NAME",
+      image: abominable,
+      name: "The Abominable Sasquatch",
       descriptions:
-        "a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs ",
+        "The Abominable Sasquatch is an experimental algorithmic artist working. Abominable Sasquatch began as a co-founder of Snowball, one of the first DAOs on Avalanche. Abominable is Sasquatch in Snow Country",
     },
 
     strokes: 1,
@@ -37,15 +39,15 @@ const WORKSHOPS = {
     info: {
       name: "The Workshop",
       inspiration:
-        "The collection captures an iterative sequence of apocalyptic scenarios which drift through the void of obliviousness. A future for which we won't be here, conformed by a present engulfed by sediments of time. A time that will shift what was once below with what was once above ( earth-civilization ), asserting fate's victory.",
+        "This collection is inspired by Jared Tarbell's 'Substrate.' The composition is meant to resemble city blueprints from satellite views, combining the beauty of generative art with the intrigue of emergent urban landscapes.",
       descriptions:
-        "The Workshop is a collection of iterative algorithmic pieces based ",
+        "The Workshop are a series of iterative algorithmic art collections meant to evoke the beauty of algorithmic art and the intrigure of emergent urban landscapes.",
     },
     creatorInfo: {
-      image: louis,
-      name: "creaTOR NAME",
+      image: abominable,
+      name: "Abominable Sasquatch",
       descriptions:
-        "a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs a lot of needed descs ",
+        "The Abominable Sasquatch is an experimental algorithmic artist working. Abominable Sasquatch began as a co-founder of Snowball, one of the first DAOs on Avalanche. Abominable is Sasquatch in Snow Country",
     },
     strokes: 2,
   },
