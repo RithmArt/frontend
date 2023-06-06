@@ -50,8 +50,8 @@ export const HomePage = () => {
         <Grid container justifyContent="center" marginTop="200px">
           <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
             <CenteredTitleAndDescription
-              title="How does it work?"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
+              title="Unlock a World of Algorithmic Art"
+              description="With your membership, you'll gain access to a vibrant community of art enthusiasts, collectors, and creators, as well as the opportunity to shape the future of algorithmic art."
             />
           </Grid>
         </Grid>
@@ -59,22 +59,22 @@ export const HomePage = () => {
           <Grid container spacing={5} my="35px">
             <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
               <TitleAndDescriptionWithIconOnTop
-                title="Wallet"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
+                title="Become a Curator"
+                description="Acquire your exclusive Curatorship NFT - a one-of-a-kind, on-chain generative artwork from our inaugural Strokes Collection. This NFT will be your key to unlocking the Rithm Art Collective."
                 iconSrc={walletIcon}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
               <TitleAndDescriptionWithIconOnTop
-                title="Create Collection"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
+                title="Curate"
+                description="Lead in the curation of our treasury. Support artist and collection intake as we contextualize algorithmic art."
                 iconSrc={paperUploadIcon}
               />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
               <TitleAndDescriptionWithIconOnTop
-                title="List them for sale"
-                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat sapien quam, tristique dignissim odio."
+                title="Govern"
+                description="Vote on governance proposals and help shape the RITHM ART Experience. Partipate in launchpad development and investment in vital tooling for the space."
                 iconSrc={bookmarkIcon}
               />
             </Grid>

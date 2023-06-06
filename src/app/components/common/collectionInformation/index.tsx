@@ -54,12 +54,12 @@ export const CollectionInformationSection = (
               <BoldTitleAndDescription title={size} description="size" />
               <BoldTitleAndDescription
                 title={price + " AVAX"}
-                description="floor price"
+                description="mint price"
               />
-              <BoldTitleAndDescription
+              {/* <BoldTitleAndDescription
                 title={numberOfProperties}
                 description="Different properties"
-              />
+              /> */}
             </InfosWrapper>
           </StyledGridInfoInfos>
         </Grid>

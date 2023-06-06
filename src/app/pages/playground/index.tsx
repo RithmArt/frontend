@@ -41,11 +41,7 @@ export const PlaygroundPage = () => {
         size="100"
       />
       <VSpacer size={75} />
-      <MintSection
-        workshop="membership"
-        licence="CC BY-NC-ND 4.0"
-        scriptType="webGL"
-      />
+      <MintSection workshop="membership" licence="MIT" scriptType="P5.js" />
       <VSpacer size={75} />
 
       <GroupedTitleAndDescriptionWithIconOnTop>
