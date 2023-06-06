@@ -23,7 +23,9 @@ export const TreasuryGalleryPage: FC = () => {
     const nft = nftsToShow[index];
     const redirectLink = nft.media.original_media_url?.startsWith("ipfs")
       ? nft.media.original_media_url.replace("ipfs://", "https://ipfs.io/ipfs/")
-      : nft.media.original_media_url;
+      : nft.media.original_media_url ||
+        nft.media.media_collection?.high.url ||
+        "";
     window.open(redirectLink || "", "_blank");
     //   dispatch(
     //     GlobalActions.setSelectedNftToShow({
