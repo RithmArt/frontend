@@ -40,7 +40,27 @@ const parseNftArray = async (
     nftArray.forEach((item) => {
       if (item.metadata) {
         item.metadata = JSON.parse(item.metadata);
-        if (item.media.status === "invalid_url") {
+        if (item?.media?.status === "host_unavailable") {
+          const ipfsUrl = item.media.original_media_url.replace(
+            "https://ipfs.infura.io/ipfs/",
+            "https://ipfs.io/ipfs/"
+          );
+          const obj = { url: ipfsUrl };
+          item.media = {
+            status: "ok",
+            original_media_url: ipfsUrl,
+            media_collection: {
+              high: obj,
+              low: obj,
+              thumbnail: obj,
+              medium: obj,
+            },
+          };
+          item.original_media_url = ipfsUrl;
+        } else if (
+          item.media.status === "invalid_url" &&
+          item.media.status !== "host_unavailable"
+        ) {
           // console.log({item})
           arrayToFix.push(item);
         }
@@ -67,7 +87,8 @@ const parseNftArray = async (
         if (data.image) {
           const obj = { url: fixedImage };
           arrayToFix[i].media = {
-            sattus: "ok",
+            status: "ok",
+            original_media_url: fixedImage,
             media_collection: {
               high: obj,
               low: obj,
