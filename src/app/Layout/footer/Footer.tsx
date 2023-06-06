@@ -17,19 +17,29 @@ import {
 import ListItems from "./components/footer/listItem";
 import { Description } from "app/components/common/description";
 import { CssVariables } from "styles/cssVariables/cssVariables";
-
-const listTiltleFooter1 = "About";
-const listTiltleFooter2 = "Drops";
-const listItemsFooter1 = [
-  { subHeading: "What is RITHM.Art?", link: "#" },
-  { subHeading: "Team", link: "#" },
-  { subHeading: "Contracts", link: "#" },
-  { subHeading: "Docs", link: "#" },
-];
-const listItemsFooter2 = [
-  { subHeading: "Last drops", link: "#" },
-  { subHeading: "Gallery", link: "#" },
-  { subHeading: "Collections", link: "#" },
+import { WORKSHOPS } from "config";
+import { AppPages } from "app/types";
+const drops = Object.keys(WORKSHOPS).map((item) => {
+  return { subHeading: item, link: `${AppPages.Workshops}/${item}` };
+});
+const footrItems = [
+  {
+    name: "About",
+    items: [
+      { subHeading: "What is RITHM.Art?", link: "#" },
+      { subHeading: "Team", link: "#" },
+      // { subHeading: "Contracts", link: "#" },
+      { subHeading: "Docs", link: "#" },
+      {
+        subHeading: "become an artist",
+        link: "https://docs.google.com/forms/d/e/1FAIpQLSc3tDhf8fQIvLLS0hfBGbrDijq84iH90uFJBvRo8L-necHAcQ/viewform?usp=sf_link",
+      },
+    ],
+  },
+  {
+    name: "Drops",
+    items: drops,
+  },
 ];
 
 export default function Footer(): ReactElement {
@@ -48,12 +58,13 @@ export default function Footer(): ReactElement {
               </StyledDescription>
             </Box>
           </GridImgWrapper>
-          <Grid item xs={12} sm={12} md={2} lg={2} xl={2}>
-            <ListItems heading={listTiltleFooter1} items={listItemsFooter1} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={2} lg={2} xl={2}>
-            <ListItems heading={listTiltleFooter2} items={listItemsFooter2} />
-          </Grid>
+          {footrItems.map((item, index) => {
+            return (
+              <Grid key={index} item xs={12} sm={12} md={2} lg={2} xl={2}>
+                <ListItems heading={item.name} items={item.items} />
+              </Grid>
+            );
+          })}
           <Grid
             item
             xs={12}

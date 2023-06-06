@@ -2,9 +2,7 @@ import { treasuryAddress } from "config";
 import Moralis from "moralis";
 import axios from "axios";
 const nftAPI = Moralis.EvmApi.nft;
-const web3ApiKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImU4MzIxYzhlLWQ3ZTgtNDlkYS1hNjNiLWQxOThlMGI0MDBkNiIsIm9yZ0lkIjoiMjg2MDE1IiwidXNlcklkIjoiMjkyMzM1IiwidHlwZUlkIjoiY2I4ZWM1YWYtOGUxOS00NTlmLWEwNmMtZjc0MjA3OTkyZDdkIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE2ODQ3ODMzOTUsImV4cCI6NDg0MDU0MzM5NX0.dkUZWjNIvz_seljvUxruUZt4iPFVC19skRwX6BolYVw";
-
+const web3ApiKey = process.env.REACT_APP_WEB3_API_KEY;
 let moralisStarted = false;
 export const startMoralis = async () => {
   if (!moralisStarted) {

@@ -49,7 +49,6 @@ export const WorkshopPage = () => {
   const handleViewGalleryClick = () => {
     history.push(`${AppPages.Gallery}/${workshop}`);
   };
-  console.log({ threeRandomNfts });
   return (
     <Wrapper>
       <TitleDescriptionAction

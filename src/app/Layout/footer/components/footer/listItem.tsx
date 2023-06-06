@@ -9,8 +9,17 @@ import {
   mobile,
 } from "styles/media";
 import { CssVariables } from "styles/cssVariables/cssVariables";
+import { history } from "router/history";
 
 export default function ListItems({ heading, items }): ReactElement {
+  const handleLinkClick = (link) => {
+    if (link.includes("http")) {
+      window.open(link, "_blank");
+    } else {
+      history.push(link);
+    }
+  };
+
   return (
     <Box
       display="flex"
@@ -22,11 +31,15 @@ export default function ListItems({ heading, items }): ReactElement {
         <li>
           <Title>{heading}</Title>
         </li>
-        {items.map((item, index) => (
-          <li key={index}>
-            <SubTitle to={item.link}>{item.subHeading}</SubTitle>
-          </li>
-        ))}
+        {items.map((item, index) => {
+          return (
+            <li key={index}>
+              <SubTitle onClick={() => handleLinkClick(item.link)}>
+                {item.subHeading}
+              </SubTitle>
+            </li>
+          );
+        })}
       </CustomList>
     </Box>
   );
@@ -61,8 +74,10 @@ const Title = styled("h5")`
   }
 `;
 
-const SubTitle = styled(Link)`
+const SubTitle = styled("p")`
   text-decoration: none;
+  cursor: pointer;
+  margin: 0;
   white-space: nowrap;
   font-weight: 400;
   font-size: 18px;
