@@ -9,6 +9,7 @@ import { treasuryGalleryInfo } from "config";
 import { FC } from "react";
 import { useSelector } from "react-redux";
 import { randomHeight } from "utils/randomHeight";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export const TreasuryGalleryPage: FC = () => {
   const nfts: MoralisNftResult[] = useSelector(globalSelectors.treasuryNfts);
@@ -20,7 +21,10 @@ export const TreasuryGalleryPage: FC = () => {
   const nftsToShow = nfts;
   const handleNftClick = (index: number) => {
     const nft = nftsToShow[index];
-    window.open(nft?.media.media_collection?.high.url || "", "_blank");
+    const redirectLink = nft.media.original_media_url?.startsWith("ipfs")
+      ? nft.media.original_media_url.replace("ipfs://", "https://ipfs.io/ipfs/")
+      : nft.media.original_media_url;
+    window.open(redirectLink || "", "_blank");
     //   dispatch(
     //     GlobalActions.setSelectedNftToShow({
     //       nft,
@@ -45,7 +49,8 @@ export const TreasuryGalleryPage: FC = () => {
             >
               <ImageItem
                 alt={nft.name}
-                src={nft.media.media_collection?.medium.url}
+                placeholderSrc={nft.media.media_collection?.low.url}
+                src={nft.media.media_collection?.high.url}
               />
             </Item>
           );
@@ -54,7 +59,7 @@ export const TreasuryGalleryPage: FC = () => {
     </>
   );
 };
-const ImageItem = styled("img")`
+const ImageItem = styled(LazyLoadImage)`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -67,4 +72,8 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
   cursor: "pointer",
+  span: {
+    display: "block !important",
+    height: "100%",
+  },
 }));

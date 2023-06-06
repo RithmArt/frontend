@@ -75,6 +75,9 @@ const parseNftArray = async (
               medium: obj,
             },
           };
+
+          arrayToFix[i].original_media_url = data.image;
+
           if (data.description) {
             arrayToFix[i].metadata.description = data.description;
           }
