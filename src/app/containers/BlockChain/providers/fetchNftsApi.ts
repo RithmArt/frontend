@@ -29,26 +29,73 @@ export const getFormIpfs = async (link: string) => {
   return metadata.data;
 };
 
-const parseNftArray = (
+const parseNftArray = async (
   res:
     | Awaited<ReturnType<typeof nftAPI.getContractNFTs>>
     | Awaited<ReturnType<typeof nftAPI.getWalletNFTs>>
 ) => {
   const nftArray = res?.toJSON()?.result;
+  let arrayToFix: any = [];
   if (nftArray) {
     nftArray.forEach((item) => {
       if (item.metadata) {
         item.metadata = JSON.parse(item.metadata);
+        if (item.media.status === "invalid_url") {
+          // console.log({item})
+          arrayToFix.push(item);
+        }
       }
     });
-    return nftArray
-      .map((item) => {
-        if (item.media) {
-          return item;
+    const toCall: any = [];
+    arrayToFix.forEach((item) => {
+      if (item.token_uri) {
+        toCall.push(
+          fetch(
+            item.token_uri.replace(
+              "https://artists.bpi.network/nfts/",
+              "/bpi_network/"
+            )
+          )
+        );
+      }
+    });
+    for (let i = 0; i < toCall.length; i++) {
+      try {
+        const response = await toCall[i];
+        const data = await response.json();
+        const fixedImage = data.image;
+        if (data.image) {
+          const obj = { url: fixedImage };
+          arrayToFix[i].media = {
+            sattus: "ok",
+            media_collection: {
+              high: obj,
+              low: obj,
+              thumbnail: obj,
+              medium: obj,
+            },
+          };
         }
-        return undefined;
-      })
-      .filter((item) => item !== undefined);
+      } catch (error) {
+        console.log({ error });
+      }
+    }
+
+    return [
+      ...nftArray
+        .map((item) => {
+          if (item.media) {
+            return item;
+          }
+          return undefined;
+        })
+        .filter((item) => item !== undefined)
+        .filter(
+          (item) =>
+            item.media.status !== "invalid_url" &&
+            item.media.status !== "host_unavailable"
+        ),
+    ];
   }
   return nftArray;
 };
