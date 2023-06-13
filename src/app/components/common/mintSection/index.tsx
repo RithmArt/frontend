@@ -70,7 +70,7 @@ export const MintSection = ({
                 />
               )}
               <span style={{ color: "red" }}>
-                *rendom art from this workshop
+                *random art from this workshop
               </span>
             </ImagePreviewWrapper>
           </Grid>
