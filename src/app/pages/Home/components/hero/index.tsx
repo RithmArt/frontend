@@ -3,6 +3,8 @@ import { styled, Grid, Container } from "@mui/material";
 import { ContainedButton } from "app/components/common/buttons/containedButton";
 import { OutlinedButton } from "app/components/common/buttons/outlinedButton";
 import { ThreeImages } from "app/components/common/threeImages";
+import { AppPages } from "app/types";
+import { history } from "router/history";
 import { CssVariables } from "styles/cssVariables/cssVariables";
 import {
   mediaQuery545,
@@ -17,6 +19,16 @@ import hero2 from "./assets/hero2.png";
 import hero3 from "./assets/hero3.png";
 
 export const Hero = () => {
+  const handleBecomeAnArtistClick = () => {
+    window.open(
+      "https://docs.google.com/forms/d/e/1FAIpQLSc3tDhf8fQIvLLS0hfBGbrDijq84iH90uFJBvRo8L-necHAcQ/viewform?usp=sf_link",
+      "_blank"
+    );
+  };
+  const handleJoinClick = () => {
+    history.push(`${AppPages.Workshops}/membership#mint`);
+  };
+
   return (
     <Container maxWidth="xl">
       <Grid container spacing={{ lg: 8, xl: 8 }}>
@@ -31,8 +43,12 @@ export const Hero = () => {
               </Description>
             </TitleAndDescWrapper>
             <ActionsWrapper>
-              <ExtendedContainedButton>Gallery Art</ExtendedContainedButton>
-              <ExtendedOutlinedButton>Become an artist</ExtendedOutlinedButton>
+              <ExtendedContainedButton onClick={handleJoinClick}>
+                Join
+              </ExtendedContainedButton>
+              <ExtendedOutlinedButton onClick={handleBecomeAnArtistClick}>
+                Become an artist
+              </ExtendedOutlinedButton>
             </ActionsWrapper>
           </TitleDescActionsWrapper>
         </Grid>

@@ -22,18 +22,18 @@ const drops = Object.keys(WORKSHOPS).map((item) => {
   return { subHeading: item, link: `${AppPages.Workshops}/${item}` };
 });
 const footrItems = [
-  // {
-  //   name: "About",
-  //   items: [
-  //     { subHeading: "What is RITHM.Art?", link: "#" },
-  //     { subHeading: "Team", link: "#" },
-  //     { subHeading: "Docs", link: "#" },
-  //     {
-  //       subHeading: "become an artist",
-  //       link: "https://docs.google.com/forms/d/e/1FAIpQLSc3tDhf8fQIvLLS0hfBGbrDijq84iH90uFJBvRo8L-necHAcQ/viewform?usp=sf_link",
-  //     },
-  //   ],
-  // },
+  {
+    name: "About",
+    items: [
+      // { subHeading: "What is RITHM.Art?", link: "#" },
+      // { subHeading: "Team", link: "#" },
+      // { subHeading: "Docs", link: "#" },
+      {
+        subHeading: "become an artist",
+        link: "https://docs.google.com/forms/d/e/1FAIpQLSc3tDhf8fQIvLLS0hfBGbrDijq84iH90uFJBvRo8L-necHAcQ/viewform?usp=sf_link",
+      },
+    ],
+  },
   {
     name: "Drops",
     items: drops,

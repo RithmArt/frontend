@@ -17,6 +17,7 @@ import { PageLoading } from "app/components/common/pageLoading";
 import { utils } from "ethers";
 import { history } from "router/history";
 import { AppPages } from "app/types";
+import { useLayoutEffect } from "react";
 
 export const WorkshopPage = () => {
   const params = useParams<{ workshop: Workshops }>();
@@ -27,24 +28,28 @@ export const WorkshopPage = () => {
   const nfts = workshopData.nfts || [];
   const threeRandomNfts = getMultipleRandom(nfts, 3);
   const workshopInfo = useSelector(globalSelectors.workshopInfos(workshop));
-  if (!workshops) {
-    return <>not found</>;
-  }
-  if (!workshopInfo) {
-    return <PageLoading />;
-  }
-
-  const collectionInfo = workshopInfo[0];
-  const total = Number(collectionInfo.maxInvocations);
-  const floorPrice = Number(collectionInfo.price).toString();
-  const floorPrice_in_AVAX = utils.formatEther(floorPrice);
-
   const scrollToMintContainer = () => {
     const mintButton = document.getElementById("mintButton");
     if (mintButton) {
       mintButton.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  if (!workshops) {
+    return <>not found</>;
+  }
+  if (!workshopInfo) {
+    return <PageLoading />;
+  }
+  if (window?.location?.hash === "#mint") {
+    setTimeout(() => {
+      scrollToMintContainer();
+    }, 1000);
+  }
+  const collectionInfo = workshopInfo[0];
+  const total = Number(collectionInfo.maxInvocations);
+  const floorPrice = Number(collectionInfo.price).toString();
+  const floorPrice_in_AVAX = utils.formatEther(floorPrice);
 
   const handleViewGalleryClick = () => {
     history.push(`${AppPages.Gallery}/${workshop}`);
