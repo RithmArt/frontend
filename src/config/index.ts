@@ -3,9 +3,7 @@ import membershipABI from "abi/membership.json";
 import abominableSasquatchABI from "abi/abominable_sasquatch_workshop.json";
 import { AbominableSasquatchWorkshop } from "abi/abi-types/AbominableSasquatchWorkshop";
 import { Membership } from "abi/abi-types/Membership";
-import louis from "../assets/louis.png";
 import abominable from "../assets/abominable.png";
-import { AnchorOutlined } from "@mui/icons-material";
 
 const IS_MAINNET = env.NETWORK === "mainnet";
 

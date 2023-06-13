@@ -17,7 +17,6 @@ import { PageLoading } from "app/components/common/pageLoading";
 import { utils } from "ethers";
 import { history } from "router/history";
 import { AppPages } from "app/types";
-import { useLayoutEffect } from "react";
 
 export const WorkshopPage = () => {
   const params = useParams<{ workshop: Workshops }>();

@@ -38,6 +38,9 @@ function* startMintingNft(
       toast.warning("connect your wallet first");
     }
   } catch (error) {
+    if (JSON.stringify(error).includes("insufficient funds")) {
+      toast.warning("wallet balance is low");
+    }
   } finally {
     yield put(shopActions.setIsMintingNft(false));
   }
