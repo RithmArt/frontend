@@ -59,5 +59,5 @@ export const campfireApiEndpoint = `https://campfire.exchange/api/accounts`;
 export const treasuryAddress = "0x60104a2cdbb0207f4337036bcab90716b2925c69";
 export const treasuryGalleryInfo = {
   title: "Treasury Gallery",
-  descriptions: "treasury gallery descriptions",
+  descriptions: "Recent Acquisitions",
 };
