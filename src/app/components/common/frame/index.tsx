@@ -25,38 +25,40 @@ export const Frame = (props: FrameProps) => {
     onClick,
   } = props;
   return (
-    <Wrapper
-      width={width}
-      height={height}
-      bgVariant={bgVariant}
-      info={bottomInfo}
-      onClick={onClick ? onClick : () => {}}
-      style={{
-        cursor: onClick ? "pointer" : "auto",
-      }}
-    >
-      <ImageWrapper>
-        <StyledImg height={height} src={src} />
-      </ImageWrapper>
-      {bottomInfo && (
-        <InfoWrapper>
-          <StartImageAndTextsWrapper>
-            {bottomInfo.startImageIconSrc && (
-              <InfoStartImage src={bottomInfo.startImageIconSrc} />
-            )}
-            <InfoTextsWrapper>
-              <Title>{bottomInfo.title}</Title>
-              {bottomInfo.description && (
-                <Description>{bottomInfo.description}</Description>
+    <FrameBorder>
+      <Wrapper
+        width={width}
+        height={height}
+        bgVariant={bgVariant}
+        info={bottomInfo}
+        onClick={onClick ? onClick : () => { }}
+        style={{
+          cursor: onClick ? "pointer" : "auto",
+        }}
+      >
+        <ImageWrapper>
+          <StyledImg height={height} src={src} />
+        </ImageWrapper>
+        {bottomInfo && (
+          <InfoWrapper>
+            <StartImageAndTextsWrapper>
+              {bottomInfo.startImageIconSrc && (
+                <InfoStartImage src={bottomInfo.startImageIconSrc} />
               )}
-            </InfoTextsWrapper>
-          </StartImageAndTextsWrapper>
-          {bottomInfo.endImageIconSrc && (
-            <InfoEndImage src={bottomInfo.endImageIconSrc} />
-          )}
-        </InfoWrapper>
-      )}
-    </Wrapper>
+              <InfoTextsWrapper>
+                <Title>{bottomInfo.title}</Title>
+                {bottomInfo.description && (
+                  <Description>{bottomInfo.description}</Description>
+                )}
+              </InfoTextsWrapper>
+            </StartImageAndTextsWrapper>
+            {bottomInfo.endImageIconSrc && (
+              <InfoEndImage src={bottomInfo.endImageIconSrc} />
+            )}
+          </InfoWrapper>
+        )}
+      </Wrapper>
+    </FrameBorder>
   );
 };
 const ImageWrapper = styled("div")`
@@ -92,7 +94,9 @@ const InfoTextsWrapper = styled("div")``;
 const Title = styled("h3")`
   margin: 0;
   padding: 0;
-  font-size: 22px;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 400;
   color: ${CssVariables.white};
 `;
 const Description = styled("p")`
@@ -102,7 +106,7 @@ const Description = styled("p")`
   color: ${CssVariables.white};
 `;
 
-const StyledImg = styled("img")<{ height?: number }>`
+const StyledImg = styled("img") <{ height?: number }>`
   flex: 1;
   border: 2px solid black;
   max-width: 100%;
@@ -117,7 +121,14 @@ const StyledImg = styled("img")<{ height?: number }>`
       : "height:fit-content;"} */
 `;
 
-const Wrapper = styled("div")<{
+const FrameBorder = styled("div")`
+  padding: 10px;
+  background: #4f4545;
+  border: 2px solid #000000;
+  width: fit-content;
+`;
+
+const Wrapper = styled("div") <{
   bgVariant?: FrameProps["bgVariant"];
   width: number;
   height?: number;

@@ -1,4 +1,5 @@
 import { styled } from "@mui/material";
+import Fade from "react-reveal/Fade";
 
 interface ThreeImagesProps {
   image1: string;
@@ -9,10 +10,16 @@ export const ThreeImages = (props: ThreeImagesProps) => {
   const { image1, image2, image3 } = props;
   return (
     <ImegesWrapper>
-      <Hero1 src={image1} />
+      <Fade delay={50}>
+        <Hero1 src={image1} />
+      </Fade>
       <Hero2AndHero3Wrappe>
-        <Hero2 src={image2} />
-        <Hero3 src={image3} />
+       <Fade delay={200}>
+          <Hero2 src={image2} />
+        </Fade>
+        <Fade delay={30}>
+          <Hero3 src={image3} />
+        </Fade>
       </Hero2AndHero3Wrappe>
     </ImegesWrapper>
   );
@@ -23,18 +30,30 @@ const Hero1 = styled("img")`
   object-fit: cover;
   border: 2px solid black;
   height: 460px;
+  transition: .5s;
+  &:hover{
+    transform: scale(1.05);
+  }
 `;
 const Hero2 = styled("img")`
   width: 572px;
   object-fit: cover;
   border: 2px solid black;
   height: 410px;
+  transition: .5s;
+  &:hover{
+    transform: scale(1.05);
+  }
 `;
 const Hero3 = styled("img")`
   object-fit: cover;
   border: 2px solid black;
   width: 270px;
   height: 270px;
+  transition: .5s;
+  &:hover{
+    transform: scale(1.05);
+  }
 `;
 
 const ImegesWrapper = styled("div")`

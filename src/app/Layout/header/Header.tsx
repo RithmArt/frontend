@@ -143,8 +143,8 @@ const StyledMenuIcon = styled("img")`
 `;
 
 const StyledLogo = styled("img")`
-  width: 55px;
-  height: 76px;
+  width: auto;
+  height: 65px;
 `;
 
 const StyledAppBar = styled(AppBar)`

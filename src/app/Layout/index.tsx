@@ -4,6 +4,7 @@ import { styled } from "@mui/material";
 import { mobile } from "styles/media";
 import Footer from "./footer/Footer";
 import Header from "./header/Header";
+import BackgroundImage from "./assets/bg.png";
 // import { useDeviceSize } from "hooks/mediaQuery";
 export const LayoutMaxWidth = 1400;
 export default function Layout({
@@ -22,10 +23,14 @@ export default function Layout({
 }
 
 const StyledLayout = styled("div")({
+  backgroundSize: "cover",
+  backgroundColor: "#272626",
+  backgroundImage: `url(${BackgroundImage})`,
+  backgroundPosition: "top",
+  backgroundBlendMode: "exclusion",
   display: "flex",
   flexDirection: "column",
   minHeight: "100vh",
-  background: "#272626",
   [mobile]: {
     width: "100%",
     overflowX: "hidden",

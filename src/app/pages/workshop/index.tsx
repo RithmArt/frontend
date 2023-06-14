@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { styled, Grid } from "@mui/material";
 import { ContainedButton } from "app/components/common/buttons/containedButton";
 import { Frame } from "app/components/common/frame";
 import { TitleDescriptionAction } from "app/components/common/titleDescriptionAction";
@@ -55,25 +55,37 @@ export const WorkshopPage = () => {
   };
   return (
     <Wrapper>
-      <TitleDescriptionAction
-        top={<>{workshopData.creatorInfo.name}</>}
-        title={workshopData.info.name}
-        description={workshopData.info.descriptions}
-        actions={
-          <>
-            <ContainedButton onClick={handleViewGalleryClick}>
-              view gallery
-            </ContainedButton>
-          </>
-        }
-        otherSection={
+      <Grid container spacing={{ lg: 8, xl: 8 }} alignItems={"center"}>
+        <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
+          <TitleDescriptionAction
+            top={<>{workshopData.creatorInfo.name}</>}
+            title={workshopData.info.name}
+            description={workshopData.info.descriptions}
+            actions={
+              <>
+                <ContainedButton onClick={handleViewGalleryClick}>
+                  View gallery
+                </ContainedButton>
+              </>
+            }
+          />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={7}
+          xl={7}
+          display={{ xs: "none", lg: "flex" }}
+        >
           <ThreeImages
             image1={threeRandomNfts[0]?.media?.original_media_url}
             image2={threeRandomNfts[1]?.media?.original_media_url}
             image3={threeRandomNfts[2]?.media?.original_media_url}
           />
-        }
-      />
+        </Grid>
+      </Grid>
       <VSpacer size={170} />
       <TitleDescriptionAction
         title={workshopData.creatorInfo.name}
@@ -109,7 +121,7 @@ export const WorkshopPage = () => {
             elements={[
               <Frame
                 bgVariant="monocolor"
-                height={420}
+                height={450}
                 src={nfts[0]?.media?.original_media_url}
                 bottomInfo={{
                   title: "#" + (nfts[0]?.token_id || ""),
@@ -118,7 +130,7 @@ export const WorkshopPage = () => {
               />,
               <Frame
                 bgVariant="monocolor"
-                height={420}
+                height={450}
                 src={nfts[1]?.media?.original_media_url}
                 bottomInfo={{
                   title: "#" + (nfts[1]?.token_id || ""),
@@ -131,7 +143,7 @@ export const WorkshopPage = () => {
       />
       <VSpacer size={170} />
       <MintSection workshop={workshop} licence="MIT" scriptType="P5.js" />
-      <VSpacer size={75} />
+      <VSpacer size={150} />
       <CollectionInformationSection
         title={workshopData.info.name}
         description={workshopData.info.descriptions}

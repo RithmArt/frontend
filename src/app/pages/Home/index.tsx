@@ -21,6 +21,7 @@ import { Container, Grid, styled } from "@mui/material";
 import { LayoutMaxWidth } from "app/Layout";
 import { VSpacer } from "app/components/common/vSpace";
 import { NFTsSlider } from "./components/nftsSlider";
+import { Fade } from "react-reveal";
 
 // import { useDispatch } from "react-redux";
 
@@ -36,16 +37,24 @@ export const HomePage = () => {
         const ws = workshop as Workshops;
         if (isOdd) {
           return (
-            <WorkshopIntroSection
-              key={workshop}
-              isReverse
-              numberOfNfts={2}
-              workshop={ws}
-            />
+            <WorkshopIntroSectionWrapper>
+              <WorkshopIntroSection
+                key={workshop}
+                isReverse
+                numberOfNfts={2}
+                workshop={ws}
+              />
+            </WorkshopIntroSectionWrapper>
           );
         }
-        return <WorkshopIntroSection key={workshop} workshop={ws} />;
+
+        return (
+          <WorkshopIntroSectionWrapper>
+            <WorkshopIntroSection key={workshop} workshop={ws} />
+          </WorkshopIntroSectionWrapper>
+        );
       })}
+
       <Container maxWidth="xl">
         <Grid container justifyContent="center" marginTop="200px">
           <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
@@ -58,25 +67,31 @@ export const HomePage = () => {
         <GroupedTitleAndDescriptionWithIconOnTop>
           <Grid container spacing={5} my="35px">
             <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-              <TitleAndDescriptionWithIconOnTop
-                title="Become a Curator"
-                description="Acquire your exclusive Curatorship NFT - a one-of-a-kind, on-chain generative artwork from our inaugural Strokes Collection. This NFT will be your key to unlocking the Rithm Art Collective."
-                iconSrc={walletIcon}
-              />
+              <Fade>
+                <TitleAndDescriptionWithIconOnTop
+                  title="Become a Curator"
+                  description="Acquire your exclusive Curatorship NFT - a one-of-a-kind, on-chain generative artwork from our inaugural Strokes Collection. This NFT will be your key to unlocking the Rithm Art Collective."
+                  iconSrc={walletIcon}
+                />
+              </Fade>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+              <Fade delay={100}>
               <TitleAndDescriptionWithIconOnTop
                 title="Curate"
                 description="Lead in the curation of our treasury. Support artist and collection intake as we contextualize algorithmic art."
                 iconSrc={paperUploadIcon}
               />
+              </Fade>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Fade delay={140}>
               <TitleAndDescriptionWithIconOnTop
                 title="Govern"
                 description="Vote on governance proposals and help shape the RITHM ART Experience. Partipate in launchpad development and investment in vital tooling for the space."
                 iconSrc={bookmarkIcon}
               />
+              </Fade>
             </Grid>
           </Grid>
         </GroupedTitleAndDescriptionWithIconOnTop>
@@ -107,4 +122,8 @@ const AbsoluteWrapper = styled("div")`
 const SliderWrapper = styled("div")`
   height: 500px;
   position: relative;
+`;
+
+const WorkshopIntroSectionWrapper = styled("div")`
+ padding: 50px 0px;
 `;

@@ -17,6 +17,7 @@ import {
 import hero1 from "./assets/hero1.png";
 import hero2 from "./assets/hero2.png";
 import hero3 from "./assets/hero3.png";
+import {Fade} from "react-reveal";
 
 export const Hero = () => {
   const handleBecomeAnArtistClick = () => {
@@ -30,17 +31,21 @@ export const Hero = () => {
   };
 
   return (
-    <Container maxWidth="xl">
-      <Grid container spacing={{ lg: 8, xl: 8 }}>
-        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+    <Container maxWidth="xl" sx={{ p: 2 }}>
+      <Grid container spacing={{ lg: 8, xl: 8 }} alignItems={"center"}>
+        <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
           <TitleDescActionsWrapper>
             <TitleAndDescWrapper>
+              <Fade cascade>
               <Title>RITHM Art Collective</Title>
-              <Description>
+              </Fade>
+              <Fade delay={40}>
+                <Description>
                 The 1st Algorithmic Art Collective built on the Avalanche
                 network to support the development, curation and adoption of
                 Generative, Computational and AI art
-              </Description>
+                </Description>
+              </Fade>
             </TitleAndDescWrapper>
             <ActionsWrapper>
               <ExtendedContainedButton onClick={handleJoinClick}>
@@ -57,8 +62,8 @@ export const Hero = () => {
           xs={12}
           sm={12}
           md={12}
-          lg={8}
-          xl={8}
+          lg={7}
+          xl={7}
           display={{ xs: "none", lg: "flex" }}
         >
           <ThreeImages image1={hero1} image2={hero2} image3={hero3} />
@@ -85,6 +90,7 @@ const Title = styled("h3")`
   padding: 0;
   font-weight: 400;
   font-size: 65px;
+  line-height: 58px;
   color: ${CssVariables.white};
   @media (max-width: ${mediaQuery825}) {
     font-size: 63px;
