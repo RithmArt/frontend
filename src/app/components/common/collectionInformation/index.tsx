@@ -10,6 +10,8 @@ import {
   mediaQuery825,
   mediaQuery914,
 } from "styles/media";
+import AvaxIcon from "./assets/AvaxIcon.png";
+
 
 interface CollectionInformationSectionProps {
   size: string;
@@ -22,14 +24,17 @@ interface CollectionInformationSectionProps {
 interface BoldTitleAndDescriptionProps {
   title: string;
   description: string;
+  icon?: boolean;
 }
 
 const BoldTitleAndDescription = (props: BoldTitleAndDescriptionProps) => {
-  const { title, description } = props;
+  const { title, description, icon } = props;
   return (
     <InfoWrapper>
-      <StyledTitleBold>{title}</StyledTitleBold>
+      {icon ? <PriceWrapper><StyledTitleBold>{title}</StyledTitleBold><AvaxIconToken src={AvaxIcon} /></PriceWrapper> : <StyledTitleBold>{title}</StyledTitleBold>}
+      
       <StyledDescriptionBold>{description}</StyledDescriptionBold>
+      
     </InfoWrapper>
   );
 };
@@ -51,11 +56,14 @@ export const CollectionInformationSection = (
           </GridTextSection>
           <StyledGridInfoInfos item xs={12} sm={12} md={12} lg={5} xl={5}>
             <InfosWrapper>
-              <BoldTitleAndDescription title={size} description="size" />
+              <BoldTitleAndDescription title={size} description="Size" />
+              <PriceWrapper>
               <BoldTitleAndDescription
                 title={price + " AVAX"}
-                description="mint price"
+                description="Mint price"
+                icon={true}
               />
+              </PriceWrapper>
               {/* <BoldTitleAndDescription
                 title={numberOfProperties}
                 description="Different properties"
@@ -138,6 +146,7 @@ const StyledGridInfoInfos = styled(Grid)`
 
 const StyledTitleBold = styled(Title)`
   font-size: 36px;
+  display: inline;
   font-weight: 900;
   @media (max-width: ${mediaQuery914}) {
     font-size: 33px;
@@ -176,5 +185,16 @@ const GridTextSection = styled(Grid)`
   @media (max-width: ${mediaQuery1024}) {
     display: flex;
     justify-content: center;
+  }
+`;
+const PriceWrapper = styled(Grid)`
+  font-size: 45px;
+`;
+const AvaxIconToken = styled("img")`
+  width: 32px;
+  object-fit: cover;
+  transition: .5s;
+  &:hover{
+    transform: scale(1.05);
   }
 `;

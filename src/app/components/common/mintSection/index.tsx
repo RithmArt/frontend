@@ -58,35 +58,39 @@ export const MintSection = ({
   return (
     <Wrapper>
       <Container maxWidth="xl">
-        <Grid container justifyContent="space-between" alignItems="center">
-          <Grid item xs={12} sm={12} md={12} lg={4} xl={3}>
+        <Grid container justifyContent="center" alignItems="center">
+          <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
             <ImagePreviewWrapper>
-              {nftInfo && (
-                <Frame
-                  height={420}
-                  width={340}
-                  bgVariant="monocolor"
-                  src={nftInfo.media.original_media_url}
-                />
-              )}
-              <span style={{ color: "red" }}>
-                *random art from this workshop
-              </span>
+              <InfoWrapper>
+                {nftInfo && (
+                  <Frame
+                    height={450}
+                    width={350}
+                    bgVariant="monocolor"
+                    src={nftInfo.media.original_media_url}
+                  />
+                )}
+                <span style={{ color: "#e13434" }}>
+                  * Random art from this workshop
+                </span>
+              </InfoWrapper>
             </ImagePreviewWrapper>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={4} xl={3}>
+          <Grid item xs={12} sm={12} md={12} lg={6} xl={6} justifyContent="center" alignItems="center">
             <InfoWrapper id="mintButton">
+            <DataInfoWrapper>
               <StyledTitle>{nftInfo?.name}</StyledTitle>
-              <VSpacer size={50} />
-              <TitleValue title="Licence" value={licence} />
-              <TitleValue title="Collection ID" value={"0"} />
-
-              <TitleValue title="Script Type" value={scriptType} />
-              <TitleValue title="Remaining" value={remaining + " / " + total} />
-              <TitleValue
-                title="Floor Price"
-                value={`${floorPrice_in_AVAX} AVAX`}
-              />
+              <VSpacer size={5} />
+              
+                <TitleValue title="Licence" value={licence} />
+                <TitleValue title="Collection ID" value={"0"} />
+                <TitleValue title="Script Type" value={scriptType} />
+                <TitleValue title="Remaining" value={remaining + " / " + total} />
+                <TitleValue
+                  title="Floor Price"
+                  value={`${floorPrice_in_AVAX} AVAX`}
+                />
+              
               <NeedsWalletConnection
                 disConnected={<WalletToggle />}
                 connected={
@@ -94,7 +98,7 @@ export const MintSection = ({
                     <ActionsWrapper>
                       <SnowSelect
                         style={{ width: "50%" }}
-                        onChange={() => {}}
+                        onChange={() => { }}
                         options={[
                           { label: "Public Mint", value: "PublicMint" },
                           // { label: "Private Mint", value: "PrivateMint" },
@@ -103,7 +107,7 @@ export const MintSection = ({
                         selectedValue={"PublicMint"}
                       />
                       <ContainedButton
-                        style={{ width: "50%" }}
+                        style={{ width: "50%", minHeight: "45px" }}
                         loading={isMinting}
                         onClick={() => handleMintClick(floorPrice_in_AVAX)}
                       >
@@ -113,6 +117,7 @@ export const MintSection = ({
                   </>
                 }
               ></NeedsWalletConnection>
+              </DataInfoWrapper>
             </InfoWrapper>
           </Grid>
         </Grid>
@@ -123,7 +128,7 @@ export const MintSection = ({
 
 const ActionsWrapper = styled("div")`
   display: flex;
-  gap: 10px;
+  gap: 30px;
   @media (max-width: ${mediaQuery282}) {
     flex-direction: column;
   }
@@ -131,6 +136,8 @@ const ActionsWrapper = styled("div")`
 
 const ImagePreviewWrapper = styled("div")`
   margin-top: 25px;
+  display: flex;
+  justify-content: center;
   @media (max-width: ${mediaQuery1024}) {
     display: flex;
     justify-content: center;
@@ -143,7 +150,18 @@ const ImagePreviewWrapper = styled("div")`
 const InfoWrapper = styled("div")`
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  @media (max-width: ${mediaQuery1024}) {
+    text-align: center;
+  }
+`;
+
+const DataInfoWrapper = styled("div")`
+  display: flex;
+  flex-direction: column;
   gap: 20px;
+  max-width: 460px;
   @media (max-width: ${mediaQuery1024}) {
     text-align: center;
   }
@@ -158,8 +176,8 @@ const Wrapper = styled("div")`
 `;
 
 const StyledTitle = styled(Title)`
-  font-size: 45px;
-
+  font-size: 42px;
+  line-height: 40px;
   @media (max-width: ${mediaQuery377}) {
     font-size: 43px;
   }

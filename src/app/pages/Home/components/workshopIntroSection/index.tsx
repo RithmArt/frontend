@@ -8,6 +8,7 @@ import { globalSelectors } from "app/containers/global/selectors";
 import { WORKSHOPS, Workshops } from "config";
 import { ContainedButton } from "app/components/common/buttons/containedButton";
 import { history } from "router/history";
+import { Slide } from 'react-reveal';
 
 interface Props {
   workshop: Workshops;
@@ -31,18 +32,20 @@ export const WorkshopIntroSection = (props: Props) => {
 
   const childs = nfts.map((nft, index) => {
     return (
-      <Frame
-        height={500}
-        key={index}
-        bgVariant="monocolor"
-        src={nft.media.original_media_url}
-        bottomInfo={{
-          title: nft.name,
-          // description: nft.description,
-          endImageIconSrc: circularplaceholder,
-          startImageIconSrc: avatarplaceholder,
-        }}
-      />
+      <Slide bottom>
+        <Frame
+          height={550}
+          key={index}
+          bgVariant="monocolor"
+          src={nft.media.original_media_url}
+          bottomInfo={{
+            title: nft.name,
+            // description: nft.description,
+            endImageIconSrc: circularplaceholder,
+            startImageIconSrc: avatarplaceholder,
+          }}
+        />
+      </Slide>
     );
   });
   return (

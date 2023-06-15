@@ -196,6 +196,7 @@ const GridImgWrapper = styled(Grid)({
 
 const StyledContainer = styled(Container)({
   marginTop: "100px",
+  background: "#232222cc"
 });
 
 const IconImgBlack = styled("img")`
