@@ -44,6 +44,7 @@ export interface GlobalState {
   };
   treasuryNFTs: MoralisNftResult[];
   isLoadingTreasuryNfts: boolean;
+  transactionSuccessId: string | undefined;
 }
 // The initial state of the LoginPage container
 export const initialState: GlobalState = {
@@ -54,6 +55,7 @@ export const initialState: GlobalState = {
   },
   isLoadingTreasuryNfts: false,
   treasuryNFTs: [],
+  transactionSuccessId: undefined,
 };
 
 const globalSlice = createSlice({
@@ -113,6 +115,9 @@ const globalSlice = createSlice({
     },
     setTreasuryNfts(state, action: PayloadAction<GlobalState["treasuryNFTs"]>) {
       state.treasuryNFTs = action.payload;
+    },
+    setTransactionSuccessId(state, action: PayloadAction<string | undefined>) {
+      state.transactionSuccessId = action.payload;
     },
   },
 });

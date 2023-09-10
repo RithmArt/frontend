@@ -9,6 +9,8 @@ export const GlobalDomains = {
   randomNfts: (state: RootState) => state.global?.randomNFTs,
   selectedNftToShow: (state: RootState) => state.global?.selectedNftToShow,
   treasuryNfts: (state: RootState) => state.global?.treasuryNFTs,
+  transactionSuccessId: (state: RootState) =>
+    state.global?.transactionSuccessId,
 };
 
 export const globalSelectors = {
@@ -64,5 +66,9 @@ export const globalSelectors = {
   treasuryNfts: createSelector(
     [GlobalDomains.treasuryNfts],
     (treasuryNfts) => treasuryNfts
+  ),
+  transactionSuccessId: createSelector(
+    [GlobalDomains.transactionSuccessId],
+    (transactionSuccessId) => transactionSuccessId
   ),
 };

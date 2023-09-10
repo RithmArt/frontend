@@ -9,8 +9,10 @@ export enum AppPages {
   Workshops = "/workshops",
   TreasuryGallery = "/treasury-gallery",
   Gallery = "/gallery",
+  GovernancePage = "/governance",
 }
 
 export enum NavigationRouteName {}
+export type skipLoading = true;
 export type PrivateProvider = ethers.providers.StaticJsonRpcProvider;
 export type Contract = ethers.Contract;

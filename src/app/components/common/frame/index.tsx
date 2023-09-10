@@ -31,7 +31,7 @@ export const Frame = (props: FrameProps) => {
         height={height}
         bgVariant={bgVariant}
         info={bottomInfo}
-        onClick={onClick ? onClick : () => { }}
+        onClick={onClick ? onClick : () => {}}
         style={{
           cursor: onClick ? "pointer" : "auto",
         }}
@@ -106,7 +106,7 @@ const Description = styled("p")`
   color: ${CssVariables.white};
 `;
 
-const StyledImg = styled("img") <{ height?: number }>`
+const StyledImg = styled("img")<{ height?: number }>`
   flex: 1;
   border: 2px solid black;
   max-width: 100%;
@@ -128,7 +128,7 @@ const FrameBorder = styled("div")`
   width: fit-content;
 `;
 
-const Wrapper = styled("div") <{
+const Wrapper = styled("div")<{
   bgVariant?: FrameProps["bgVariant"];
   width: number;
   height?: number;

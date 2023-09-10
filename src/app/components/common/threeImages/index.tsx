@@ -14,7 +14,7 @@ export const ThreeImages = (props: ThreeImagesProps) => {
         <Hero1 src={image1} />
       </Fade>
       <Hero2AndHero3Wrappe>
-       <Fade delay={200}>
+        <Fade delay={200}>
           <Hero2 src={image2} />
         </Fade>
         <Fade delay={30}>
@@ -30,8 +30,8 @@ const Hero1 = styled("img")`
   object-fit: cover;
   border: 2px solid black;
   height: 460px;
-  transition: .5s;
-  &:hover{
+  transition: 0.5s;
+  &:hover {
     transform: scale(1.05);
   }
 `;
@@ -40,8 +40,8 @@ const Hero2 = styled("img")`
   object-fit: cover;
   border: 2px solid black;
   height: 410px;
-  transition: .5s;
-  &:hover{
+  transition: 0.5s;
+  &:hover {
     transform: scale(1.05);
   }
 `;
@@ -50,8 +50,8 @@ const Hero3 = styled("img")`
   border: 2px solid black;
   width: 270px;
   height: 270px;
-  transition: .5s;
-  &:hover{
+  transition: 0.5s;
+  &:hover {
     transform: scale(1.05);
   }
 `;

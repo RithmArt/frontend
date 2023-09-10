@@ -6,6 +6,8 @@ import { EthersState } from "app/containers/BlockChain/Ethers/types";
 
 import { GlobalState } from "app/containers/global/slice";
 import { ShopState } from "app/containers/shop/types";
+import { GovernanceState } from "app/containers/BlockChain/Governance/types";
+import { GovernancePageState } from "app/pages/Governance/types";
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 /* 
@@ -22,5 +24,7 @@ export interface RootState {
   ethers?: EthersState;
   blockChain?: BlockChainState;
   shop: ShopState;
+  governance: GovernanceState;
+  governancePage: GovernancePageState;
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }

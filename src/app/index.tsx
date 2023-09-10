@@ -23,6 +23,7 @@ import { LastDropsPage } from "./pages/LastDrops/Loadable";
 import { WorkshopPage } from "./pages/workshop/Loadable";
 import { GalleryPage } from "./pages/gallery/Loadable";
 import { TreasuryGalleryPage } from "./pages/treasuryGallery/Loadable";
+import { GovernancePage } from "./pages/Governance/Loadable";
 
 export function App() {
   const { t } = useTranslation();
@@ -60,6 +61,11 @@ export function App() {
             exact
             path={`${AppPages.Gallery}/:workshop`}
             component={GalleryPage}
+          />
+          <Route
+            exact
+            path={AppPages.GovernancePage}
+            component={GovernancePage}
           />
           <Route component={NotFoundPage} />
         </Switch>

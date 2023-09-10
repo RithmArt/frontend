@@ -3,8 +3,14 @@
 /* eslint-disable */
 export type { AbominableSasquatchWorkshop } from "./AbominableSasquatchWorkshop";
 export type { Erc20 } from "./Erc20";
+export type { Governance } from "./Governance";
 export type { Membership } from "./Membership";
+export type { SAxial } from "./SAxial";
+export type { VeAxial } from "./VeAxial";
 
 export { AbominableSasquatchWorkshop__factory } from "./factories/AbominableSasquatchWorkshop__factory";
 export { Erc20__factory } from "./factories/Erc20__factory";
+export { Governance__factory } from "./factories/Governance__factory";
 export { Membership__factory } from "./factories/Membership__factory";
+export { SAxial__factory } from "./factories/SAxial__factory";
+export { VeAxial__factory } from "./factories/VeAxial__factory";

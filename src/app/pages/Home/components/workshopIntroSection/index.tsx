@@ -8,7 +8,7 @@ import { globalSelectors } from "app/containers/global/selectors";
 import { WORKSHOPS, Workshops } from "config";
 import { ContainedButton } from "app/components/common/buttons/containedButton";
 import { history } from "router/history";
-import { Slide } from 'react-reveal';
+import { Slide } from "react-reveal";
 
 interface Props {
   workshop: Workshops;
