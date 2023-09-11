@@ -49,9 +49,9 @@ html {
   --paperBackground: #201f55;
   --bodyTextColor: #e5e6e7;
   --buttonBorderRadius: 0px;
-  --primaryDisabled: rgba(209, 94, 44, 0.25);
+  --primaryDisabled: rgb(11, 10, 10);
   --chipBackgroundColor: #3a2e6b;
-  --poolCardBackground: rgba(0, 16, 59, 0.6);
+  --poolCardBackground: #3F3F3F;
   --cardBorder: #4d2f43;
   --swapInputbackground: #06041d;
   --paperBorderRadius: 12px;

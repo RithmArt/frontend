@@ -13,12 +13,7 @@ import { GovernancePageSelectors } from "app/pages/Governance/selectors";
 export const VoteOptions: FC = () => {
   const { t } = useTranslation();
 
-  const proposal = useSelector(GovernancePageSelectors.selectedProposal);
   let isForAgainstType = true;
-
-  if (proposal && proposal.execution_contexts.length > 1) {
-    isForAgainstType = false;
-  }
 
   return (
     <Grid container spacing={1}>

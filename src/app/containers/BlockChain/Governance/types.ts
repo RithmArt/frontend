@@ -49,7 +49,6 @@ export interface Proposal {
   document: null;
   duration: string; // "72"
   end_date: string; //"2022-04-25T19:04:07.000Z"
-  execution_contexts: ProposalExecContext[];
   executor: string; // "0x0000000000000000000000000000000000000000"
   governance_id: string; // "2"
   id: string; //"04018024-63b1-4db8-b6c1-d8ece02b503e"

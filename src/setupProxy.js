@@ -36,7 +36,7 @@ module.exports = function (app) {
   app.use(
     "/bpi_network/**",
     createProxyMiddleware({
-      target: `https://artists.bpi.network/nfts/`,
+      target: `https://artists.bpi.network/`,
       pathRewrite: rewriteDevFn,
       ...commonConfig,
     })

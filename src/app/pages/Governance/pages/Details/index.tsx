@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 
 import { translations } from "locales/i18n";
 import { Max1040 } from "app/components/wrappers/max1040";
-import { VotingPowerInfo } from "../../components/VotingPowerInfo";
 import { DocLinksAndInfo } from "./components/DocLinksAndInfo";
 import { ProposalDescription } from "./components/ProposalDescription";
 import { ProposalDetails } from "./components/ProposalDetails";
@@ -69,11 +68,6 @@ export const Details: FC = () => {
           <Grid item xs={12}>
             <ProposalDetails />
           </Grid>
-
-          <Grid item xs={12}>
-            <VotingPowerInfo />
-          </Grid>
-
           <Grid item xs={12}>
             {isLoading ? <StyledLoader /> : <ConditionalVoting />}
           </Grid>

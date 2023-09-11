@@ -439,14 +439,6 @@ export function* syncProposalsWithBlockchain() {
       const item: Governance.ProposalStruct = proposalsFromBlockChain[i];
       const metadata = metaDataFromBlockchain[i];
 
-      const executionContexts: ProposalExecContext[] =
-        item.executionContexts.contexts?.map((item) => ({
-          data: JSON.stringify(item.data),
-          label: item.label,
-          value: Number(item.value).toString(),
-          target: item.target,
-        })) || [];
-
       const states = Object.values(ProposalState);
       let state = ProposalState.Active;
       for (let index = 0; index < states.length; index++) {
@@ -480,7 +472,6 @@ export function* syncProposalsWithBlockchain() {
         start_date: startTime.toLocaleDateString(),
         end_date: endTime.toLocaleDateString(),
         executor: item.executor,
-        execution_contexts: executionContexts,
         governance_id: i.toString(),
         quorum_votes: Number(item.quorumVotes).toString(),
         duration,

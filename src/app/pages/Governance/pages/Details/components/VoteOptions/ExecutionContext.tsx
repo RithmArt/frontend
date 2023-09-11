@@ -32,35 +32,7 @@ export const ExecutionContext = () => {
     return <></>;
   }
 
-  const disabled = !isActive;
-
-  return (
-    <Grid container spacing={2} direction="column">
-      {proposal.execution_contexts.map((context, index) => {
-        return (
-          <Grid item key={index}>
-            {supportingOption === index ? (
-              <StyledContainedButton
-                disabled={disabled}
-                fullWidth
-                onClick={() => handleVoteClick(index)}
-              >
-                {context.label}
-              </StyledContainedButton>
-            ) : (
-              <StyledOutlinedButton
-                disabled={disabled}
-                fullWidth
-                onClick={() => handleVoteClick(index)}
-              >
-                {context.label}
-              </StyledOutlinedButton>
-            )}
-          </Grid>
-        );
-      })}
-    </Grid>
-  );
+  return <Grid container spacing={2} direction="column"></Grid>;
 };
 
 const StyledContainedButton = styled(ContainedButton)({

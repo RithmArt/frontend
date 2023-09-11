@@ -7,7 +7,6 @@ import { GovernanceActions, useGovernanceSlice } from "./slice";
 export const Governance = ({
   tokenABI,
   governanceABI,
-  staking,
 }: {
   tokenABI: any;
   governanceABI: any;

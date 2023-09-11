@@ -5,8 +5,7 @@ import { mobile } from "styles/media";
 
 export const PrimaryCardWrapper = styled("div")({
   backgroundColor: CssVariables.poolCardBackground,
-  border: `4px solid ${CssVariables.cardBorder}`,
-  borderRadius: "20px",
+  borderRadius: "0px",
   padding: "26px 32px",
 
   [mobile]: {

@@ -62,11 +62,7 @@ export function App() {
             path={`${AppPages.Gallery}/:workshop`}
             component={GalleryPage}
           />
-          <Route
-            exact
-            path={AppPages.GovernancePage}
-            component={GovernancePage}
-          />
+          <Route path={AppPages.GovernancePage} component={GovernancePage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Layout>

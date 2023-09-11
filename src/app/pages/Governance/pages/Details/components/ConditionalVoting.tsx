@@ -11,7 +11,7 @@ export const ConditionalVoting: FC = () => {
   const receipt = useSelector(GovernanceSelectors.receipt);
   const proposal = useSelector(GovernancePageSelectors.selectedProposal);
 
-  const multiOptional = proposal && proposal?.execution_contexts.length > 1;
+  const multiOptional = false;
   const hasVoted = receipt?.hasVoted;
   const isActive = proposal?.proposal_state === ProposalState.Active;
 

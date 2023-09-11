@@ -27,14 +27,6 @@ export const VoteOptionsStatus: FC<Props> = ({ proposal }) => {
       title: t(translations.GovernancePage.Against()),
       votes: commify(selectedProposal.votes[0]),
     });
-  } else if (selectedProposal?.votes && selectedProposal.votes.length > 2) {
-    let execContexts = selectedProposal.execution_contexts;
-    execContexts.forEach((item) => {
-      options.push({
-        title: item.label,
-        votes: commify(item.value),
-      });
-    });
   } else {
     return <></>;
   }

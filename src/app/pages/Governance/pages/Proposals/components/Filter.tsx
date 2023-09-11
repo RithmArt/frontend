@@ -59,8 +59,8 @@ const StyledSelect = styled(SnowSelect)({
   },
 
   "&.MuiOutlinedInput-root": {
-    backgroundColor: CssVariables.poolCardBackground,
-    border: `4px solid ${CssVariables.cardBorder}`,
+    backgroundColor: "transparent",
+    border: `1px solid ${CssVariables.white}`,
   },
 
   ".MuiSelect-select": {

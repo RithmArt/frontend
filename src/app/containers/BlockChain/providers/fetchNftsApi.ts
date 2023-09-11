@@ -71,10 +71,9 @@ const parseNftArray = async (
       if (item.token_uri) {
         toCall.push(
           fetch(
-            item.token_uri.replace(
-              "https://artists.bpi.network/nfts/",
-              "/bpi_network/"
-            )
+            item.token_uri
+              .replace()
+              .replace("https://artists.bpi.network/", "/bpi_network/")
           )
         );
       }
