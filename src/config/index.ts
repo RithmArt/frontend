@@ -1,9 +1,12 @@
 import { env } from "environment";
 import membershipABI from "abi/membership.json";
 import abominableSasquatchABI from "abi/abominable_sasquatch_workshop.json";
+import cyclesOfLifeABI from "abi/cycles_of_life.json";
 import { AbominableSasquatchWorkshop } from "abi/abi-types/AbominableSasquatchWorkshop";
 import { Membership } from "abi/abi-types/Membership";
+import { CyclesOfLife } from "abi/abi-types/CyclesOfLife";
 import abominable from "../assets/abominable.png";
+import metamorph from "../assets/metamorph.png";
 
 const IS_MAINNET = env.NETWORK === "mainnet";
 
@@ -49,9 +52,27 @@ const WORKSHOPS = {
     },
     strokes: 2,
   },
+  cyclesoflife: {
+    address: "0x72742338521509c43D050607A04F5Eab803D61d8",
+    abi: cyclesOfLifeABI,
+    info: {
+      name: "Cycles of Life",
+      inspiration:
+        "The 'Cycles of Life' collection is inspired by the elements of life. It was inspired by the desire to capture the organic beauty and progression of life, with all its joys and sorrows, triumphs and trials.",
+      descriptions:
+        "The 'Cycles of Life' collection is a vivid representation of life's organic progression, rendered through the sophisticated medium of generative art using code with p5.js. 'Cycles of Life' series showcases a diverse array of designs. The algorithm balances different elements, symbolizing the unique journey of each living being. The interplay of lines and circles in different structural arrangements invites viewers into a space of geometric contemplation. In addition, the 'Cycles of Life' collection is Metamorph's first on-chain, long-form generative project, releasing on AVAX. This means that each piece is generated on the Avalanche Network at the time of minting",
+    },
+    creatorInfo: {
+      image: metamorph,
+      name: "Metamorph",
+      descriptions:
+        "Metamorph is a prolific generative artists with multiple sold out collections. Metamorph is highly recognized for his community building and support of defining the art culture on Avalanche. As an artist he has embarked on both abstract and figurative art through code based expressions. ",
+    },
+    strokes: 3,
+  },
 };
 export type Workshops = keyof typeof WORKSHOPS;
-export type WorkshopContract = Membership | AbominableSasquatchWorkshop;
+export type WorkshopContract = Membership | AbominableSasquatchWorkshop | CyclesOfLife;
 export { IS_MAINNET, WORKSHOPS, MAX_RETRIES, MAX_NFTS_TO_FETCH_ON_START };
 export const campfireApiEndpoint = `https://campfire.exchange/api/accounts`;
 export const treasuryAddress = "0x60104a2cdbb0207f4337036bcab90716b2925c69";
