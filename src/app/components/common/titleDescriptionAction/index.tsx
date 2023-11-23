@@ -10,7 +10,7 @@ import {
   mediaQuery282,
   mediaQuery825,
 } from "styles/media";
-import {Fade, Slide} from "react-reveal";
+import { Fade, Slide } from "react-reveal";
 
 interface TitleDescriptionActionProps {
   title: string | ReactNode;
@@ -35,13 +35,22 @@ export const TitleDescriptionAction = (props: TitleDescriptionActionProps) => {
   return (
     <ContainerWrapper maxWidth="xl">
       <Wrapper reverse={reverse ? "true" : "false"}>
-        <Grid container spacing={{ lg: 8, xl: 8 }} alignItems={"center"} direction={reverse ? "row-reverse" : "row"}>
+        <Grid
+          container
+          spacing={{ lg: 8, xl: 8 }}
+          alignItems={"center"}
+          direction={reverse ? "row-reverse" : "row"}
+        >
           <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
             <TitleDescriptionActionsSection textAlign={textAlign}>
               <Fade>{top}</Fade>
-              <Fade delay={90}><Title>{title}</Title></Fade>
+              <Fade delay={90}>
+                <Title>{title}</Title>
+              </Fade>
               {typeof description === "string" ? (
-                <Fade delay={130}><Descriptions>{description}</Descriptions></Fade>
+                <Fade delay={130}>
+                  <Descriptions>{description}</Descriptions>
+                </Fade>
               ) : (
                 description.map((item, index) => (
                   <Descriptions key={index} index={index}>
@@ -71,10 +80,8 @@ export const TitleDescriptionAction = (props: TitleDescriptionActionProps) => {
     </ContainerWrapper>
   );
 };
-
-const TitleDescriptionActionsSection = styled("div") <{
-  textAlign: TitleDescriptionActionProps["textAlign"];
-}>`
+// prettier-ignore
+const TitleDescriptionActionsSection = styled("div")<{  textAlign: TitleDescriptionActionProps["textAlign"]}>`
   ${({ textAlign }) => {
     return css`
       text-align: ${textAlign};
@@ -92,7 +99,7 @@ const TitleDescriptionActionsSection = styled("div") <{
     text-align: center;
   }
 `;
-const Descriptions = styled("p") <{ index?: number }>`
+const Descriptions = styled("p")<{ index?: number }>`
   padding: 20px 0 0 0;
   margin: 0;
   font-size: 20px;
@@ -123,7 +130,7 @@ const Title = styled("h3")`
   padding: 0;
   margin: 0;
   font-size: 45px;
-  line-height: 45px; 
+  line-height: 45px;
   font-weight: 400;
   @media (max-width: ${mediaQuery1024}) {
     margin-bottom: 14px;
@@ -141,17 +148,16 @@ const Title = styled("h3")`
 `;
 
 const OtherSection = styled("div")`
-display: flex;
-flex-direction: row;
-justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   @media (max-width: ${mediaQuery1024}) {
     display: none;
   }
 `;
-
-const ActionsWrapper = styled("div") <{
-  align: TitleDescriptionActionProps["textAlign"];
-}>`
+// ignore prettier for this line:
+// prettier-ignore
+const ActionsWrapper = styled("div")<{align: TitleDescriptionActionProps["textAlign"]}>`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -161,8 +167,8 @@ const ActionsWrapper = styled("div") <{
       justify-content: ${align === "center"
         ? "center"
         : align === "right"
-          ? "flex-end"
-          : "flex-start"};
+        ? "flex-end"
+        : "flex-start"};
     `;
   }}
   @media (max-width: ${mediaQuery1024}) {
@@ -171,7 +177,7 @@ const ActionsWrapper = styled("div") <{
   }
 `;
 
-const Wrapper = styled("div") <{ reverse: "true" | "false" }>`
+const Wrapper = styled("div")<{ reverse: "true" | "false" }>`
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;

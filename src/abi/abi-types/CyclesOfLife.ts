@@ -19,7 +19,7 @@ import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
 export interface CyclesOfLifeInterface extends utils.Interface {
-  contractName: "CyclesOfLifeWorkshop";
+  contractName: "CyclesOfLife";
   functions: {
     "_tokenIdToHashMap(uint256)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -32,15 +32,17 @@ export interface CyclesOfLifeInterface extends utils.Interface {
     "getTokenInfo(uint256)": FunctionFragment;
     "getTokensByOwner(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mint(uint256)": FunctionFragment;
+    "mint(address,uint256)": FunctionFragment;
     "mintMany(address,uint256,uint256)": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
+    "resetTokenRoyalty(uint256)": FunctionFragment;
     "royaltyInfo(uint256,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setBaseURI(string)": FunctionFragment;
+    "setDefaultRoyalty(address,uint96)": FunctionFragment;
     "setMintCollectionID(uint256)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -117,6 +119,10 @@ export interface CyclesOfLifeInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "resetTokenRoyalty",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "royaltyInfo",
     values: [BigNumberish, BigNumberish]
   ): string;
@@ -129,6 +135,10 @@ export interface CyclesOfLifeInterface extends utils.Interface {
     values: [string, boolean]
   ): string;
   encodeFunctionData(functionFragment: "setBaseURI", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "setDefaultRoyalty",
+    values: [string, BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "setMintCollectionID",
     values: [BigNumberish]
@@ -224,6 +234,10 @@ export interface CyclesOfLifeInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "resetTokenRoyalty",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "royaltyInfo",
     data: BytesLike
   ): Result;
@@ -236,6 +250,10 @@ export interface CyclesOfLifeInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setBaseURI", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setDefaultRoyalty",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "setMintCollectionID",
     data: BytesLike
@@ -433,6 +451,12 @@ export interface CyclesOfLife extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    "mint(address,uint256)"(
+      _to: string,
+      _collectionId: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     "mint(uint256)"(
       _amount: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -453,6 +477,11 @@ export interface CyclesOfLife extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    resetTokenRoyalty(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     royaltyInfo(
       _tokenId: BigNumberish,
@@ -483,6 +512,12 @@ export interface CyclesOfLife extends BaseContract {
 
     setBaseURI(
       baseURI_: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setDefaultRoyalty(
+      receiver: string,
+      feeNumerator: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -628,6 +663,12 @@ export interface CyclesOfLife extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  "mint(address,uint256)"(
+    _to: string,
+    _collectionId: BigNumberish,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   "mint(uint256)"(
     _amount: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -645,6 +686,11 @@ export interface CyclesOfLife extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  resetTokenRoyalty(
+    tokenId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   royaltyInfo(
     _tokenId: BigNumberish,
@@ -675,6 +721,12 @@ export interface CyclesOfLife extends BaseContract {
 
   setBaseURI(
     baseURI_: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setDefaultRoyalty(
+    receiver: string,
+    feeNumerator: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -814,11 +866,16 @@ export interface CyclesOfLife extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    "mint(address,uint256)"(
+      _to: string,
+      _collectionId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     "mint(uint256)"(
       _amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
 
     mintMany(
       _to: string,
@@ -832,6 +889,11 @@ export interface CyclesOfLife extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    resetTokenRoyalty(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     royaltyInfo(
       _tokenId: BigNumberish,
@@ -861,6 +923,12 @@ export interface CyclesOfLife extends BaseContract {
     ): Promise<void>;
 
     setBaseURI(baseURI_: string, overrides?: CallOverrides): Promise<void>;
+
+    setDefaultRoyalty(
+      receiver: string,
+      feeNumerator: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setMintCollectionID(
       mintCollectionId_: BigNumberish,
@@ -951,12 +1019,16 @@ export interface CyclesOfLife extends BaseContract {
       approved?: null
     ): ApprovalForAllEventFilter;
 
-    "Mint(uint256,bytes32)"(
-      mint?: null,
+    "Mint(address,uint256,uint256,bytes32)"(
+      to?: null,
+      collectionId?: null,
+      tokenId?: null,
       hash?: null
     ): MintEventFilter;
     Mint(
-      mint?: null,
+      to?: null,
+      collectionId?: null,
+      tokenId?: null,
       hash?: null
     ): MintEventFilter;
 
@@ -1043,6 +1115,12 @@ export interface CyclesOfLife extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    "mint(address,uint256)"(
+      _to: string,
+      _collectionId: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     "mint(uint256)"(
       _amount: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -1062,6 +1140,11 @@ export interface CyclesOfLife extends BaseContract {
     ownerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    resetTokenRoyalty(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     royaltyInfo(
@@ -1093,6 +1176,12 @@ export interface CyclesOfLife extends BaseContract {
 
     setBaseURI(
       baseURI_: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setDefaultRoyalty(
+      receiver: string,
+      feeNumerator: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1233,6 +1322,12 @@ export interface CyclesOfLife extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    "mint(address,uint256)"(
+      _to: string,
+      _collectionId: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     "mint(uint256)"(
       _amount: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -1252,6 +1347,11 @@ export interface CyclesOfLife extends BaseContract {
     ownerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    resetTokenRoyalty(
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     royaltyInfo(
@@ -1283,6 +1383,12 @@ export interface CyclesOfLife extends BaseContract {
 
     setBaseURI(
       baseURI_: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setDefaultRoyalty(
+      receiver: string,
+      feeNumerator: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -37,20 +37,15 @@ export const HomePage = () => {
         const ws = workshop as Workshops;
         if (isOdd) {
           return (
-            <WorkshopIntroSectionWrapper>
-              <WorkshopIntroSection
-                key={workshop}
-                isReverse
-                numberOfNfts={2}
-                workshop={ws}
-              />
+            <WorkshopIntroSectionWrapper key={workshop}>
+              <WorkshopIntroSection isReverse numberOfNfts={2} workshop={ws} />
             </WorkshopIntroSectionWrapper>
           );
         }
 
         return (
-          <WorkshopIntroSectionWrapper>
-            <WorkshopIntroSection key={workshop} workshop={ws} />
+          <WorkshopIntroSectionWrapper key={workshop}>
+            <WorkshopIntroSection workshop={ws} />
           </WorkshopIntroSectionWrapper>
         );
       })}
@@ -77,20 +72,20 @@ export const HomePage = () => {
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
               <Fade delay={100}>
-              <TitleAndDescriptionWithIconOnTop
-                title="Curate"
-                description="Lead in the curation of our treasury. Support artist and collection intake as we contextualize algorithmic art."
-                iconSrc={paperUploadIcon}
-              />
+                <TitleAndDescriptionWithIconOnTop
+                  title="Curate"
+                  description="Lead in the curation of our treasury. Support artist and collection intake as we contextualize algorithmic art."
+                  iconSrc={paperUploadIcon}
+                />
               </Fade>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-            <Fade delay={140}>
-              <TitleAndDescriptionWithIconOnTop
-                title="Govern"
-                description="Vote on governance proposals and help shape the RITHM ART Experience. Partipate in launchpad development and investment in vital tooling for the space."
-                iconSrc={bookmarkIcon}
-              />
+              <Fade delay={140}>
+                <TitleAndDescriptionWithIconOnTop
+                  title="Govern"
+                  description="Vote on governance proposals and help shape the RITHM ART Experience. Partipate in launchpad development and investment in vital tooling for the space."
+                  iconSrc={bookmarkIcon}
+                />
               </Fade>
             </Grid>
           </Grid>
@@ -125,5 +120,5 @@ const SliderWrapper = styled("div")`
 `;
 
 const WorkshopIntroSectionWrapper = styled("div")`
- padding: 50px 0px;
+  padding: 50px 0px;
 `;
