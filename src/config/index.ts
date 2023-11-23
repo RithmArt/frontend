@@ -68,11 +68,14 @@ const WORKSHOPS = {
       descriptions:
         "Metamorph is a prolific generative artists with multiple sold out collections. Metamorph is highly recognized for his community building and support of defining the art culture on Avalanche. As an artist he has embarked on both abstract and figurative art through code based expressions. ",
     },
-    strokes: 3,
+    strokes: 1,
   },
 };
 export type Workshops = keyof typeof WORKSHOPS;
-export type WorkshopContract = Membership | AbominableSasquatchWorkshop | CyclesOfLife;
+export type WorkshopContract =
+  | Membership
+  | AbominableSasquatchWorkshop
+  | CyclesOfLife;
 export { IS_MAINNET, WORKSHOPS, MAX_RETRIES, MAX_NFTS_TO_FETCH_ON_START };
 export const campfireApiEndpoint = `https://campfire.exchange/api/accounts`;
 export const treasuryAddress = "0x60104a2cdbb0207f4337036bcab90716b2925c69";
