@@ -12,7 +12,6 @@ import {
 } from "styles/media";
 import AvaxIcon from "./assets/AvaxIcon.png";
 
-
 interface CollectionInformationSectionProps {
   size: string;
   title: string;
@@ -31,10 +30,16 @@ const BoldTitleAndDescription = (props: BoldTitleAndDescriptionProps) => {
   const { title, description, icon } = props;
   return (
     <InfoWrapper>
-      {icon ? <PriceWrapper><StyledTitleBold>{title}</StyledTitleBold><AvaxIconToken src={AvaxIcon} /></PriceWrapper> : <StyledTitleBold>{title}</StyledTitleBold>}
-      
+      {icon ? (
+        <PriceWrapper>
+          <StyledTitleBold>{title}</StyledTitleBold>
+          <AvaxIconToken src={AvaxIcon} />
+        </PriceWrapper>
+      ) : (
+        <StyledTitleBold>{title}</StyledTitleBold>
+      )}
+
       <StyledDescriptionBold>{description}</StyledDescriptionBold>
-      
     </InfoWrapper>
   );
 };
@@ -58,11 +63,11 @@ export const CollectionInformationSection = (
             <InfosWrapper>
               <BoldTitleAndDescription title={size} description="Size" />
               <PriceWrapper>
-              <BoldTitleAndDescription
-                title={price + " AVAX"}
-                description="Mint price"
-                icon={true}
-              />
+                <BoldTitleAndDescription
+                  title={price + " AVAX"}
+                  description="Mint price"
+                  icon={true}
+                />
               </PriceWrapper>
               {/* <BoldTitleAndDescription
                 title={numberOfProperties}
@@ -193,8 +198,8 @@ const PriceWrapper = styled(Grid)`
 const AvaxIconToken = styled("img")`
   width: 32px;
   object-fit: cover;
-  transition: .5s;
-  &:hover{
+  transition: 0.5s;
+  &:hover {
     transform: scale(1.05);
   }
 `;

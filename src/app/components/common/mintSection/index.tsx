@@ -76,47 +76,59 @@ export const MintSection = ({
               </InfoWrapper>
             </ImagePreviewWrapper>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={6} xl={6} justifyContent="center" alignItems="center">
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={12}
+            lg={6}
+            xl={6}
+            justifyContent="center"
+            alignItems="center"
+          >
             <InfoWrapper id="mintButton">
-            <DataInfoWrapper>
-              <StyledTitle>{nftInfo?.name}</StyledTitle>
-              <VSpacer size={5} />
-              
+              <DataInfoWrapper>
+                <StyledTitle>{nftInfo?.name}</StyledTitle>
+                <VSpacer size={5} />
+
                 <TitleValue title="Licence" value={licence} />
                 <TitleValue title="Collection ID" value={"0"} />
                 <TitleValue title="Script Type" value={scriptType} />
-                <TitleValue title="Remaining" value={remaining + " / " + total} />
+                <TitleValue
+                  title="Remaining"
+                  value={remaining + " / " + total}
+                />
                 <TitleValue
                   title="Floor Price"
                   value={`${floorPrice_in_AVAX} AVAX`}
                 />
-              
-              <NeedsWalletConnection
-                disConnected={<WalletToggle />}
-                connected={
-                  <>
-                    <ActionsWrapper>
-                      <SnowSelect
-                        style={{ width: "50%" }}
-                        onChange={() => { }}
-                        options={[
-                          { label: "Public Mint", value: "PublicMint" },
-                          // { label: "Private Mint", value: "PrivateMint" },
-                        ]}
-                        value="PublicMint"
-                        selectedValue={"PublicMint"}
-                      />
-                      <ContainedButton
-                        style={{ width: "50%", minHeight: "45px" }}
-                        loading={isMinting}
-                        onClick={() => handleMintClick(floorPrice_in_AVAX)}
-                      >
-                        Mint
-                      </ContainedButton>
-                    </ActionsWrapper>
-                  </>
-                }
-              ></NeedsWalletConnection>
+
+                <NeedsWalletConnection
+                  disConnected={<WalletToggle />}
+                  connected={
+                    <>
+                      <ActionsWrapper>
+                        <SnowSelect
+                          style={{ width: "50%" }}
+                          onChange={() => {}}
+                          options={[
+                            { label: "Public Mint", value: "PublicMint" },
+                            // { label: "Private Mint", value: "PrivateMint" },
+                          ]}
+                          value="PublicMint"
+                          selectedValue={"PublicMint"}
+                        />
+                        <ContainedButton
+                          style={{ width: "50%", minHeight: "45px" }}
+                          loading={isMinting}
+                          onClick={() => handleMintClick(floorPrice_in_AVAX)}
+                        >
+                          Mint
+                        </ContainedButton>
+                      </ActionsWrapper>
+                    </>
+                  }
+                ></NeedsWalletConnection>
               </DataInfoWrapper>
             </InfoWrapper>
           </Grid>

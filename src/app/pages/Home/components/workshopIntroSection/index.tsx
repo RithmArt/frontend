@@ -8,7 +8,7 @@ import { globalSelectors } from "app/containers/global/selectors";
 import { WORKSHOPS, Workshops } from "config";
 import { ContainedButton } from "app/components/common/buttons/containedButton";
 import { history } from "router/history";
-import { Slide } from 'react-reveal';
+import { Slide } from "react-reveal";
 
 interface Props {
   workshop: Workshops;
@@ -32,7 +32,7 @@ export const WorkshopIntroSection = (props: Props) => {
 
   const childs = nfts.map((nft, index) => {
     return (
-      <Slide bottom>
+      <Slide bottom key={index}>
         <Frame
           height={550}
           key={index}
@@ -55,6 +55,7 @@ export const WorkshopIntroSection = (props: Props) => {
         reverse={isReverse}
         textAlign={isReverse ? "right" : "left"}
         description={workshopDescriptions}
+        key={workshopName}
         actions={
           <ContainedButton onClick={handleRedirectToWorkshopClick}>
             View Collection
